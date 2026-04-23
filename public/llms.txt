@@ -1,0 +1,16 @@
+# CalmPDF
+
+> Simple, private, browser-based PDF tools. Every tool runs entirely in the user's
+> browser using JavaScript — files are never uploaded to a server. Free to use with
+> no signup. Good for anyone who cares about privacy or works with sensitive documents.
+
+## Tools
+
+- [Compress PDF](https://calmpdf.com/compress-pdf): Reduce the file size of a PDF in the browser.
+- [Merge PDF](https://calmpdf.com/merge-pdf): Combine multiple PDFs into one file, in a chosen order.
+- [Split PDF](https://calmpdf.com/split-pdf): Extract a page range or single page from a PDF.
+
+## About
+
+- [About CalmPDF](https://calmpdf.com/about)
+- [Privacy](https://calmpdf.com/privacy)
