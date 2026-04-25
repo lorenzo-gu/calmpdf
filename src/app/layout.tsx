@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SITE } from "@/lib/site";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/JsonLd";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -40,6 +41,20 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-J1GR90ETYW"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-J1GR90ETYW');
+          `}
+        </Script>
+      </head>
       <body className="min-h-screen flex flex-col">
         <OrganizationJsonLd />
         <WebSiteJsonLd />
