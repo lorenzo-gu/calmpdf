@@ -11,6 +11,38 @@ export type Tool = {
 
 export const TOOLS: Tool[] = [
   {
+    slug: "edit-pdf",
+    title: "Edit PDF — Add Text, Images, Signatures & Initials | CalmPDF",
+    h1: "Edit PDF",
+    tagline: "Add text, images, signatures, and initials in your browser.",
+    description:
+      "Edit a PDF directly in your browser. Add movable text boxes, images, signatures, and initials, then download a fresh edited copy.",
+    keyword: "edit pdf",
+    steps: [
+      "Drop your PDF into the editor and choose the page you want to edit.",
+      "Add text, images, signatures, or initials and drag each item into position.",
+      "Download the edited PDF copy. Your original file stays unchanged.",
+    ],
+    faqs: [
+      {
+        q: "Does the PDF stay open while I edit?",
+        a: "Yes. Once your PDF is loaded, you can keep editing in the browser editor, moving text, images, signatures, and initials before downloading.",
+      },
+      {
+        q: "Can I sign a PDF without uploading it?",
+        a: "Yes. Signature generation and placement happen fully in your browser, so the PDF never leaves your device.",
+      },
+      {
+        q: "Can I add initials too?",
+        a: "Yes. You can add separate initials marks and move them independently from your full signature.",
+      },
+      {
+        q: "Are my original files modified?",
+        a: "No. CalmPDF always creates a new edited PDF for download and leaves your original file untouched.",
+      },
+    ],
+  },
+  {
     slug: "rotate-pdf",
     title: "Rotate PDF — Turn PDF Pages Left or Right | CalmPDF",
     h1: "Rotate PDF",
