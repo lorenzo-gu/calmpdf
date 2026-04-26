@@ -20,17 +20,21 @@ type OverlayBase = {
 type ImageOverlay = OverlayBase & {
   kind: "image";
   file: File;
+  previewUrl: string;
 };
 
 type TextOverlay = OverlayBase & {
   kind: "text";
   text: string;
   size: number;
+  font: "helvetica" | "times" | "courier";
 };
 
 type SignatureOverlay = OverlayBase & {
   kind: "signature" | "initials";
   text: string;
+  size: number;
+  font: "times" | "helvetica" | "courier";
 };
 
 type Overlay = ImageOverlay | TextOverlay | SignatureOverlay;
@@ -49,48 +53,6 @@ function toRgb(hex: string) {
   return rgb(r, g, b);
 }
 
-function buildSignaturePng(text: string, compact = false): Promise<Uint8Array> {
-  const width = compact ? 320 : 700;
-  const height = compact ? 140 : 220;
-  const canvas = document.createElement("canvas");
-  canvas.width = width;
-  canvas.height = height;
-  const ctx = canvas.getContext("2d");
-  if (!ctx) throw new Error("Could not initialize signature canvas.");
-
-  ctx.clearRect(0, 0, width, height);
-  ctx.lineCap = "round";
-  ctx.lineJoin = "round";
-
-  const fontSize = compact ? 68 : 108;
-  ctx.font = `italic ${fontSize}px cursive`;
-  ctx.fillStyle = "#1f2a2f";
-  ctx.globalAlpha = 0.94;
-
-  const baseline = compact ? 98 : 152;
-  ctx.fillText(text || "Signature", 10, baseline);
-
-  ctx.globalAlpha = 0.8;
-  ctx.strokeStyle = "#1f2a2f";
-  ctx.lineWidth = compact ? 2.8 : 3.2;
-  ctx.beginPath();
-  const waveY = compact ? 112 : 176;
-  ctx.moveTo(10, waveY);
-  ctx.quadraticCurveTo(width * 0.36, waveY - 8, width * 0.68, waveY);
-  ctx.quadraticCurveTo(width * 0.84, waveY + 5, width - 12, waveY - 2);
-  ctx.stroke();
-
-  return new Promise((resolve, reject) => {
-    canvas.toBlob(async (blob) => {
-      if (!blob) {
-        reject(new Error("Unable to render signature image."));
-        return;
-      }
-      resolve(new Uint8Array(await blob.arrayBuffer()));
-    }, "image/png");
-  });
-}
-
 export function EditPdfTool() {
   const [file, setFile] = useState<File | null>(null);
   const [busy, setBusy] = useState(false);
@@ -104,10 +66,13 @@ export function EditPdfTool() {
   const [nameDraft, setNameDraft] = useState("Jane Doe");
   const [initialsDraft, setInitialsDraft] = useState("JD");
   const [textColor, setTextColor] = useState("#1f2a2f");
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   const [pagePreviewUrl, setPagePreviewUrl] = useState<string | null>(null);
 
   const stageRef = useRef<HTMLDivElement | null>(null);
+  const activeTextRef = useRef<HTMLTextAreaElement | null>(null);
+  const imageUrlMapRef = useRef<Record<string, string>>({});
 
   const selectedOverlay = useMemo(
     () => overlays.find((overlay) => overlay.id === selectedId) ?? null,
@@ -133,8 +98,9 @@ export function EditPdfTool() {
   }
 
   function addTextOverlay() {
+    const nextId = crypto.randomUUID();
     addOverlay({
-      id: crypto.randomUUID(),
+      id: nextId,
       kind: "text",
       pageIndex: currentPageIndex,
       xPct: 0.1,
@@ -142,8 +108,10 @@ export function EditPdfTool() {
       wPct: 0.45,
       hPct: 0.1,
       size: 24,
+      font: "helvetica",
       text: textDraft,
     });
+    setEditingId(nextId);
   }
 
   function addSignatureOverlay(kind: "signature" | "initials") {
@@ -157,10 +125,13 @@ export function EditPdfTool() {
       wPct: kind === "signature" ? 0.46 : 0.24,
       hPct: kind === "signature" ? 0.13 : 0.1,
       text,
+      size: kind === "signature" ? 42 : 32,
+      font: "times",
     });
   }
 
   function addImageOverlay(imageFile: File) {
+    const previewUrl = URL.createObjectURL(imageFile);
     addOverlay({
       id: crypto.randomUUID(),
       kind: "image",
@@ -170,6 +141,7 @@ export function EditPdfTool() {
       wPct: 0.28,
       hPct: 0.24,
       file: imageFile,
+      previewUrl,
     });
   }
 
@@ -211,6 +183,73 @@ export function EditPdfTool() {
     window.addEventListener("pointermove", onMove);
     window.addEventListener("pointerup", onUp);
   }
+
+  function beginResize(overlay: Overlay, event: React.PointerEvent<HTMLSpanElement>) {
+    if (!stageRef.current) return;
+    event.preventDefault();
+    event.stopPropagation();
+    event.currentTarget.setPointerCapture(event.pointerId);
+    const stageRect = stageRef.current.getBoundingClientRect();
+    const startX = event.clientX;
+    const startY = event.clientY;
+    const startW = overlay.wPct * stageRect.width;
+    const startH = overlay.hPct * stageRect.height;
+    const left = overlay.xPct * stageRect.width;
+    const top = overlay.yPct * stageRect.height;
+
+    const onMove = (moveEvent: PointerEvent) => {
+      const nextWidth = clamp(startW + (moveEvent.clientX - startX), 36, stageRect.width - left);
+      const nextHeight = clamp(startH + (moveEvent.clientY - startY), 26, stageRect.height - top);
+      updateOverlay(overlay.id, {
+        wPct: nextWidth / stageRect.width,
+        hPct: nextHeight / stageRect.height,
+      });
+    };
+
+    const onUp = () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+    };
+
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+  }
+
+  useEffect(() => {
+    if (editingId && activeTextRef.current) activeTextRef.current.focus();
+  }, [editingId]);
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (!selectedId) return;
+      const target = event.target as HTMLElement | null;
+      const typingInField = target
+        && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable);
+      if (typingInField) return;
+      if (event.key === "Delete" || event.key === "Backspace") {
+        event.preventDefault();
+        setOverlays((prev) => prev.filter((overlay) => overlay.id !== selectedId));
+        setSelectedId(null);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [selectedId]);
+
+  useEffect(() => {
+    const nextMap: Record<string, string> = {};
+    overlays.forEach((overlay) => {
+      if (overlay.kind === "image") nextMap[overlay.id] = overlay.previewUrl;
+    });
+    Object.entries(imageUrlMapRef.current).forEach(([id, url]) => {
+      if (!nextMap[id]) URL.revokeObjectURL(url);
+    });
+    imageUrlMapRef.current = nextMap;
+  }, [overlays]);
+
+  useEffect(() => () => {
+    Object.values(imageUrlMapRef.current).forEach((url) => URL.revokeObjectURL(url));
+  }, []);
 
 
   useEffect(() => {
@@ -270,6 +309,8 @@ export function EditPdfTool() {
     try {
       const doc = await PDFDocument.load(await readFileAsArrayBuffer(file), { ignoreEncryption: true });
       const helvetica = await doc.embedFont(StandardFonts.Helvetica);
+      const times = await doc.embedFont(StandardFonts.TimesRomanItalic);
+      const courier = await doc.embedFont(StandardFonts.Courier);
 
       for (const overlay of overlays) {
         const page = doc.getPage(overlay.pageIndex);
@@ -295,7 +336,7 @@ export function EditPdfTool() {
             x,
             y: y + Math.max(0, overlayHeight - overlay.size),
             size: overlay.size,
-            font: helvetica,
+            font: overlay.font === "times" ? times : overlay.font === "courier" ? courier : helvetica,
             color: toRgb(textColor),
             maxWidth: overlayWidth,
             lineHeight: overlay.size * 1.2,
@@ -303,14 +344,14 @@ export function EditPdfTool() {
           continue;
         }
 
-        const signaturePng = await buildSignaturePng(overlay.text, overlay.kind === "initials");
-        const signatureImage = await doc.embedPng(signaturePng);
-        page.drawImage(signatureImage, {
+        page.drawText(overlay.text || (overlay.kind === "signature" ? "Signature" : "JD"), {
           x,
-          y,
-          width: overlayWidth,
-          height: overlayHeight,
-          opacity: 0.95,
+          y: y + Math.max(0, overlayHeight - overlay.size),
+          size: overlay.size,
+          font: overlay.font === "courier" ? courier : overlay.font === "helvetica" ? helvetica : times,
+          color: toRgb(textColor),
+          maxWidth: overlayWidth,
+          lineHeight: overlay.size * 1.1,
         });
       }
 
@@ -337,7 +378,12 @@ export function EditPdfTool() {
             try {
               setError(null);
               setDone(null);
-              setOverlays([]);
+              setOverlays((prev) => {
+                prev.forEach((overlay) => {
+                  if (overlay.kind === "image") URL.revokeObjectURL(overlay.previewUrl);
+                });
+                return [];
+              });
               setSelectedId(null);
               setPagePreviewUrl((previous) => {
                 if (previous) URL.revokeObjectURL(previous);
@@ -370,7 +416,12 @@ export function EditPdfTool() {
               onClick={() => {
                 setFile(null);
                 setPages([]);
-                setOverlays([]);
+                setOverlays((prev) => {
+                  prev.forEach((overlay) => {
+                    if (overlay.kind === "image") URL.revokeObjectURL(overlay.previewUrl);
+                  });
+                  return [];
+                });
                 setSelectedId(null);
                 setPagePreviewUrl((previous) => {
                   if (previous) URL.revokeObjectURL(previous);
@@ -462,7 +513,7 @@ export function EditPdfTool() {
         <div className="card">
           <div className="mb-3 text-sm text-sage-700 flex items-center gap-2">
             <Move className="h-4 w-4" />
-            Drag items in this page editor to position them.
+            Drag items to position. Click and drag the bottom-right handle to resize. Press Delete to remove.
           </div>
           <div
             ref={stageRef}
@@ -491,7 +542,7 @@ export function EditPdfTool() {
                   onClick={() => setSelectedId(overlay.id)}
                   onPointerDown={(event) => beginDrag(overlay, event)}
                   className={[
-                    "absolute rounded-lg border text-left transition-colors",
+                    "absolute rounded-lg border text-left transition-colors overflow-hidden",
                     active ? "border-sage-700 bg-sage-50/70" : "border-sage-300 bg-white/85 hover:border-sage-500",
                   ].join(" ")}
                   style={{
@@ -499,13 +550,44 @@ export function EditPdfTool() {
                     top: `${overlay.yPct * 100}%`,
                     width: `${overlay.wPct * 100}%`,
                     height: `${overlay.hPct * 100}%`,
-                    padding: "8px",
+                    padding: overlay.kind === "image" ? "0" : "8px",
                   }}
                 >
-                  <p className="text-xs text-sage-500 uppercase tracking-wide">{overlay.kind}</p>
-                  <p className="mt-1 truncate text-sm text-sage-900">
-                    {overlay.kind === "image" ? overlay.file.name : overlay.text}
-                  </p>
+                  {overlay.kind === "image" ? (
+                    <img src={overlay.previewUrl} alt={overlay.file.name} className="h-full w-full object-contain bg-white" />
+                  ) : (
+                    <textarea
+                      ref={active && editingId === overlay.id ? activeTextRef : null}
+                      className="h-full w-full resize-none border-0 bg-transparent p-0 text-sage-900 outline-none"
+                      style={{
+                        fontSize: `${overlay.size}px`,
+                        fontFamily: overlay.font === "times"
+                          ? "Times New Roman, Times, serif"
+                          : overlay.font === "courier"
+                            ? "Courier New, monospace"
+                            : overlay.kind === "signature"
+                              ? "cursive"
+                              : "Arial, sans-serif",
+                        fontStyle: overlay.kind === "signature" ? "italic" : "normal",
+                        lineHeight: 1.1,
+                        color: textColor,
+                      }}
+                      value={overlay.text}
+                      onFocus={() => {
+                        setSelectedId(overlay.id);
+                        setEditingId(overlay.id);
+                      }}
+                      onBlur={() => {
+                        if (editingId === overlay.id) setEditingId(null);
+                      }}
+                      onPointerDown={(event) => event.stopPropagation()}
+                      onChange={(event) => updateOverlay(overlay.id, { text: event.target.value })}
+                    />
+                  )}
+                  <span
+                    className="absolute bottom-0 right-0 h-4 w-4 cursor-se-resize border-l border-t border-sage-400 bg-white/80"
+                    onPointerDown={(event) => beginResize(overlay, event)}
+                  />
                 </button>
               );
             })}
@@ -524,19 +606,35 @@ export function EditPdfTool() {
                   />
                 </label>
               )}
-              {selectedOverlay.kind === "text" && (
+              {selectedOverlay.kind !== "image" && (
                 <div className="grid gap-3 sm:grid-cols-2">
                   <label className="text-sm text-sage-700">
                     Font size
                     <input
                       className="mt-1 w-full rounded-xl border border-sand-300 bg-white px-3 py-2"
-                      min={10}
+                      min={8}
                       max={96}
                       type="number"
                       value={selectedOverlay.size}
                       onChange={(event) => updateOverlay(selectedOverlay.id, { size: Number(event.target.value) || 24 })}
                     />
                   </label>
+                  <label className="text-sm text-sage-700">
+                    Font
+                    <select
+                      className="mt-1 w-full rounded-xl border border-sand-300 bg-white px-3 py-2"
+                      value={selectedOverlay.font}
+                      onChange={(event) => updateOverlay(selectedOverlay.id, { font: event.target.value as TextOverlay["font"] })}
+                    >
+                      <option value="helvetica">Helvetica</option>
+                      <option value="times">Times</option>
+                      <option value="courier">Courier</option>
+                    </select>
+                  </label>
+                </div>
+              )}
+              {selectedOverlay.kind === "text" && (
+                <div className="grid gap-3 sm:grid-cols-2">
                   <label className="text-sm text-sage-700">
                     Text color
                     <input
@@ -548,6 +646,30 @@ export function EditPdfTool() {
                   </label>
                 </div>
               )}
+              <div className="grid gap-3 sm:grid-cols-2">
+                <label className="text-sm text-sage-700">
+                  Width (% of page)
+                  <input
+                    className="mt-1 w-full"
+                    type="range"
+                    min={5}
+                    max={95}
+                    value={Math.round(selectedOverlay.wPct * 100)}
+                    onChange={(event) => updateOverlay(selectedOverlay.id, { wPct: Number(event.target.value) / 100 })}
+                  />
+                </label>
+                <label className="text-sm text-sage-700">
+                  Height (% of page)
+                  <input
+                    className="mt-1 w-full"
+                    type="range"
+                    min={4}
+                    max={95}
+                    value={Math.round(selectedOverlay.hPct * 100)}
+                    onChange={(event) => updateOverlay(selectedOverlay.id, { hPct: Number(event.target.value) / 100 })}
+                  />
+                </label>
+              </div>
               <button type="button" className="btn-ghost text-red-600" onClick={removeSelected}>
                 Remove selected item
               </button>
