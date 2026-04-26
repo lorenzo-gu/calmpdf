@@ -327,6 +327,10 @@ export function EditPdfTool() {
 
   const pageOverlays = overlays.filter((overlay) => overlay.pageIndex === currentPageIndex);
 
+  const hasMultiplePages = pages.length > 1;
+  const goToPreviousPage = () => setCurrentPageIndex((prev) => Math.max(0, prev - 1));
+  const goToNextPage = () => setCurrentPageIndex((prev) => Math.min(pages.length - 1, prev + 1));
+
   return (
     <div className="space-y-6">
       {!file ? (
@@ -460,9 +464,34 @@ export function EditPdfTool() {
 
       {file && (
         <div className="card">
-          <div className="mb-3 text-sm text-sage-700 flex items-center gap-2">
-            <Move className="h-4 w-4" />
-            Drag items in this page editor to position them.
+          <div className="mb-3 text-sm text-sage-700 flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <Move className="h-4 w-4" />
+              Drag items in this page editor to position them.
+            </div>
+            {hasMultiplePages && (
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  className="btn-ghost"
+                  onClick={goToPreviousPage}
+                  disabled={currentPageIndex === 0}
+                >
+                  Previous
+                </button>
+                <p className="text-xs text-sage-700">
+                  Page {currentPageIndex + 1} of {pages.length}
+                </p>
+                <button
+                  type="button"
+                  className="btn-ghost"
+                  onClick={goToNextPage}
+                  disabled={currentPageIndex === pages.length - 1}
+                >
+                  Next
+                </button>
+              </div>
+            )}
           </div>
           <div
             ref={stageRef}
@@ -476,12 +505,6 @@ export function EditPdfTool() {
                 className="pointer-events-none absolute inset-0 h-full w-full border-0"
               />
             )}
-            {pageOverlays.length === 0 && (
-              <div className="absolute inset-0 grid place-items-center bg-white/20 text-sm text-sage-600">
-                Add a text box, image, signature, or initials to this page.
-              </div>
-            )}
-
             {pageOverlays.map((overlay) => {
               const active = overlay.id === selectedId;
               return (
