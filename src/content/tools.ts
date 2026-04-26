@@ -11,6 +11,38 @@ export type Tool = {
 
 export const TOOLS: Tool[] = [
   {
+    slug: "rotate-pdf",
+    title: "Rotate PDF — Turn PDF Pages Left or Right | CalmPDF",
+    h1: "Rotate PDF",
+    tagline: "Rotate all pages in a PDF in your browser. Fast and private.",
+    description:
+      "Rotate a PDF 90, 180, or 270 degrees directly in your browser. CalmPDF keeps your file on your device and creates a freshly rotated copy to download.",
+    keyword: "rotate pdf",
+    steps: [
+      "Drop your PDF into the box above.",
+      "Choose how far you want to rotate the pages.",
+      "Download the rotated PDF. Your original file stays untouched.",
+    ],
+    faqs: [
+      {
+        q: "Will CalmPDF rotate every page?",
+        a: "Yes. This first version rotates every page in the PDF by the same amount, which is perfect for scans that came in sideways or upside down.",
+      },
+      {
+        q: "Can I rotate just one page?",
+        a: "Not yet. Phase 2 starts with whole-document rotation first. Per-page controls can be added later on top of the same browser-based engine.",
+      },
+      {
+        q: "Is my file uploaded anywhere?",
+        a: "No. Rotation happens entirely inside your browser using JavaScript, so your PDF never leaves your device.",
+      },
+      {
+        q: "Will rotating reduce quality?",
+        a: "No. Rotating pages changes page metadata and keeps the original PDF content intact, so there is no image-quality loss.",
+      },
+    ],
+  },
+  {
     slug: "compress-pdf",
     title: "Compress PDF — Reduce PDF File Size for Free | CalmPDF",
     h1: "Compress PDF",

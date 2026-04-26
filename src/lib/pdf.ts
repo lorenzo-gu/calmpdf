@@ -5,6 +5,7 @@
  * All functions here run entirely in the browser — no network I/O.
  */
 import { PDFDocument } from "pdf-lib";
+import { degrees } from "pdf-lib";
 
 export async function readFileAsArrayBuffer(file: File): Promise<ArrayBuffer> {
   return await file.arrayBuffer();
@@ -40,6 +41,18 @@ export async function mergePdfs(files: File[]): Promise<Uint8Array> {
     copied.forEach((p) => out.addPage(p));
   }
   return await out.save({ useObjectStreams: true });
+}
+
+export async function rotatePdf(file: File, rotation: 90 | 180 | 270): Promise<Uint8Array> {
+  const buf = await readFileAsArrayBuffer(file);
+  const src = await PDFDocument.load(buf, { ignoreEncryption: true });
+
+  src.getPages().forEach((page) => {
+    const current = page.getRotation().angle;
+    page.setRotation(degrees((current + rotation) % 360));
+  });
+
+  return await src.save({ useObjectStreams: true, addDefaultPage: false });
 }
 
 export async function splitPdf(
