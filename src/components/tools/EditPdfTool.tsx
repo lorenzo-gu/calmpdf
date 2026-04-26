@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Loader2, Move, Plus, Signature, Type } from "lucide-react";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import { Dropzone } from "@/components/Dropzone";
@@ -104,6 +104,8 @@ export function EditPdfTool() {
   const [nameDraft, setNameDraft] = useState("Jane Doe");
   const [initialsDraft, setInitialsDraft] = useState("JD");
   const [textColor, setTextColor] = useState("#1f2a2f");
+
+  const [pagePreviewUrl, setPagePreviewUrl] = useState<string | null>(null);
 
   const stageRef = useRef<HTMLDivElement | null>(null);
 
@@ -210,6 +212,55 @@ export function EditPdfTool() {
     window.addEventListener("pointerup", onUp);
   }
 
+
+  useEffect(() => {
+    let canceled = false;
+    let activeUrl: string | null = null;
+
+    async function buildPagePreview() {
+      if (!file || !pages[currentPageIndex]) {
+        setPagePreviewUrl((previous) => {
+          if (previous) URL.revokeObjectURL(previous);
+          return null;
+        });
+        return;
+      }
+
+      try {
+        const sourceBytes = await readFileAsArrayBuffer(file);
+        const sourceDoc = await PDFDocument.load(sourceBytes, { ignoreEncryption: true });
+        const previewDoc = await PDFDocument.create();
+        const [previewPage] = await previewDoc.copyPages(sourceDoc, [currentPageIndex]);
+        previewDoc.addPage(previewPage);
+        const previewBytes = await previewDoc.save({ useObjectStreams: true, addDefaultPage: false });
+
+        if (canceled) return;
+
+        const previewBuffer = new Uint8Array(previewBytes.byteLength);
+        previewBuffer.set(previewBytes);
+        activeUrl = URL.createObjectURL(new Blob([previewBuffer], { type: "application/pdf" }));
+        setPagePreviewUrl((previous) => {
+          if (previous) URL.revokeObjectURL(previous);
+          return activeUrl;
+        });
+      } catch {
+        if (!canceled) {
+          setPagePreviewUrl((previous) => {
+            if (previous) URL.revokeObjectURL(previous);
+            return null;
+          });
+        }
+      }
+    }
+
+    buildPagePreview();
+
+    return () => {
+      canceled = true;
+      if (activeUrl) URL.revokeObjectURL(activeUrl);
+    };
+  }, [file, pages, currentPageIndex]);
+
   async function handleExport() {
     if (!file) return;
     setBusy(true);
@@ -288,10 +339,18 @@ export function EditPdfTool() {
               setDone(null);
               setOverlays([]);
               setSelectedId(null);
+              setPagePreviewUrl((previous) => {
+                if (previous) URL.revokeObjectURL(previous);
+                return null;
+              });
               setFile(next);
               await loadPdfMeta(next);
             } catch (e) {
               setFile(null);
+              setPagePreviewUrl((previous) => {
+                if (previous) URL.revokeObjectURL(previous);
+                return null;
+              });
               setError(e instanceof Error ? e.message : "Could not open PDF.");
             }
           }}
@@ -313,6 +372,10 @@ export function EditPdfTool() {
                 setPages([]);
                 setOverlays([]);
                 setSelectedId(null);
+                setPagePreviewUrl((previous) => {
+                  if (previous) URL.revokeObjectURL(previous);
+                  return null;
+                });
               }}
               disabled={busy}
             >
@@ -403,11 +466,18 @@ export function EditPdfTool() {
           </div>
           <div
             ref={stageRef}
-            className="relative mx-auto w-full max-w-[720px] rounded-xl border border-sand-300 bg-[linear-gradient(0deg,rgba(237,231,223,.35),rgba(237,231,223,.35)),white]"
+            className="relative mx-auto w-full max-w-[720px] overflow-hidden rounded-xl border border-sand-300 bg-[linear-gradient(0deg,rgba(237,231,223,.35),rgba(237,231,223,.35)),white]"
             style={{ aspectRatio: `${1 / stageRatio}` }}
           >
+            {pagePreviewUrl && (
+              <iframe
+                title={`Preview of ${file.name} page ${currentPageIndex + 1}`}
+                src={pagePreviewUrl + "#toolbar=0&navpanes=0&scrollbar=0"}
+                className="pointer-events-none absolute inset-0 h-full w-full border-0"
+              />
+            )}
             {pageOverlays.length === 0 && (
-              <div className="absolute inset-0 grid place-items-center text-sm text-sage-500">
+              <div className="absolute inset-0 grid place-items-center bg-white/20 text-sm text-sage-600">
                 Add a text box, image, signature, or initials to this page.
               </div>
             )}
