@@ -9,6 +9,23 @@
 - [Compress PDF](https://calmpdf.com/compress-pdf): Reduce the file size of a PDF in the browser.
 - [Merge PDF](https://calmpdf.com/merge-pdf): Combine multiple PDFs into one file, in a chosen order.
 - [Split PDF](https://calmpdf.com/split-pdf): Extract a page range or single page from a PDF.
+- [Edit PDF](https://calmpdf.com/edit-pdf): Annotate and edit PDF pages in the browser.
+- [Rotate PDF](https://calmpdf.com/rotate-pdf): Rotate pages in a PDF file.
+
+## Compress PDF by target size
+
+- [Compress PDF to 100KB](https://calmpdf.com/compress-pdf-to-100kb): Guide and tool for reducing a PDF to under 100 kilobytes.
+- [Compress PDF to 500KB](https://calmpdf.com/compress-pdf-to-500kb): Guide and tool for reducing a PDF to under 500 kilobytes.
+- [Compress PDF to 1MB](https://calmpdf.com/compress-pdf-to-1mb): Guide and tool for reducing a PDF to under 1 megabyte.
+
+## How-to guides
+
+- [How to Compress a PDF on Mac](https://calmpdf.com/how-to/compress-pdf-on-mac): Using Preview, Quartz filters, and browser-based tools on macOS.
+- [How to Compress a PDF Without Losing Quality](https://calmpdf.com/how-to/compress-pdf-without-losing-quality): Lossless vs lossy compression and how to preserve visual fidelity.
+- [How to Merge PDF Files Free](https://calmpdf.com/how-to/merge-pdf-files-free): Compare free tools for combining PDFs including CalmPDF, Smallpdf, and Preview.
+- [How to Split a PDF into Multiple Files](https://calmpdf.com/how-to/split-pdf-into-multiple-files): Extract pages or page ranges from a PDF without losing quality.
+- [How to Reduce PDF File Size](https://calmpdf.com/how-to/reduce-pdf-file-size): Four methods for making PDFs smaller, from reexporting to browser-based compression.
+- [How to Combine PDF Files](https://calmpdf.com/how-to/combine-pdf-files): Step-by-step guide for merging PDFs on any platform.
 
 ## About
 
