@@ -17,6 +17,7 @@
 - [Compress PDF to 100KB](https://calmpdf.com/compress-pdf-to-100kb): Guide and tool for reducing a PDF to under 100 kilobytes.
 - [Compress PDF to 500KB](https://calmpdf.com/compress-pdf-to-500kb): Guide and tool for reducing a PDF to under 500 kilobytes.
 - [Compress PDF to 1MB](https://calmpdf.com/compress-pdf-to-1mb): Guide and tool for reducing a PDF to under 1 megabyte.
+- [Compress PDF for Email](https://calmpdf.com/compress-pdf-for-email): How big a PDF needs to be for Gmail, Outlook, and other email providers, plus how to compress it in your browser.
 
 ## How-to guides
 
