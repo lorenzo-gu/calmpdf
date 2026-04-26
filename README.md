@@ -11,6 +11,22 @@ npm run dev
 # open http://localhost:3000
 ```
 
+## Ads (Google AdSense)
+
+A single subtle ad slot is rendered at the bottom of how-to articles only —
+tool pages, the homepage, privacy, and about stay ad-free. The slot is fully
+gated on env vars, so dev and preview deployments render no ads at all.
+
+To enable ads in production, set both vars (e.g. in Vercel project settings):
+
+```
+NEXT_PUBLIC_ADSENSE_CLIENT=ca-pub-XXXXXXXXXXXXXXXX
+NEXT_PUBLIC_ADSENSE_ARTICLE_SLOT=XXXXXXXXXX
+```
+
+Then update `public/ads.txt` to use your real publisher ID
+(`pub-XXXXXXXXXXXXXXXX`). See `.env.example` for the template.
+
 ---
 
 ## Phase 1 — Core tools (complete)

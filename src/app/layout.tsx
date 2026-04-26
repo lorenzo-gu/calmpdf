@@ -39,6 +39,8 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
+
   return (
     <html lang="en">
       <head>
@@ -54,6 +56,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', 'G-J1GR90ETYW');
           `}
         </Script>
+        {adsenseClient ? (
+          <Script
+            id="google-adsense"
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+        ) : null}
       </head>
       <body className="min-h-screen flex flex-col">
         <OrganizationJsonLd />
