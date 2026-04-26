@@ -485,7 +485,7 @@ export function EditPdfTool() {
           hint="Add images, text, signatures, and initials — then move them where you need."
         />
       ) : (
-        <div className="card space-y-4">
+        <div className="card space-y-3">
           <div className="flex items-center justify-between gap-3">
             <div>
               <p className="truncate font-medium text-sage-900">{file.name}</p>
@@ -515,11 +515,11 @@ export function EditPdfTool() {
             </button>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <label className="text-sm text-sage-700">
+          <div className="flex flex-wrap items-end gap-2">
+            <label className="text-sm text-sage-700 leading-tight">
               Add image
               <input
-                className="ml-2 block text-xs"
+                className="mt-1 block text-xs"
                 type="file"
                 accept="image/png,image/jpeg"
                 onChange={(event) => {
@@ -535,9 +535,6 @@ export function EditPdfTool() {
               <Plus className="h-4 w-4" />
               Add text box
             </button>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3">
             <button type="button" className="btn-ghost" onClick={() => addSignatureOverlay("signature")}>
               <Signature className="h-4 w-4" />
               Add signature
