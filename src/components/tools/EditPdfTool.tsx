@@ -515,34 +515,40 @@ export function EditPdfTool() {
             </button>
           </div>
 
-          <div className="flex flex-wrap items-end gap-2">
-            <label className="text-sm text-sage-700 leading-tight">
-              Add image
-              <input
-                className="mt-1 block text-xs"
-                type="file"
-                accept="image/png,image/jpeg"
-                onChange={(event) => {
-                  const image = event.target.files?.[0];
-                  if (!image) return;
-                  addImageOverlay(image);
-                  event.currentTarget.value = "";
-                }}
-              />
-            </label>
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div className="flex flex-wrap items-end gap-2">
+              <label className="flex flex-col justify-end text-sm text-sage-700 leading-tight">
+                <span>Add image</span>
+                <input
+                  className="mt-1 block text-xs"
+                  type="file"
+                  accept="image/png,image/jpeg"
+                  onChange={(event) => {
+                    const image = event.target.files?.[0];
+                    if (!image) return;
+                    addImageOverlay(image);
+                    event.currentTarget.value = "";
+                  }}
+                />
+              </label>
 
-            <button type="button" className="btn-ghost" onClick={addTextOverlay}>
-              <Plus className="h-4 w-4" />
-              Add text box
-            </button>
-            <button type="button" className="btn-ghost" onClick={() => addSignatureOverlay("signature")}>
-              <Signature className="h-4 w-4" />
-              Add signature
-            </button>
+              <button type="button" className="btn-ghost" onClick={addTextOverlay}>
+                <Plus className="h-4 w-4" />
+                Add text box
+              </button>
+              <button type="button" className="btn-ghost" onClick={() => addSignatureOverlay("signature")}>
+                <Signature className="h-4 w-4" />
+                Add signature
+              </button>
 
-            <button type="button" className="btn-ghost" onClick={() => addSignatureOverlay("initials")}>
-              <Type className="h-4 w-4" />
-              Add initials
+              <button type="button" className="btn-ghost" onClick={() => addSignatureOverlay("initials")}>
+                <Type className="h-4 w-4" />
+                Add initials
+              </button>
+            </div>
+            <button type="button" className="btn-primary" disabled={busy || !file} onClick={handleExport}>
+              {busy && <Loader2 className="h-4 w-4 animate-spin" />}
+              {busy ? "Applying edits…" : "Download PDF"}
             </button>
           </div>
         </div>
@@ -740,12 +746,6 @@ export function EditPdfTool() {
         </div>
       )}
 
-      <div className="flex gap-3">
-        <button type="button" className="btn-primary" disabled={busy || !file} onClick={handleExport}>
-          {busy && <Loader2 className="h-4 w-4 animate-spin" />}
-          {busy ? "Applying edits…" : "Download edited PDF"}
-        </button>
-      </div>
     </div>
   );
 }
