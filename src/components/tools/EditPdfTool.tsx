@@ -236,7 +236,9 @@ export function EditPdfTool() {
 
         if (canceled) return;
 
-        activeUrl = URL.createObjectURL(new Blob([previewBytes], { type: "application/pdf" }));
+        const previewBuffer = new Uint8Array(previewBytes.byteLength);
+        previewBuffer.set(previewBytes);
+        activeUrl = URL.createObjectURL(new Blob([previewBuffer], { type: "application/pdf" }));
         setPagePreviewUrl((previous) => {
           if (previous) URL.revokeObjectURL(previous);
           return activeUrl;

@@ -10,7 +10,8 @@ function JsonLdScript({ data }: { data: object }) {
       // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
     />
-Add ArticleShell layout component for blog posts}
+  );
+}
 
 export function ArticleShell({
   post,
