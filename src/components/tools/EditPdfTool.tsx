@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { Loader2, Move, Plus, Signature, Type } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Loader2, Move, Plus, Signature, Trash2, Type } from "lucide-react";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import { Dropzone } from "@/components/Dropzone";
 import { formatBytes, readFileAsArrayBuffer, triggerDownload } from "@/lib/pdf";
@@ -189,6 +189,12 @@ export function EditPdfTool() {
 
   function updateOverlay(id: string, patch: Partial<Overlay>) {
     setOverlays((prev) => prev.map((overlay) => (overlay.id === id ? { ...overlay, ...patch } as Overlay : overlay)));
+  }
+
+  function getOverlayDrawSize(overlay: TextLikeOverlay) {
+    if (!stageRef.current) return overlay.size;
+    const stageRect = stageRef.current.getBoundingClientRect();
+    return getFittedFontSize(overlay, overlay.wPct * stageRect.width, overlay.hPct * stageRect.height);
   }
 
   function getOverlayDrawSize(overlay: TextLikeOverlay) {
@@ -474,7 +480,7 @@ export function EditPdfTool() {
           hint="Add images, text, signatures, and initials — then move them where you need."
         />
       ) : (
-        <div className="card space-y-2">
+        <div className="card space-y-3">
           <div className="flex items-center justify-between gap-3">
             <div>
               <p className="truncate font-medium text-sage-900">{file.name}</p>
@@ -493,21 +499,18 @@ export function EditPdfTool() {
                     });
                     return [];
                   });
-                  setSelectedId(null);
-                  setPagePreviewUrl((previous) => {
-                    if (previous) URL.revokeObjectURL(previous);
-                    return null;
-                  });
-                }}
-                disabled={busy}
-              >
-                Choose another
-              </button>
-              <button type="button" className="btn-primary" disabled={busy || !file} onClick={handleExport}>
-                {busy && <Loader2 className="h-4 w-4 animate-spin" />}
-                {busy ? "Applying edits…" : "Download PDF"}
-              </button>
-            </div>
+                  return [];
+                });
+                setSelectedId(null);
+                setPagePreviewUrl((previous) => {
+                  if (previous) URL.revokeObjectURL(previous);
+                  return null;
+                });
+              }}
+              disabled={busy}
+            >
+              Choose another
+            </button>
           </div>
 
           <div className="flex flex-wrap items-end gap-2">
@@ -649,6 +652,78 @@ export function EditPdfTool() {
             })}
           </div>
 
+          {selectedOverlay && (
+            <div className="mt-4 rounded-xl border border-sand-200 bg-sand-50 p-4 space-y-3">
+              <p className="font-medium text-sage-900">Selected: {selectedOverlay.kind}</p>
+              {selectedOverlay.kind !== "image" && (
+                <label className="block text-sm text-sage-700">
+                  Text
+                  <input
+                    className="mt-1 w-full rounded-xl border border-sand-300 bg-white px-3 py-2"
+                    value={selectedOverlay.text}
+                    onChange={(event) => updateOverlay(selectedOverlay.id, { text: event.target.value })}
+                  />
+                </label>
+              )}
+              {selectedOverlay.kind !== "image" && (
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <label className="text-sm text-sage-700">
+                    Font
+                    <select
+                      className="mt-1 w-full rounded-xl border border-sand-300 bg-white px-3 py-2"
+                      value={selectedOverlay.font}
+                      onChange={(event) => updateOverlay(selectedOverlay.id, { font: event.target.value as TextOverlay["font"] })}
+                    >
+                      <option value="helvetica">Helvetica</option>
+                      <option value="times">Times</option>
+                      <option value="courier">Courier</option>
+                    </select>
+                  </label>
+                </div>
+              )}
+              {selectedOverlay.kind !== "image" && (
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <label className="text-sm text-sage-700">
+                    Text color
+                    <input
+                      className="mt-1 block h-10 w-20 rounded-xl border border-sand-300 bg-white p-1"
+                      type="color"
+                      value={selectedOverlay.color}
+                      onChange={(event) => updateOverlay(selectedOverlay.id, { color: event.target.value } as Partial<TextLikeOverlay>)}
+                    />
+                  </label>
+                </div>
+              )}
+              <div className="grid gap-3 sm:grid-cols-2">
+                <label className="text-sm text-sage-700">
+                  Width (% of page)
+                  <input
+                    className="mt-1 w-full"
+                    type="range"
+                    min={5}
+                    max={95}
+                    value={Math.round(selectedOverlay.wPct * 100)}
+                    onChange={(event) => updateOverlay(selectedOverlay.id, { wPct: Number(event.target.value) / 100 })}
+                  />
+                </label>
+                <label className="text-sm text-sage-700">
+                  Height (% of page)
+                  <input
+                    className="mt-1 w-full"
+                    type="range"
+                    min={4}
+                    max={95}
+                    value={Math.round(selectedOverlay.hPct * 100)}
+                    onChange={(event) => updateOverlay(selectedOverlay.id, { hPct: Number(event.target.value) / 100 })}
+                  />
+                </label>
+              </div>
+              <button type="button" className="btn-ghost text-red-600" onClick={removeSelected}>
+                <Trash2 className="h-4 w-4" />
+                Remove selected item
+              </button>
+            </div>
+          )}
         </div>
       )}
 
