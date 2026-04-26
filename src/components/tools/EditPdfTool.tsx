@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Loader2, Move, Plus, Signature, Type } from "lucide-react";
+import { Loader2, Move, Plus, Signature, Trash2, Type } from "lucide-react";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import { Dropzone } from "@/components/Dropzone";
 import { formatBytes, readFileAsArrayBuffer, triggerDownload } from "@/lib/pdf";
@@ -57,6 +57,51 @@ function toRgb(hex: string) {
   return rgb(r, g, b);
 }
 
+function resolveFontFamily(overlay: TextLikeOverlay) {
+  if (overlay.font === "times") return "Times New Roman, Times, serif";
+  if (overlay.font === "courier") return "Courier New, monospace";
+  if (overlay.kind === "signature") return "cursive";
+  return "Arial, sans-serif";
+}
+
+function getFittedFontSize(
+  overlay: TextLikeOverlay,
+  boxWidthPx: number,
+  boxHeightPx: number,
+) {
+  const text = overlay.text || (overlay.kind === "signature" ? "Signature" : "Text");
+  const padding = 8;
+  const innerWidth = Math.max(16, boxWidthPx - (padding * 2));
+  const innerHeight = Math.max(16, boxHeightPx - (padding * 2));
+  const lines = text.split("\n");
+  const family = resolveFontFamily(overlay);
+  const style = overlay.kind === "signature" ? "italic" : "normal";
+  const probeCanvas = document.createElement("canvas");
+  const probeContext = probeCanvas.getContext("2d");
+  if (!probeContext) return 14;
+
+  let low = 8;
+  let high = 180;
+  let best = 8;
+
+  while (low <= high) {
+    const mid = Math.floor((low + high) / 2);
+    probeContext.font = `${style} ${mid}px ${family}`;
+    const widestLine = lines.reduce((max, line) => Math.max(max, probeContext.measureText(line || " ").width), 0);
+    const lineHeight = mid * 1.1;
+    const totalHeight = Math.max(lineHeight, lines.length * lineHeight);
+    const fits = widestLine <= innerWidth && totalHeight <= innerHeight;
+    if (fits) {
+      best = mid;
+      low = mid + 1;
+    } else {
+      high = mid - 1;
+    }
+  }
+
+  return best;
+}
+
 export function EditPdfTool() {
   const [file, setFile] = useState<File | null>(null);
   const [busy, setBusy] = useState(false);
@@ -66,9 +111,6 @@ export function EditPdfTool() {
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
   const [overlays, setOverlays] = useState<Overlay[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [textDraft, setTextDraft] = useState("");
-  const [nameDraft, setNameDraft] = useState("Jane Doe");
-  const [initialsDraft, setInitialsDraft] = useState("JD");
   const [editingId, setEditingId] = useState<string | null>(null);
 
   const [pagePreviewUrl, setPagePreviewUrl] = useState<string | null>(null);
@@ -113,13 +155,13 @@ export function EditPdfTool() {
       size: 24,
       font: "helvetica",
       color: "#1f2a2f",
-      text: textDraft,
+      text: "",
     });
     setEditingId(nextId);
   }
 
   function addSignatureOverlay(kind: "signature" | "initials") {
-    const text = kind === "signature" ? nameDraft : initialsDraft;
+    const text = kind === "signature" ? "Jane Doe" : "JD";
     addOverlay({
       id: crypto.randomUUID(),
       kind,
@@ -158,6 +200,12 @@ export function EditPdfTool() {
     if (!selectedId) return;
     setOverlays((prev) => prev.filter((overlay) => overlay.id !== selectedId));
     setSelectedId(null);
+  }
+
+  function getOverlayDrawSize(overlay: TextLikeOverlay) {
+    if (!stageRef.current) return overlay.size;
+    const stageRect = stageRef.current.getBoundingClientRect();
+    return getFittedFontSize(overlay, overlay.wPct * stageRect.width, overlay.hPct * stageRect.height);
   }
 
   function beginDrag(overlay: Overlay, event: React.PointerEvent<HTMLDivElement>) {
@@ -253,7 +301,7 @@ export function EditPdfTool() {
       const typingInField = target
         && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable);
       if (typingInField) return;
-      if (event.key === "Delete") {
+      if (event.key === "Delete" || event.key === "Backspace") {
         event.preventDefault();
         setOverlays((prev) => prev.filter((overlay) => overlay.id !== selectedId));
         setSelectedId(null);
@@ -359,26 +407,28 @@ export function EditPdfTool() {
         }
 
         if (overlay.kind === "text") {
+          const fittedSize = getFittedFontSize(overlay, overlayWidth, overlayHeight);
           page.drawText(overlay.text, {
             x,
-            y: y + Math.max(0, overlayHeight - overlay.size),
-            size: overlay.size,
+            y: y + Math.max(0, overlayHeight - fittedSize),
+            size: fittedSize,
             font: overlay.font === "times" ? times : overlay.font === "courier" ? courier : helvetica,
             color: toRgb(overlay.color),
             maxWidth: overlayWidth,
-            lineHeight: overlay.size * 1.2,
+            lineHeight: fittedSize * 1.1,
           });
           continue;
         }
 
+        const fittedSize = getFittedFontSize(overlay, overlayWidth, overlayHeight);
         page.drawText(overlay.text || (overlay.kind === "signature" ? "Signature" : "JD"), {
           x,
-          y: y + Math.max(0, overlayHeight - overlay.size),
-          size: overlay.size,
+          y: y + Math.max(0, overlayHeight - fittedSize),
+          size: fittedSize,
           font: overlay.font === "courier" ? courier : overlay.font === "helvetica" ? helvetica : times,
           color: toRgb(overlay.color),
           maxWidth: overlayWidth,
-          lineHeight: overlay.size * 1.1,
+          lineHeight: fittedSize * 1.1,
         });
       }
 
@@ -435,7 +485,7 @@ export function EditPdfTool() {
           hint="Add images, text, signatures, and initials — then move them where you need."
         />
       ) : (
-        <div className="card space-y-4">
+        <div className="card space-y-3">
           <div className="flex items-center justify-between gap-3">
             <div>
               <p className="truncate font-medium text-sage-900">{file.name}</p>
@@ -465,24 +515,11 @@ export function EditPdfTool() {
             </button>
           </div>
 
-          <div className="flex flex-wrap items-end gap-3">
-            <label className="text-sm text-sage-700">
-              Page
-              <select
-                className="ml-2 rounded-xl border border-sand-300 bg-white px-3 py-2 text-sm"
-                value={currentPageIndex}
-                onChange={(event) => setCurrentPageIndex(Number(event.target.value))}
-              >
-                {pages.map((_, i) => (
-                  <option key={i} value={i}>Page {i + 1}</option>
-                ))}
-              </select>
-            </label>
-
-            <label className="text-sm text-sage-700">
+          <div className="flex flex-wrap items-end gap-2">
+            <label className="text-sm text-sage-700 leading-tight">
               Add image
               <input
-                className="ml-2 block text-xs"
+                className="mt-1 block text-xs"
                 type="file"
                 accept="image/png,image/jpeg"
                 onChange={(event) => {
@@ -494,45 +531,15 @@ export function EditPdfTool() {
               />
             </label>
 
-            <label className="text-sm text-sage-700">
-              Text
-                <input
-                  className="ml-2 rounded-xl border border-sand-300 bg-white px-3 py-2 text-sm"
-                  placeholder="Add your text"
-                  value={textDraft}
-                  onChange={(event) => setTextDraft(event.target.value)}
-                />
-            </label>
-
             <button type="button" className="btn-ghost" onClick={addTextOverlay}>
               <Plus className="h-4 w-4" />
               Add text box
             </button>
-          </div>
-
-          <div className="flex flex-wrap items-end gap-3">
-            <label className="text-sm text-sage-700">
-              Signature name
-              <input
-                className="ml-2 rounded-xl border border-sand-300 bg-white px-3 py-2 text-sm"
-                value={nameDraft}
-                onChange={(event) => setNameDraft(event.target.value)}
-              />
-            </label>
             <button type="button" className="btn-ghost" onClick={() => addSignatureOverlay("signature")}>
               <Signature className="h-4 w-4" />
               Add signature
             </button>
 
-            <label className="text-sm text-sage-700">
-              Initials
-              <input
-                className="ml-2 w-20 rounded-xl border border-sand-300 bg-white px-3 py-2 text-sm"
-                maxLength={4}
-                value={initialsDraft}
-                onChange={(event) => setInitialsDraft(event.target.value.toUpperCase())}
-              />
-            </label>
             <button type="button" className="btn-ghost" onClick={() => addSignatureOverlay("initials")}>
               <Type className="h-4 w-4" />
               Add initials
@@ -574,7 +581,7 @@ export function EditPdfTool() {
           </div>
           <div
             ref={stageRef}
-            className="relative mx-auto w-full max-w-[720px] overflow-hidden rounded-xl border border-sand-300 bg-[linear-gradient(0deg,rgba(237,231,223,.35),rgba(237,231,223,.35)),white]"
+            className="relative mx-auto w-full max-w-[720px] overflow-hidden rounded-xl border-4 border-slate-400 bg-white"
             style={{ aspectRatio: `${1 / stageRatio}` }}
           >
             {pagePreviewUrl && (
@@ -586,6 +593,7 @@ export function EditPdfTool() {
             )}
             {pageOverlays.map((overlay) => {
               const active = overlay.id === selectedId;
+              const fittedSize = overlay.kind === "image" ? undefined : getOverlayDrawSize(overlay);
               return (
                 <div
                   key={overlay.id}
@@ -610,14 +618,8 @@ export function EditPdfTool() {
                       ref={active && editingId === overlay.id ? activeTextRef : null}
                       className="h-full w-full resize-none border-0 bg-transparent p-0 text-sage-900 outline-none"
                       style={{
-                        fontSize: `${overlay.size}px`,
-                        fontFamily: overlay.font === "times"
-                          ? "Times New Roman, Times, serif"
-                          : overlay.font === "courier"
-                            ? "Courier New, monospace"
-                            : overlay.kind === "signature"
-                              ? "cursive"
-                              : "Arial, sans-serif",
+                        fontSize: `${fittedSize ?? overlay.size}px`,
+                        fontFamily: resolveFontFamily(overlay),
                         fontStyle: overlay.kind === "signature" ? "italic" : "normal",
                         lineHeight: 1.1,
                         color: overlay.color,
@@ -667,17 +669,6 @@ export function EditPdfTool() {
               )}
               {selectedOverlay.kind !== "image" && (
                 <div className="grid gap-3 sm:grid-cols-2">
-                  <label className="text-sm text-sage-700">
-                    Font size
-                    <input
-                      className="mt-1 w-full rounded-xl border border-sand-300 bg-white px-3 py-2"
-                      min={8}
-                      max={96}
-                      type="number"
-                      value={selectedOverlay.size}
-                      onChange={(event) => updateOverlay(selectedOverlay.id, { size: Number(event.target.value) || 24 })}
-                    />
-                  </label>
                   <label className="text-sm text-sage-700">
                     Font
                     <select
@@ -730,6 +721,7 @@ export function EditPdfTool() {
                 </label>
               </div>
               <button type="button" className="btn-ghost text-red-600" onClick={removeSelected}>
+                <Trash2 className="h-4 w-4" />
                 Remove selected item
               </button>
             </div>
