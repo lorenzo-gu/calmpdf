@@ -22,6 +22,7 @@
 ## How-to guides
 
 - [How to Compress a PDF on Mac](https://calmpdf.com/how-to/compress-pdf-on-mac): Using Preview, Quartz filters, and browser-based tools on macOS.
+- [How to Compress a PDF on Windows](https://calmpdf.com/how-to/compress-pdf-on-windows): Three methods using Word, Microsoft Print to PDF, and a private browser-based tool.
 - [How to Compress a PDF Without Losing Quality](https://calmpdf.com/how-to/compress-pdf-without-losing-quality): Lossless vs lossy compression and how to preserve visual fidelity.
 - [How to Merge PDF Files Free](https://calmpdf.com/how-to/merge-pdf-files-free): Compare free tools for combining PDFs including CalmPDF, Smallpdf, and Preview.
 - [How to Split a PDF into Multiple Files](https://calmpdf.com/how-to/split-pdf-into-multiple-files): Extract pages or page ranges from a PDF without losing quality.
