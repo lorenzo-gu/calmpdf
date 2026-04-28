@@ -6,6 +6,7 @@ import { BLOG_POSTS } from "@/content/posts";
 const PROGRAMMATIC_SLUGS = [
   "compress-pdf-to-100kb",
   "compress-pdf-to-500kb",
+  "compress-pdf-to-200kb",
   "compress-pdf-to-1mb",
     "compress-pdf-for-email",
 ];
