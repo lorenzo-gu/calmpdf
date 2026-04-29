@@ -30,6 +30,8 @@
 - [How to Reduce PDF File Size](https://calmpdf.com/how-to/reduce-pdf-file-size): Four methods for making PDFs smaller, from reexporting to browser-based compression.
 - [How to Combine PDF Files](https://calmpdf.com/how-to/combine-pdf-files): Step-by-step guide for merging PDFs on any platform.
 
+- [How to Rotate a PDF](https://calmpdf.com/how-to/rotate-pdf): Step-by-step guide for rotating one or every page of a PDF in your browser.
+
 ## About
 
 - [About CalmPDF](https://calmpdf.com/about)
