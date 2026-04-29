@@ -9,6 +9,15 @@ export type Post = {
 
 export const BLOG_POSTS: Post[] = [
   {
+    slug: "rotate-pdf",
+    title: "How to Rotate a PDF",
+    description:
+      "Rotate a PDF in your browser without uploading it. Step-by-step instructions for CalmPDF, Preview on Mac, and Microsoft Edge on Windows — all free, no signup.",
+    datePublished: "2026-04-29",
+    ctaHref: "/rotate-pdf",
+    ctaLabel: "Rotate PDF free",
+  },
+  {
         slug: "compress-pdf-on-windows",
         title: "How to Compress a PDF on Windows",
         description:
