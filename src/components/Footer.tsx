@@ -31,6 +31,7 @@ export function Footer() {
           <ul className="space-y-2">
             <li><Link href="/privacy" className="text-sage-700 no-underline hover:underline">Privacy</Link></li>
             <li><Link href="/about" className="text-sage-700 no-underline hover:underline">About</Link></li>
+            <li><Link href="https://calmpdf.com/how-to" className="text-sage-700 no-underline hover:underline">How to</Link></li>
           </ul>
         </div>
       </div>
