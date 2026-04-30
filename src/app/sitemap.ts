@@ -13,7 +13,7 @@ const PROGRAMMATIC_SLUGS = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const staticPaths = ["", "about", "privacy"];
+  const staticPaths = ["", "about", "privacy", "terms", "contact", "blog", "tools", "pdf-to-images", "images-to-pdf", "jpg-to-pdf", "png-to-pdf", "pdf-to-jpg", "pdf-to-png", "extract-pdf-pages", "remove-pdf-pages", "reorder-pdf-pages", "add-page-numbers-to-pdf", "protect-pdf", "unlock-pdf", "pdf-metadata-viewer", "pdf-metadata-editor"];
   return [
     ...staticPaths.map((p) => ({
       url: `${SITE.url}${p ? `/${p}` : ""}`,
