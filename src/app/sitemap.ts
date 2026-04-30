@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/site";
 import { TOOLS } from "@/content/tools";
-import { BLOG_POSTS } from "@/content/posts";
+import { PUBLISHED_BLOG_POSTS } from "@/content/posts";
 
 const PROGRAMMATIC_SLUGS = [
   "compress-pdf-to-100kb",
@@ -33,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly" as const,
       priority: 0.8,
     },
-    ...BLOG_POSTS.map((post) => ({
+    ...PUBLISHED_BLOG_POSTS.map((post) => ({
       url: `${SITE.url}/how-to/${post.slug}`,
       lastModified: new Date(post.datePublished),
       changeFrequency: "monthly" as const,

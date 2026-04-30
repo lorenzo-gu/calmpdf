@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
-import { BLOG_POSTS } from "@/content/posts";
+import { PUBLISHED_BLOG_POSTS } from "@/content/posts";
 
 export const metadata: Metadata = {
   title: "PDF How-to Guides | CalmPDF",
@@ -27,7 +27,7 @@ export default function HowToIndexPage() {
       </p>
 
       <div className="mt-10 grid gap-4 sm:grid-cols-2">
-        {BLOG_POSTS.map((post) => (
+        {PUBLISHED_BLOG_POSTS.map((post) => (
           <Link
             key={post.slug}
             href={`/how-to/${post.slug}`}
