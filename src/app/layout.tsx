@@ -9,10 +9,7 @@ import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
-  title: {
-    default: `${SITE.name} — ${SITE.tagline}`,
-    template: `%s | ${SITE.name}`,
-  },
+  title: `${SITE.name} — ${SITE.tagline}`,
   description: SITE.description,
   applicationName: SITE.name,
   keywords: ["PDF tools", "compress PDF", "merge PDF", "split PDF", "private PDF tools", "browser PDF"],

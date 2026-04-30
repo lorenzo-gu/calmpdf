@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About | CalmPDF",
   description: `${SITE.name} builds simple, private PDF tools that run entirely in your browser.`,
   alternates: { canonical: "/about" },
 };
