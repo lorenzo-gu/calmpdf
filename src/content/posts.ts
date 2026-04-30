@@ -5,6 +5,7 @@ export type Post = {
     datePublished: string;
     ctaHref: string;
     ctaLabel: string;
+    published: boolean;
 };
 
 export const BLOG_POSTS: Post[] = [
@@ -16,6 +17,7 @@ export const BLOG_POSTS: Post[] = [
     datePublished: "2026-04-29",
     ctaHref: "/rotate-pdf",
     ctaLabel: "Rotate PDF free",
+    published: true,
   },
   {
         slug: "compress-pdf-on-windows",
@@ -25,6 +27,7 @@ export const BLOG_POSTS: Post[] = [
         datePublished: "2026-04-27",
         ctaHref: "/compress-pdf",
         ctaLabel: "Compress PDF free",
+        published: true,
   },
   {
         slug: "compress-pdf-on-mac",
@@ -34,6 +37,7 @@ export const BLOG_POSTS: Post[] = [
         datePublished: "2026-04-25",
         ctaHref: "/compress-pdf",
         ctaLabel: "Compress PDF free",
+        published: true,
   },
   {
         slug: "compress-pdf-without-losing-quality",
@@ -43,6 +47,7 @@ export const BLOG_POSTS: Post[] = [
         datePublished: "2026-04-25",
         ctaHref: "/compress-pdf",
         ctaLabel: "Compress PDF free",
+        published: true,
   },
   {
         slug: "merge-pdf-files-free",
@@ -52,6 +57,7 @@ export const BLOG_POSTS: Post[] = [
         datePublished: "2026-04-25",
         ctaHref: "/merge-pdf",
         ctaLabel: "Merge PDF free",
+        published: true,
   },
   {
         slug: "split-pdf-into-multiple-files",
@@ -61,6 +67,7 @@ export const BLOG_POSTS: Post[] = [
         datePublished: "2026-04-25",
         ctaHref: "/split-pdf",
         ctaLabel: "Split PDF free",
+        published: true,
   },
   {
         slug: "reduce-pdf-file-size",
@@ -70,6 +77,7 @@ export const BLOG_POSTS: Post[] = [
         datePublished: "2026-04-25",
         ctaHref: "/compress-pdf",
         ctaLabel: "Compress PDF free",
+        published: true,
   },
   {
         slug: "combine-pdf-files",
@@ -79,9 +87,13 @@ export const BLOG_POSTS: Post[] = [
         datePublished: "2026-04-25",
         ctaHref: "/merge-pdf",
         ctaLabel: "Combine PDFs free",
+        published: true,
   },
   ];
 
 export function getPost(slug: string): Post | undefined {
-    return BLOG_POSTS.find((p) => p.slug === slug);
+    return PUBLISHED_BLOG_POSTS.find((p) => p.slug === slug);
 }
+
+
+export const PUBLISHED_BLOG_POSTS = BLOG_POSTS.filter((post) => post.published);
