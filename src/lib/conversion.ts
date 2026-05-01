@@ -19,6 +19,8 @@ const PDF_PAGE_STYLES = `
 `;
 
 const PDFJS_WORKER_PATH = "/pdf.worker.min.mjs";
+const PDFJS_CMAP_URL = "/pdfjs/cmaps/";
+const PDFJS_STANDARD_FONT_URL = "/pdfjs/standard_fonts/";
 
 type PdfTextItem = {
   str: string;
@@ -102,7 +104,15 @@ export async function pdfToDocx(file: File): Promise<Blob> {
   let pages: ExtractedLine[][];
   try {
     const arrayBuffer = await file.arrayBuffer();
-    const loadingTask = pdfjsLib.getDocument({ data: new Uint8Array(arrayBuffer) });
+    // CMaps and standard font data are needed to decode CID/embedded fonts —
+    // without them, text extraction from PDFs like Google Docs exports returns
+    // empty strings even though the PDF clearly has selectable text.
+    const loadingTask = pdfjsLib.getDocument({
+      data: new Uint8Array(arrayBuffer),
+      cMapUrl: PDFJS_CMAP_URL,
+      cMapPacked: true,
+      standardFontDataUrl: PDFJS_STANDARD_FONT_URL,
+    });
     const pdf = await loadingTask.promise;
 
     pages = [];
