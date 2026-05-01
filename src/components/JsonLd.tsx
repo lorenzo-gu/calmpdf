@@ -99,7 +99,8 @@ export function BreadcrumbJsonLd({ tool }: { tool: Tool }) {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: SITE.url },
-          { "@type": "ListItem", position: 2, name: tool.h1, item: `${SITE.url}/${tool.slug}` },
+          { "@type": "ListItem", position: 2, name: "PDF Tools", item: `${SITE.url}/tools` },
+          { "@type": "ListItem", position: 3, name: tool.h1, item: `${SITE.url}/${tool.slug}` },
         ],
       }}
     />
