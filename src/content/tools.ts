@@ -7,6 +7,7 @@ export type Tool = {
   keyword: string;
   steps: [string, string, string];
   faqs: { q: string; a: string }[];
+  relatedGuides?: { href: string; label: string }[];
 };
 
 export const TOOLS: Tool[] = [
@@ -41,6 +42,7 @@ export const TOOLS: Tool[] = [
         a: "No. CalmPDF always creates a new edited PDF for download and leaves your original file untouched.",
       },
     ],
+    relatedGuides: [],
   },
   {
     slug: "rotate-pdf",
@@ -73,6 +75,7 @@ export const TOOLS: Tool[] = [
         a: "No. Rotating pages changes page metadata and keeps the original PDF content intact, so there is no image-quality loss.",
       },
     ],
+    relatedGuides: [{ href: "/how-to/rotate-pdf", label: "How to Rotate a PDF" }],
   },
   {
     slug: "compress-pdf",
@@ -109,6 +112,11 @@ export const TOOLS: Tool[] = [
         a: "Yes. All core PDF tools are free and unlimited, supported by unobtrusive ads.",
       },
     ],
+    relatedGuides: [
+      { href: "/how-to/compress-pdf-on-windows", label: "How to Compress a PDF on Windows" },
+      { href: "/how-to/compress-pdf-on-mac", label: "How to Compress a PDF on Mac" },
+      { href: "/how-to/reduce-pdf-file-size", label: "How to Reduce PDF File Size" },
+    ],
   },
   {
     slug: "merge-pdf",
@@ -141,6 +149,10 @@ export const TOOLS: Tool[] = [
         a: "Yes. The merge happens inside your browser using JavaScript. No file is sent to our servers.",
       },
     ],
+    relatedGuides: [
+      { href: "/how-to/merge-pdf-files-free", label: "How to Merge PDF Files Free" },
+      { href: "/how-to/combine-pdf-files", label: "How to Combine PDF Files" },
+    ],
   },
   {
     slug: "split-pdf",
@@ -172,6 +184,9 @@ export const TOOLS: Tool[] = [
         q: "Does it work offline?",
         a: "Once the page has loaded once, yes — splitting happens entirely in your browser.",
       },
+    ],
+    relatedGuides: [
+      { href: "/how-to/split-pdf-into-multiple-files", label: "How to Split a PDF into Multiple Files" },
     ],
   },
 ];
