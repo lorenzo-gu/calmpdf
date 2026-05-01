@@ -189,6 +189,38 @@ export const TOOLS: Tool[] = [
       { href: "/how-to/split-pdf-into-multiple-files", label: "How to Split a PDF into Multiple Files" },
     ],
   },
+  {
+    slug: "docx-to-pdf",
+    title: "DOCX to PDF — Convert Word to PDF for Free | CalmPDF",
+    h1: "DOCX to PDF",
+    tagline: "Turn a Word document into a PDF in your browser.",
+    description:
+      "Convert a DOCX file into a PDF directly in your browser. Private, simple, and free.",
+    keyword: "docx to pdf",
+    steps: [
+      "Drop your DOCX file into the converter.",
+      "CalmPDF renders the document in your browser.",
+      "Download the converted PDF. Your document is never uploaded.",
+    ],
+    faqs: [
+      {
+        q: "Is my Word document uploaded?",
+        a: "No. The conversion happens locally in your browser.",
+      },
+      {
+        q: "Will the PDF look exactly like Word?",
+        a: "Simple documents should convert well. Complex formatting, custom fonts, comments, tracked changes, or embedded objects may not match perfectly.",
+      },
+      {
+        q: "Can I convert old .doc files?",
+        a: "Not in this MVP. This version supports .docx files only.",
+      },
+      {
+        q: "Does this work on mobile?",
+        a: "It should work in modern browsers, but larger documents may work better on desktop.",
+      },
+    ],
+  },
 ];
 
 export function getTool(slug: string): Tool | undefined {
