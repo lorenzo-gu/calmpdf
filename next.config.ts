@@ -52,6 +52,14 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // The pdf.js worker must be served with a JavaScript MIME type so the
+      // browser will run it under our `nosniff` policy.
+      {
+        source: "/pdf.worker.min.js",
+        headers: [
+          { key: "Content-Type", value: "application/javascript; charset=utf-8" },
+        ],
+      },
     ];
   },
 };

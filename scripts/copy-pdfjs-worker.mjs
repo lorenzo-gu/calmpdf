@@ -30,9 +30,14 @@ async function copyDir(src, dest) {
 }
 
 await mkdir(publicDir, { recursive: true });
+// Copy as .js instead of .mjs so Next.js (and any CDN/edge in front of it)
+// reliably serves it with a JavaScript MIME type. With our global
+// `X-Content-Type-Options: nosniff` header, an .mjs file served as
+// application/octet-stream would be blocked from running as a worker, which
+// silently breaks text extraction.
 await copyFile(
   resolve(pkg, "build/pdf.worker.min.mjs"),
-  resolve(publicDir, "pdf.worker.min.mjs"),
+  resolve(publicDir, "pdf.worker.min.js"),
 );
 await copyDir(resolve(pkg, "cmaps"), resolve(publicDir, "pdfjs/cmaps"));
 await copyDir(
