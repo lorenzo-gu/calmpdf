@@ -30,6 +30,12 @@ export default function Page() {
         It's one of the most common PDF tasks — and one of the simplest. Here's how to do
         it quickly, privately, and for free.
       </p>
+      <p className="text-sage-700 mb-6">
+        <a href="/merge-pdf" className="text-sage-900 underline underline-offset-4">
+          Need to combine PDFs now? Use CalmPDF's free Merge PDF tool.
+        </a>
+      </p>
+
 
       <h2 className="text-2xl font-semibold mt-8 mb-3">When would you combine PDFs?</h2>
       <p className="text-sage-700 mb-4">Common scenarios where combining PDFs saves time:</p>
@@ -99,6 +105,12 @@ export default function Page() {
         after a set time. For confidential documents — contracts, HR files, financial records,
         medical paperwork — this is a real consideration. CalmPDF processes everything locally
         in your browser. The files never leave your device, so there's nothing to delete.
+      </p>
+
+      <p className="text-sage-700 mb-6">
+        <a href="/merge-pdf" className="text-sage-900 underline underline-offset-4">
+          Need to combine PDFs now? Use CalmPDF's free Merge PDF tool.
+        </a>
       </p>
 
       <h2 className="text-2xl font-semibold mt-8 mb-3">Frequently asked questions</h2>

@@ -34,6 +34,12 @@ export const metadata: Metadata = {
                                                                                         <p className="text-sage-700 mb-6">
                                                                                                 Windows 10 and 11 don&apos;t ship with a dedicated PDF compressor, but you can still shrink a PDF without paying for Acrobat or installing third-party software. The three reliable options are Microsoft Word (if you have it), the built-in Microsoft Print to PDF driver, and a free browser-based tool like CalmPDF that runs entirely on your computer.
                                                                                                       </p>
+      <p className="text-sage-700 mb-6">
+        <a href="/compress-pdf" className="text-sage-900 underline underline-offset-4">
+          Need to compress a PDF on Windows now? Use CalmPDF's free Compress PDF tool.
+        </a>
+      </p>
+
                                                                                                       
                                                                                                             <h2 className="text-2xl font-semibold mt-8 mb-3">Method 1: Re-export from Microsoft Word</h2>
                                                                                                                   <p className="text-sage-700 mb-4">
@@ -102,3 +108,9 @@ export const metadata: Metadata = {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         );
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         }
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+      <p className="text-sage-700 mb-6">
+        <a href="/compress-pdf" className="text-sage-900 underline underline-offset-4">
+          Need to compress a PDF on Windows now? Use CalmPDF's free Compress PDF tool.
+        </a>
+      </p>
+

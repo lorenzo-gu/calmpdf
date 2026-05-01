@@ -86,6 +86,12 @@ export default function Page() {
         computer. Preview on Mac and Microsoft Edge on Windows can also do it,
         with a couple of caveats below.
       </p>
+      <p className="text-sage-700 mb-6">
+        <a href="/rotate-pdf" className="text-sage-900 underline underline-offset-4">
+          Need to rotate a PDF now? Use CalmPDF's free Rotate PDF tool.
+        </a>
+      </p>
+
 
       <h2 className="text-2xl font-semibold mt-8 mb-3">
         Method 1: Rotate a PDF in your browser with CalmPDF
@@ -183,6 +189,12 @@ export default function Page() {
         the tab clears the file from memory — there is no copy on a server to
         forget about. That makes it a sensible default for sensitive
         documents like signed contracts, medical forms, or tax filings.
+      </p>
+
+      <p className="text-sage-700 mb-6">
+        <a href="/rotate-pdf" className="text-sage-900 underline underline-offset-4">
+          Need to rotate a PDF now? Use CalmPDF's free Rotate PDF tool.
+        </a>
       </p>
 
       <h2 className="text-2xl font-semibold mt-8 mb-3">Frequently asked questions</h2>
