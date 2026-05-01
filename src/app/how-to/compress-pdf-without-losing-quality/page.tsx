@@ -31,6 +31,12 @@ export default function Page() {
         Images are trickier: most compression tools reduce image resolution, which does
         affect sharpness. The key is choosing the right compression level for your content.
       </p>
+      <p className="text-sage-700 mb-6">
+        <a href="/compress-pdf" className="text-sage-900 underline underline-offset-4">
+          Need to compress a PDF now? Use CalmPDF's free Compress PDF tool.
+        </a>
+      </p>
+
 
       <h2 className="text-2xl font-semibold mt-8 mb-3">Lossy vs lossless compression</h2>
       <p className="text-sage-700 mb-4">
@@ -128,6 +134,12 @@ export default function Page() {
         50–70% are achievable with minimal impact for on-screen viewing. Beyond 70%, you'll usually
         see softening in photos. For legal, medical, or archival documents, stay conservative.
       </p>
-    </ArticleShell>
+    
+      <p className="text-sage-700 mb-6">
+        <a href="/compress-pdf" className="text-sage-900 underline underline-offset-4">
+          Need to compress a PDF now? Use CalmPDF's free Compress PDF tool.
+        </a>
+      </p>
+</ArticleShell>
   );
 }

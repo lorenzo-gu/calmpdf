@@ -31,6 +31,12 @@ export default function Page() {
         a report, or divide a large scan into smaller parts for email. CalmPDF lets you do this
         in your browser — no upload, no account, free.
       </p>
+      <p className="text-sage-700 mb-6">
+        <a href="/split-pdf" className="text-sage-900 underline underline-offset-4">
+          Need to split a PDF now? Use CalmPDF's free Split PDF tool.
+        </a>
+      </p>
+
 
       <h2 className="text-2xl font-semibold mt-8 mb-3">When would you split a PDF?</h2>
       <p className="text-sage-700 mb-4">Common reasons to split a PDF include:</p>
@@ -93,6 +99,12 @@ export default function Page() {
         <li><strong>Adobe Acrobat Reader</strong> — splitting requires the paid Acrobat Pro version.</li>
         <li><strong>PDF24</strong> — free desktop app for Windows with a split feature.</li>
       </ul>
+
+      <p className="text-sage-700 mb-6">
+        <a href="/split-pdf" className="text-sage-900 underline underline-offset-4">
+          Need to split a PDF now? Use CalmPDF's free Split PDF tool.
+        </a>
+      </p>
 
       <h2 className="text-2xl font-semibold mt-8 mb-3">Frequently asked questions</h2>
 

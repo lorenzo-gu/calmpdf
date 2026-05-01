@@ -30,6 +30,12 @@ export default function Page() {
         The good news: most PDFs can be reduced significantly — often 50–80% — without
         meaningful quality loss. The method depends on what's making your PDF large.
       </p>
+      <p className="text-sage-700 mb-6">
+        <a href="/compress-pdf" className="text-sage-900 underline underline-offset-4">
+          Need to reduce PDF size now? Use CalmPDF's free Compress PDF tool.
+        </a>
+      </p>
+
 
       <h2 className="text-2xl font-semibold mt-8 mb-3">Why PDFs get large</h2>
       <p className="text-sage-700 mb-4">
@@ -128,6 +134,12 @@ export default function Page() {
         (like 2 MB for a government portal), try the highest compression setting and check the
         result. If it's still too large, the PDF may have a lot of high-resolution imagery.
       </p>
-    </ArticleShell>
+    
+      <p className="text-sage-700 mb-6">
+        <a href="/compress-pdf" className="text-sage-900 underline underline-offset-4">
+          Need to reduce PDF size now? Use CalmPDF's free Compress PDF tool.
+        </a>
+      </p>
+</ArticleShell>
   );
 }

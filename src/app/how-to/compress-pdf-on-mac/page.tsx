@@ -31,6 +31,12 @@ export default function Page() {
         faster and more predictable — no Quartz filter required, and your file never
         leaves your device.
       </p>
+      <p className="text-sage-700 mb-6">
+        <a href="/compress-pdf" className="text-sage-900 underline underline-offset-4">
+          Need to compress a PDF on Mac now? Use CalmPDF's free Compress PDF tool.
+        </a>
+      </p>
+
 
       <h2 className="text-2xl font-semibold mt-8 mb-3">Method 1: Compress using Preview</h2>
       <p className="text-sage-700 mb-4">
@@ -102,6 +108,12 @@ export default function Page() {
         Compression resamples those images at a lower resolution, which dramatically reduces
         file size with minimal impact on on-screen readability. Text-only PDFs are usually
         already small and compress less.
+      </p>
+
+      <p className="text-sage-700 mb-6">
+        <a href="/compress-pdf" className="text-sage-900 underline underline-offset-4">
+          Need to compress a PDF on Mac now? Use CalmPDF's free Compress PDF tool.
+        </a>
       </p>
 
       <h2 className="text-2xl font-semibold mt-8 mb-3">Frequently asked questions</h2>

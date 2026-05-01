@@ -30,6 +30,12 @@ export default function Page() {
         The best option depends on how many files you need to combine, whether the documents
         are sensitive, and how often you do this. Here's an honest comparison of the main approaches.
       </p>
+      <p className="text-sage-700 mb-6">
+        <a href="/merge-pdf" className="text-sage-900 underline underline-offset-4">
+          Need to merge PDFs now? Use CalmPDF's free Merge PDF tool.
+        </a>
+      </p>
+
 
       <h2 className="text-2xl font-semibold mt-8 mb-3">Option 1: CalmPDF (browser-based, fully private)</h2>
       <p className="text-sage-700 mb-4">
@@ -123,6 +129,12 @@ export default function Page() {
         CalmPDF, require unprotected files. You can remove the password in Preview (Mac) or
         Adobe Acrobat before merging.
       </p>
-    </ArticleShell>
+    
+      <p className="text-sage-700 mb-6">
+        <a href="/merge-pdf" className="text-sage-900 underline underline-offset-4">
+          Need to merge PDFs now? Use CalmPDF's free Merge PDF tool.
+        </a>
+      </p>
+</ArticleShell>
   );
 }
