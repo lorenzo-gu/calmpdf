@@ -13,6 +13,7 @@ export function ToolShell({
   children: React.ReactNode;
 }) {
   const related = TOOLS.filter((t) => t.slug !== tool.slug);
+  const relatedGuides = tool.relatedGuides ?? [];
 
   return (
     <>
@@ -88,6 +89,21 @@ export function ToolShell({
           </div>
         </section>
       ) : null}
+
+      {relatedGuides.length > 0 && (
+        <section className="mx-auto max-w-content px-4 md:px-6 py-10">
+          <h2 className="text-2xl font-semibold mb-6">Related guides</h2>
+          <ul className="list-disc pl-6 space-y-2 text-sage-800">
+            {relatedGuides.map((guide) => (
+              <li key={guide.href}>
+                <Link href={guide.href} className="underline underline-offset-2 hover:text-sage-950">
+                  {guide.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <section className="mx-auto max-w-content px-4 md:px-6 py-10">
         <h2 className="text-2xl font-semibold mb-6">Related PDF tools</h2>
