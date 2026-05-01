@@ -3,6 +3,8 @@ export type Post = {
     title: string;
     description: string;
     datePublished: string;
+    dateModified: string;
+    image?: string;
     ctaHref: string;
     ctaLabel: string;
     published: boolean;
@@ -15,6 +17,7 @@ export const BLOG_POSTS: Post[] = [
     description:
       "Rotate a PDF in your browser without uploading it. Step-by-step instructions for CalmPDF, Preview on Mac, and Microsoft Edge on Windows — all free, no signup.",
     datePublished: "2026-04-29",
+    dateModified: "2026-04-29",
     ctaHref: "/rotate-pdf",
     ctaLabel: "Rotate PDF free",
     published: true,
@@ -25,6 +28,7 @@ export const BLOG_POSTS: Post[] = [
         description:
                 "Three ways to compress a PDF on Windows 10 and 11 — using Word, Microsoft Print to PDF, or a free private browser-based tool. No software install required.",
         datePublished: "2026-04-27",
+        dateModified: "2026-04-27",
         ctaHref: "/compress-pdf",
         ctaLabel: "Compress PDF free",
         published: true,
@@ -35,6 +39,7 @@ export const BLOG_POSTS: Post[] = [
         description:
                 "Learn how to reduce PDF file size on Mac using Preview, and discover CalmPDF — a free, private browser-based alternative that works on any device.",
         datePublished: "2026-04-25",
+        dateModified: "2026-04-25",
         ctaHref: "/compress-pdf",
         ctaLabel: "Compress PDF free",
         published: true,
@@ -45,6 +50,7 @@ export const BLOG_POSTS: Post[] = [
         description:
                 "Understand lossy vs lossless PDF compression, and learn how CalmPDF preserves quality while still meaningfully reducing file size.",
         datePublished: "2026-04-25",
+        dateModified: "2026-04-25",
         ctaHref: "/compress-pdf",
         ctaLabel: "Compress PDF free",
         published: true,
@@ -55,6 +61,7 @@ export const BLOG_POSTS: Post[] = [
         description:
                 "Compare the best ways to merge PDF files for free, including CalmPDF — a fully private option that never uploads your files to a server.",
         datePublished: "2026-04-25",
+        dateModified: "2026-04-25",
         ctaHref: "/merge-pdf",
         ctaLabel: "Merge PDF free",
         published: true,
@@ -65,6 +72,7 @@ export const BLOG_POSTS: Post[] = [
         description:
                 "A step-by-step guide to splitting a PDF into separate files using CalmPDF, with tips on extracting invoices, chapters, and specific page ranges.",
         datePublished: "2026-04-25",
+        dateModified: "2026-04-25",
         ctaHref: "/split-pdf",
         ctaLabel: "Split PDF free",
         published: true,
@@ -75,6 +83,7 @@ export const BLOG_POSTS: Post[] = [
         description:
                 "Discover why PDFs get large, the best methods to reduce file size, and a step-by-step guide to compressing PDFs in your browser with CalmPDF.",
         datePublished: "2026-04-25",
+        dateModified: "2026-04-25",
         ctaHref: "/compress-pdf",
         ctaLabel: "Compress PDF free",
         published: true,
@@ -85,6 +94,7 @@ export const BLOG_POSTS: Post[] = [
         description:
                 "A complete guide to combining PDF files — from merging contracts to assembling reports — using CalmPDF's free, private browser-based tool.",
         datePublished: "2026-04-25",
+        dateModified: "2026-04-25",
         ctaHref: "/merge-pdf",
         ctaLabel: "Combine PDFs free",
         published: true,
