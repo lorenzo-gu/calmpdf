@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ToolShell } from "@/components/ToolShell";
 import { MergePdfTool } from "@/components/tools/MergePdfTool";
 import { getTool } from "@/content/tools";
@@ -24,6 +25,17 @@ export default function Page() {
         </p>
         <p>
           Typical use cases include building board packets, assembling client deliverables, creating school submission bundles, and organizing records before archiving. You can reorder files before combining, which helps when pages come from different teammates or were exported in the wrong sequence.
+        </p>
+        <p>
+          Need a smaller final document? Compress your PDF with{" "}
+          <Link href="/compress-pdf" className="underline underline-offset-2 hover:no-underline">
+            Compress PDF
+          </Link>
+          . If one source includes extra pages, remove them first with{" "}
+          <Link href="/split-pdf" className="underline underline-offset-2 hover:no-underline">
+            Split PDF
+          </Link>
+          .
         </p>
         <p>
           Processing happens in your browser, so private materials stay local to your device. That is useful for HR files, medical forms, or legal exhibits where confidentiality matters. No account is required, and there is no waiting for remote upload and download cycles when your connection is slow.

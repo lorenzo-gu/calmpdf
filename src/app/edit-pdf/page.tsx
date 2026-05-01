@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ToolShell } from "@/components/ToolShell";
 import { EditPdfTool } from "@/components/tools/EditPdfTool";
 import { getTool } from "@/content/tools";
@@ -24,6 +25,17 @@ export default function Page() {
         </p>
         <p>
           Common use cases include marking up drafts for review, preparing onboarding packets, updating labels in form documents, and adding visual guidance to instructions. Many users also edit PDFs before converting, merging, or splitting so each downstream file is already cleaned up and ready to send.
+        </p>
+        <p>
+          Need to remove or extract pages before editing? Start with{" "}
+          <Link href="/split-pdf" className="underline underline-offset-2 hover:no-underline">
+            Split PDF
+          </Link>
+          . Preparing a final packet after edits? Combine everything with{" "}
+          <Link href="/merge-pdf" className="underline underline-offset-2 hover:no-underline">
+            Merge PDF
+          </Link>
+          .
         </p>
         <p>
           CalmPDF is browser-based, and processing stays on your device. That helps protect confidential project files and personal records while avoiding account setup. Since there is no upload dependency, edits can be faster on stable local hardware even if your internet connection is inconsistent.
