@@ -50,6 +50,24 @@ export function ArticleShell({
         }}
       />
 
+
+      {post.faqs && post.faqs.length > 0 ? (
+        <JsonLdScript
+          data={{
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: post.faqs.map((faq) => ({
+              "@type": "Question",
+              name: faq.q,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.a,
+              },
+            })),
+          }}
+        />
+      ) : null}
+
       {/* Breadcrumb JSON-LD */}
       <JsonLdScript
         data={{
