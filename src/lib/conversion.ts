@@ -18,7 +18,7 @@ const PDF_PAGE_STYLES = `
   box-sizing: border-box;
 `;
 
-const PDFJS_WORKER_PATH = "/pdf.worker.min.mjs";
+const PDFJS_WORKER_PATH = "/pdf.worker.min.js";
 const PDFJS_CMAP_URL = "/pdfjs/cmaps/";
 const PDFJS_STANDARD_FONT_URL = "/pdfjs/standard_fonts/";
 
@@ -46,8 +46,7 @@ function isTextItem(item: unknown): item is PdfTextItem {
   );
 }
 
-function groupItemsIntoLines(rawItems: unknown[]): ExtractedLine[] {
-  const items = rawItems.filter(isTextItem);
+function groupItemsIntoLines(items: PdfTextItem[]): ExtractedLine[] {
   if (items.length === 0) return [];
 
   // Sort top-to-bottom (PDF y axis grows upward, so larger y first), then left-to-right.
@@ -102,16 +101,19 @@ export async function pdfToDocx(file: File): Promise<Blob> {
   const { Document, Packer, Paragraph, TextRun, PageBreak } = docxLib;
 
   let pages: ExtractedLine[][];
+  let totalRawChars = 0;
+  let totalItems = 0;
   try {
     const arrayBuffer = await file.arrayBuffer();
-    // CMaps and standard font data are needed to decode CID/embedded fonts —
-    // without them, text extraction from PDFs like Google Docs exports returns
-    // empty strings even though the PDF clearly has selectable text.
+    // CMaps and standard font data are needed to decode CID/embedded fonts.
+    // useSystemFonts: false keeps text extraction deterministic across browsers
+    // by preventing pdf.js from substituting host system fonts for missing ones.
     const loadingTask = pdfjsLib.getDocument({
       data: new Uint8Array(arrayBuffer),
       cMapUrl: PDFJS_CMAP_URL,
       cMapPacked: true,
       standardFontDataUrl: PDFJS_STANDARD_FONT_URL,
+      useSystemFonts: false,
     });
     const pdf = await loadingTask.promise;
 
@@ -119,18 +121,24 @@ export async function pdfToDocx(file: File): Promise<Blob> {
     for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
       const page = await pdf.getPage(pageNumber);
       const textContent = await page.getTextContent();
-      pages.push(groupItemsIntoLines(textContent.items));
+      const items = (textContent.items as unknown[]).filter(isTextItem);
+      totalItems += items.length;
+      for (const item of items) totalRawChars += item.str.length;
+      pages.push(groupItemsIntoLines(items));
     }
   } catch {
     throw new Error("This file could not be converted. Try a simpler document or a smaller file.");
   }
 
-  const allText = pages
-    .flat()
-    .map((line) => line.text)
-    .join(" ")
-    .trim();
-  if (allText.length < 20) {
+  // Run the empty-PDF check against raw extracted characters rather than the
+  // grouped-line text, so a quirk in line grouping can never falsely trigger
+  // the scanned-PDF error on a PDF that actually contains selectable text.
+  if (totalRawChars < 10) {
+    if (typeof console !== "undefined") {
+      console.warn(
+        `[CalmPDF] PDF appears to have no extractable text (items=${totalItems}, chars=${totalRawChars}).`,
+      );
+    }
     throw new Error(
       "This PDF does not appear to contain selectable text. Scanned PDFs are not supported yet.",
     );
