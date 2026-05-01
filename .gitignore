@@ -6,3 +6,6 @@ out
 *.tsbuildinfo
 next-env.d.ts
 .DS_Store
+
+# Auto-copied by scripts/copy-pdfjs-worker.mjs before dev/build.
+public/pdf.worker.min.mjs
