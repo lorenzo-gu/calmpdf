@@ -9,3 +9,4 @@ next-env.d.ts
 
 # Auto-copied by scripts/copy-pdfjs-worker.mjs before dev/build.
 public/pdf.worker.min.mjs
+public/pdfjs/
