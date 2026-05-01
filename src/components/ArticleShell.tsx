@@ -33,7 +33,7 @@ export function ArticleShell({
           headline: post.title,
           description: post.description,
           datePublished: post.datePublished,
-          dateModified: post.datePublished,
+          dateModified: post.dateModified ?? post.datePublished,
           author: {
             "@type": "Organization",
             name: SITE.name,
@@ -46,6 +46,7 @@ export function ArticleShell({
           },
           url: canonicalUrl,
           mainEntityOfPage: canonicalUrl,
+          ...(post.image ? { image: post.image } : {}),
         }}
       />
 
