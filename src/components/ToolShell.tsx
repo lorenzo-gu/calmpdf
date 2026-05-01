@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ShieldCheck, Zap, Wifi } from "lucide-react";
 import type { Tool } from "@/content/tools";
 import { TOOLS } from "@/content/tools";
@@ -20,11 +21,13 @@ export function ToolShell({
       <FaqJsonLd tool={tool} />
       <BreadcrumbJsonLd tool={tool} />
 
-      <nav aria-label="Breadcrumb" className="mx-auto max-w-content px-4 md:px-6 pt-6 text-sm text-sage-700">
-        <Link href="/" className="no-underline hover:underline">Home</Link>
-        <span className="mx-2">/</span>
-        <span className="text-sage-900">{tool.h1}</span>
-      </nav>
+      <Breadcrumbs
+        crumbs={[
+          { label: "Home", href: "/" },
+          { label: "PDF Tools", href: "/tools" },
+          { label: tool.h1 },
+        ]}
+      />
 
       <section className="mx-auto max-w-content px-4 md:px-6 pt-4 pb-10">
         <h1 className="text-3xl md:text-4xl font-semibold">{tool.h1}</h1>
