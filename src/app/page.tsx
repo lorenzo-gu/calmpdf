@@ -16,6 +16,9 @@ export default function HomePage() {
         </p>
 
         <div className="mt-8 flex flex-wrap gap-3 justify-center">
+          <Link href="/tools" className="btn-primary">
+            All PDF tools
+          </Link>
           {TOOLS.map((t) => (
             <Link key={t.slug} href={`/${t.slug}`} className="btn-primary">
               {t.h1}
