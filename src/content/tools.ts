@@ -221,6 +221,38 @@ export const TOOLS: Tool[] = [
       },
     ],
   },
+  {
+    slug: "pdf-to-docx",
+    title: "PDF to DOCX — Convert PDF to Word for Free | CalmPDF",
+    h1: "PDF to DOCX",
+    tagline: "Convert simple PDFs into editable Word documents.",
+    description:
+      "Convert a text-based PDF into a Word-compatible DOCX file directly in your browser. No upload, no signup.",
+    keyword: "pdf to docx",
+    steps: [
+      "Drop your PDF into the converter.",
+      "CalmPDF extracts the text and creates a Word-compatible DOCX file.",
+      "Download the DOCX file. Your original PDF stays on your device.",
+    ],
+    faqs: [
+      {
+        q: "Is my PDF uploaded?",
+        a: "No. The conversion runs in your browser, so your PDF never leaves your device.",
+      },
+      {
+        q: "Will the DOCX look exactly like the PDF?",
+        a: "Not in this first version. The MVP is best for simple, text-based PDFs and may not preserve complex layouts, images, or tables.",
+      },
+      {
+        q: "Can it convert scanned PDFs?",
+        a: "Not yet. Scanned PDFs need OCR, which is planned as a future improvement.",
+      },
+      {
+        q: "Can I edit the DOCX after downloading?",
+        a: "Yes. The output is a Word-compatible DOCX file that can be opened in Word, Google Docs, Pages, and similar editors.",
+      },
+    ],
+  },
 ];
 
 export function getTool(slug: string): Tool | undefined {
