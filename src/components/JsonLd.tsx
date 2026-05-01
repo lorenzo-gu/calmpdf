@@ -45,9 +45,9 @@ export function SoftwareAppJsonLd({ tool }: { tool: Tool }) {
       data={{
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
-        name: `${SITE.name} — ${tool.h1}`,
-        applicationCategory: "UtilityApplication",
-        operatingSystem: "Any (web browser)",
+        name: tool.h1,
+        applicationCategory: "UtilitiesApplication",
+        operatingSystem: "Web",
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
         description: tool.description,
         url: `${SITE.url}/${tool.slug}`,
