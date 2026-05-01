@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ToolShell } from "@/components/ToolShell";
 import { RotatePdfTool } from "@/components/tools/RotatePdfTool";
 import { getTool } from "@/content/tools";
@@ -24,6 +25,17 @@ export default function Page() {
         </p>
         <p>
           Typical use cases include rotating a single misaligned signature page, standardizing portrait orientation for reports, and preparing handouts for print shops. It is also helpful before merging files so the final document looks consistent from page 1 through the appendix.
+        </p>
+        <p>
+          If your file includes unwanted pages, clean it up first with{" "}
+          <Link href="/split-pdf" className="underline underline-offset-2 hover:no-underline">
+            Split PDF
+          </Link>
+          . Once orientation is fixed, combine related files with{" "}
+          <Link href="/merge-pdf" className="underline underline-offset-2 hover:no-underline">
+            Merge PDF
+          </Link>
+          .
         </p>
         <p>
           Because CalmPDF runs in your browser, orientation fixes happen locally on your device. That keeps confidential scans private and avoids uploading sensitive paperwork. For busy workflows, local processing also feels faster since there is no cloud round-trip before each adjustment.

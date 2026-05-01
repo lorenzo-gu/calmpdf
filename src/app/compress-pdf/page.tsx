@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ToolShell } from "@/components/ToolShell";
 import { CompressPdfTool } from "@/components/tools/CompressPdfTool";
 import { getTool } from "@/content/tools";
@@ -21,6 +22,17 @@ export default function Page() {
         <h2 className="text-2xl font-semibold text-sage-900">More about compressing PDFs online</h2>
         <p>
           Use this tool when your PDF is too large for email limits, web forms, or messaging apps. Compression is especially useful for scan-heavy files, reports with full-page images, and exported slide decks. If your original file is 15 to 30 MB, reducing it can make sharing faster and less frustrating for everyone who needs to open it.
+        </p>
+        <p>
+          Need to combine files first? Try{" "}
+          <Link href="/merge-pdf" className="underline underline-offset-2 hover:no-underline">
+            Merge PDF
+          </Link>
+          . Want to extract a few pages before compressing? Use{" "}
+          <Link href="/split-pdf" className="underline underline-offset-2 hover:no-underline">
+            Split PDF
+          </Link>
+          .
         </p>
         <p>
           Common use cases include sending contracts to clients, uploading resumes to job portals with strict size caps, and submitting coursework or application documents that reject large files. For teams, compressed PDFs also keep cloud storage cleaner and help reduce duplicate uploads caused by failed file-size checks.
