@@ -4,6 +4,7 @@ import { ShieldCheck, Zap, Wifi } from "lucide-react";
 import type { Tool } from "@/content/tools";
 import { TOOLS } from "@/content/tools";
 import { SoftwareAppJsonLd, HowToJsonLd, FaqJsonLd, BreadcrumbJsonLd } from "./JsonLd";
+import { VerticalResponsiveAd } from "@/components/VerticalResponsiveAd";
 
 export function ToolShell({
   tool,
@@ -47,6 +48,8 @@ export function ToolShell({
         </div>
 
         <div className="mt-8">{children}</div>
+
+        <VerticalResponsiveAd />
       </section>
 
       <section className="mx-auto max-w-content px-4 md:px-6 py-10 grid gap-8 md:grid-cols-2">

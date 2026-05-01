@@ -2,7 +2,7 @@ import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { TOOLS } from "@/content/tools";
 import type { Post } from "@/content/posts";
-import { AdSlot } from "@/components/AdSlot";
+import { VerticalResponsiveAd } from "@/components/VerticalResponsiveAd";
 
 function JsonLdScript({ data }: { data: object }) {
   return (
@@ -98,8 +98,10 @@ export function ArticleShell({
         {children}
       </article>
 
-      {/* Single subtle ad slot — only on how-to articles, after the user has read the content. */}
-      <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_ARTICLE_SLOT ?? ""} />
+      {/* Footer ad slot for how-to pages after primary content. */}
+      <section className="mx-auto max-w-3xl px-4 md:px-6">
+        <VerticalResponsiveAd />
+      </section>
 
       {/* CTA card */}
       <aside className="mx-auto max-w-3xl px-4 md:px-6 pb-12">
