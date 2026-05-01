@@ -30,8 +30,8 @@ export function VerticalResponsiveAd() {
   }
 
   return (
-    <div className="my-8 w-full overflow-hidden">
-      <div className="min-h-[280px]">
+    <div className="my-6 md:my-8 w-full overflow-hidden">
+      <div className="min-h-[90px] md:min-h-[120px]">
         <ins
           className="adsbygoogle"
           style={{ display: "block" }}
