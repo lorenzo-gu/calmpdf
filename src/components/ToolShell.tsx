@@ -72,20 +72,22 @@ export function ToolShell({
         </div>
       </section>
 
-      <section className="mx-auto max-w-content px-4 md:px-6 py-10">
-        <h2 className="text-2xl font-semibold mb-6">Frequently asked questions</h2>
-        <div className="divide-y divide-sand-200 rounded-2xl border border-sand-200 bg-white">
-          {tool.faqs.map((f, i) => (
-            <details key={i} className="group p-5 open:bg-sand-50/50">
-              <summary className="cursor-pointer list-none flex justify-between items-center font-medium text-sage-900">
-                {f.q}
-                <span className="ml-4 text-sage-500 group-open:rotate-45 transition-transform">+</span>
-              </summary>
-              <p className="mt-3 text-sage-700">{f.a}</p>
-            </details>
-          ))}
-        </div>
-      </section>
+      {tool.faqs.length > 0 ? (
+        <section className="mx-auto max-w-content px-4 md:px-6 py-10">
+          <h2 className="text-2xl font-semibold mb-6">Frequently asked questions</h2>
+          <div className="divide-y divide-sand-200 rounded-2xl border border-sand-200 bg-white">
+            {tool.faqs.map((f, i) => (
+              <details key={i} className="group p-5 open:bg-sand-50/50">
+                <summary className="cursor-pointer list-none flex justify-between items-center font-medium text-sage-900">
+                  {f.q}
+                  <span className="ml-4 text-sage-500 group-open:rotate-45 transition-transform">+</span>
+                </summary>
+                <p className="mt-3 text-sage-700">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <section className="mx-auto max-w-content px-4 md:px-6 py-10">
         <h2 className="text-2xl font-semibold mb-6">Related PDF tools</h2>

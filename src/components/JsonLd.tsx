@@ -76,6 +76,8 @@ export function HowToJsonLd({ tool }: { tool: Tool }) {
 }
 
 export function FaqJsonLd({ tool }: { tool: Tool }) {
+  if (tool.faqs.length === 0) return null;
+
   return (
     <Script
       data={{
