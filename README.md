@@ -148,6 +148,16 @@ Apply to Ezoic first — much easier approval than AdSense for a new site. Media
 
 ---
 
+## Search engine verification + crawl readiness
+
+- Canonical production host is `https://calmpdf.com` (non-canonical `www` and `http` variants must redirect to it at the hosting/CDN layer).
+- `src/app/robots.ts` and `src/app/sitemap.ts` derive URLs from `SITE.url`, so keep `src/lib/site.ts` as the single canonical source.
+- Search Console verification tokens are configured with env vars only:
+  - `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`
+  - `NEXT_PUBLIC_BING_SITE_VERIFICATION`
+- Do **not** hardcode verification tags in page components. Update only env vars to rotate tokens without touching unrelated SEO metadata.
+- Run `npm run audit:seo` after deploy to validate robots, sitemap, canonical URLs, and redirect behavior.
+
 ## SEO checklist (do these before launch)
 
 - Replace `public/og.png` with a real 1200×630 social image.

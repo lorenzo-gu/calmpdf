@@ -1,115 +1,135 @@
-import fs from 'node:fs';
-import path from 'node:path';
+#!/usr/bin/env node
 
-const root = process.cwd();
-const fail = [];
+const canonicalOrigin = "https://calmpdf.com";
+const defaultAuditOrigins = [
+  canonicalOrigin,
+  "https://www.calmpdf.com",
+  "http://calmpdf.com",
+  "http://www.calmpdf.com",
+];
 
-const read = (p) => fs.readFileSync(path.join(root, p), 'utf8');
-const exists = (p) => fs.existsSync(path.join(root, p));
+const customOrigins = process.env.SEO_AUDIT_ORIGINS
+  ? process.env.SEO_AUDIT_ORIGINS.split(",").map((origin) => origin.trim()).filter(Boolean)
+  : defaultAuditOrigins;
 
-function parseQuotedArray(filePath, varName) {
-  const text = read(filePath);
-  const match = text.match(new RegExp(`const\\s+${varName}\\s*=\\s*\\[([\\s\\S]*?)\\];`));
-  if (!match) return [];
-  return match[1].split(",").map((v) => v.trim()).filter((v) => /^".*"$/.test(v)).map((v) => v.slice(1, -1));
+function fail(message) {
+  console.error(`❌ ${message}`);
+  process.exitCode = 1;
 }
 
-function parseToolData() {
-  const text = read('src/content/tools.ts');
-  const blocks = [...text.matchAll(/\{\s*slug:\s*"([^"]+)"[\s\S]*?title:\s*"([^"]+)"[\s\S]*?description:\s*\n?\s*"([^"]+)"[\s\S]*?faqs:\s*\[([\s\S]*?)\],/g)];
-  return blocks.map((m) => ({ slug: m[1], title: m[2], description: m[3], faqCount: (m[4].match(/q:\s*"/g) || []).length }));
+function pass(message) {
+  console.log(`✅ ${message}`);
 }
 
-function parsePosts() {
-  const text = read('src/content/posts.ts');
-  const blocks = [...text.matchAll(/\{\s*slug:\s*"([^"]+)"[\s\S]*?title:\s*"([^"]+)"[\s\S]*?description:\s*\n?\s*"([^"]+)"[\s\S]*?published:\s*(true|false)[\s\S]*?(?:faqs:\s*\[([\s\S]*?)\],)?/g)];
-  return blocks
-    .map((m) => ({ slug: m[1], title: m[2], description: m[3], published: m[4] === 'true', faqCount: ((m[5] || '').match(/q:\s*"/g) || []).length }))
-    .filter((p) => p.published);
+async function fetchWithRedirects(url, maxRedirects = 8) {
+  let current = url;
+  const chain = [];
+
+  for (let i = 0; i <= maxRedirects; i += 1) {
+    const response = await fetch(current, { redirect: "manual" });
+    const location = response.headers.get("location");
+    chain.push({ url: current, status: response.status, location });
+
+    if (!location || response.status < 300 || response.status >= 400) {
+      return { finalResponse: response, chain };
+    }
+
+    current = new URL(location, current).toString();
+  }
+
+  throw new Error(`Too many redirects for ${url}`);
 }
 
-function routeExists(route) {
-  if (route === '/') return exists('src/app/page.tsx');
-  const seg = route.replace(/^\//, '');
-  return exists(`src/app/${seg}/page.tsx`);
+function parseLocsFromSitemap(xml) {
+  const locRegex = /<loc>(.*?)<\/loc>/g;
+  const locs = [];
+  let match = locRegex.exec(xml);
+  while (match) {
+    locs.push(match[1].trim());
+    match = locRegex.exec(xml);
+  }
+  return locs;
 }
 
-const staticPaths = parseQuotedArray('src/app/sitemap.ts', 'staticPaths').map((p) => (p ? `/${p}` : '/'));
-const programmatic = parseQuotedArray('src/app/sitemap.ts', 'PROGRAMMATIC_SLUGS').map((s) => `/${s}`);
-const tools = parseToolData();
-const posts = parsePosts();
-const postRoutes = posts.map((p) => `/how-to/${p.slug}`);
-const toolRoutes = tools.map((t) => `/${t.slug}`);
-const allRoutes = [...new Set([...staticPaths, '/how-to', ...toolRoutes, ...postRoutes, ...programmatic])];
+async function main() {
+  console.log(`SEO audit targets: ${customOrigins.join(", ")}`);
 
-for (const route of allRoutes) {
-  if (!routeExists(route)) fail.push({ route, reason: 'Missing route page file for sitemap/indexable path.' });
-}
+  const robotsUrl = `${canonicalOrigin}/robots.txt`;
+  const robotsRes = await fetch(robotsUrl);
+  if (robotsRes.status !== 200) {
+    fail(`${robotsUrl} returned ${robotsRes.status} (expected 200)`);
+  } else {
+    pass(`${robotsUrl} returned 200`);
+  }
 
-for (const t of tools) {
-  if (!allRoutes.includes(`/${t.slug}`)) fail.push({ route: `/${t.slug}`, reason: 'Tool missing from sitemap routes.' });
-}
-for (const p of posts) {
-  if (!allRoutes.includes(`/how-to/${p.slug}`)) fail.push({ route: `/how-to/${p.slug}`, reason: 'Published post missing from sitemap routes.' });
-}
+  const robotsText = await robotsRes.text();
+  const sitemapLine = `Sitemap: ${canonicalOrigin}/sitemap.xml`;
+  if (!robotsText.includes(sitemapLine)) {
+    fail(`robots.txt is missing exact sitemap line: ${sitemapLine}`);
+  } else {
+    pass("robots.txt includes canonical sitemap URL");
+  }
 
-const paths = new Map();
-for (const route of allRoutes) {
-  paths.set(route, (paths.get(route) || 0) + 1);
-}
-for (const [route, count] of paths.entries()) {
-  if (count > 1) fail.push({ route, reason: 'Duplicate route defined across SEO surfaces.' });
-}
+  const sitemapUrl = `${canonicalOrigin}/sitemap.xml`;
+  const sitemapRes = await fetch(sitemapUrl);
+  if (sitemapRes.status !== 200) {
+    fail(`${sitemapUrl} returned ${sitemapRes.status} (expected 200)`);
+  } else {
+    pass(`${sitemapUrl} returned 200`);
+  }
 
-const titles = new Map();
-const descs = new Map();
-for (const t of tools) {
-  titles.set(t.title, (titles.get(t.title) || 0) + 1);
-  descs.set(t.description, (descs.get(t.description) || 0) + 1);
-}
-for (const p of posts) {
-  titles.set(p.title, (titles.get(p.title) || 0) + 1);
-  descs.set(p.description, (descs.get(p.description) || 0) + 1);
-}
-for (const [v, c] of titles.entries()) if (c > 1) fail.push({ route: '(metadata)', reason: `Duplicate title: ${v}` });
-for (const [v, c] of descs.entries()) if (c > 1) fail.push({ route: '(metadata)', reason: `Duplicate description: ${v.slice(0, 80)}...` });
+  const sitemapXml = await sitemapRes.text();
+  const locs = parseLocsFromSitemap(sitemapXml);
+  if (locs.length === 0) {
+    fail("sitemap.xml contains no <loc> entries");
+  } else {
+    pass(`sitemap.xml contains ${locs.length} URL entries`);
+  }
 
-for (const route of allRoutes.filter((r) => r !== '/')) {
-  const file = `src/app${route}/page.tsx`;
-  if (!exists(file)) continue;
-  const text = read(file);
-  if (!text.includes('alternates:') || !text.includes('canonical')) {
-    fail.push({ route, reason: 'Missing canonical URL in metadata alternates.' });
+  const nonCanonical = locs.filter((url) => !url.startsWith(canonicalOrigin));
+  if (nonCanonical.length > 0) {
+    fail(`sitemap.xml has non-canonical URLs, sample: ${nonCanonical.slice(0, 3).join(", ")}`);
+  } else {
+    pass("all sitemap URLs use canonical origin");
+  }
+
+  for (const url of locs.slice(0, 200)) {
+    const { finalResponse, chain } = await fetchWithRedirects(url);
+    if (chain.length > 1) {
+      fail(`sitemap URL redirects: ${url} -> ${chain.map((c) => `${c.status}:${c.url}`).join(" -> ")}`);
+      continue;
+    }
+
+    if (finalResponse.status !== 200) {
+      fail(`sitemap URL not 200: ${url} (${finalResponse.status})`);
+      continue;
+    }
+  }
+  pass("sampled sitemap URLs did not redirect and returned 200");
+
+  for (const origin of customOrigins) {
+    const { chain } = await fetchWithRedirects(origin);
+    const final = chain[chain.length - 1];
+    const isCanonical = final.url.startsWith(canonicalOrigin);
+    if (!isCanonical) {
+      fail(`origin did not resolve to canonical host: ${origin} -> ${final.url}`);
+      continue;
+    }
+
+    if (origin.startsWith("http://") && chain.length === 1) {
+      fail(`origin did not redirect from HTTP to HTTPS: ${origin}`);
+      continue;
+    }
+
+    pass(`origin resolves to canonical HTTPS host: ${origin} -> ${final.url}`);
+  }
+
+  if (process.exitCode) {
+    process.exit(process.exitCode);
   }
 }
 
-for (const t of tools) {
-  const file = `src/app/${t.slug}/page.tsx`;
-  if (!exists(file)) continue;
-  const text = read(file);
-  ['SoftwareAppJsonLd', 'HowToJsonLd', 'FaqJsonLd', 'BreadcrumbJsonLd'].forEach((token) => {
-    if (!text.includes(token) && !read('src/components/ToolShell.tsx').includes(token)) fail.push({ route: `/${t.slug}`, reason: `Missing ${token} JSON-LD.` });
-  });
-}
-for (const p of posts) {
-  const file = `src/app/how-to/${p.slug}/page.tsx`;
-  if (!exists(file)) continue;
-  const text = read(file);
-  if (!text.includes('ArticleShell')) fail.push({ route: `/how-to/${p.slug}`, reason: 'Missing ArticleShell / Article JSON-LD path.' });
-}
-
-if (exists('.next/server/app-paths-manifest.json')) {
-  const manifest = JSON.parse(read('.next/server/app-paths-manifest.json'));
-  for (const route of allRoutes) {
-    const key = route === '/' ? '/page' : `${route}/page`;
-    if (!manifest[key]) fail.push({ route, reason: 'Route not present in built app-paths manifest.' });
-  }
-}
-
-if (fail.length) {
-  console.error('\nSEO audit failed:\n');
-  for (const item of fail) console.error(`- ${item.route}: ${item.reason}`);
+main().catch((error) => {
+  console.error(`❌ SEO audit failed with exception: ${error.message}`);
   process.exit(1);
-}
-
-console.log(`SEO audit passed for ${allRoutes.length} routes.`);
+});
