@@ -1,6 +1,9 @@
 import type { MetadataRoute } from "next";
 import { PUBLISHED_BLOG_POSTS } from "@/content/posts";
 import { PROGRAMMATIC_PAGES } from "@/content/programmatic-pages";
+import { STATIC_SITEMAP_ROUTES } from "@/content/routes";
+import { TOOLS } from "@/content/tools";
+import { SITE } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
