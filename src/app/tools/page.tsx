@@ -31,17 +31,24 @@ const TOOL_GROUPS = [
     title: "Optimize PDF",
     links: [{ href: "/compress-pdf", label: "Compress PDF" }],
   },
+  {
+    title: "Convert PDF",
+    links: [
+      { href: "/pdf-to-word", label: "PDF to Word" },
+      { href: "/docx-to-pdf", label: "Word to PDF" },
+    ],
+  },
 ] as const;
 
 export const metadata: Metadata = {
   title: "Free Online PDF Tools | CalmPDF",
   description:
-    "Use CalmPDF's free online PDF and Word conversion tools to edit, rotate, compress, merge, split, and convert documents directly in your browser.",
+    "Use CalmPDF's free online PDF tools to edit, rotate, compress, merge, split, and convert PDFs directly in your browser.",
   alternates: { canonical: "/tools" },
   openGraph: {
     title: "Free Online PDF Tools | CalmPDF",
     description:
-      "Use CalmPDF's free online PDF and Word conversion tools to edit, rotate, compress, merge, split, and convert documents directly in your browser.",
+      "Use CalmPDF's free online PDF tools to edit, rotate, compress, merge, split, and convert PDFs directly in your browser.",
     url: "/tools",
   },
 };

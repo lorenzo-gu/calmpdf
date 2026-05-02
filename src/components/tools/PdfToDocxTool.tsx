@@ -120,7 +120,7 @@ export function PdfToDocxTool() {
           onClick={handleConvert}
         >
           {busy && <Loader2 className="h-4 w-4 animate-spin" />}
-          {busy ? "Converting…" : "Convert to DOCX"}
+          {busy ? "Converting…" : "Convert PDF to Word"}
         </button>
       </div>
     </div>

@@ -268,17 +268,17 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
-    slug: "pdf-to-docx",
-    title: "PDF to Word (DOCX) — Convert PDF to Editable Word Documents | CalmPDF",
-    h1: "PDF to Word (DOCX)",
-    tagline: "Convert PDF files into editable Word documents in your browser.",
+    slug: "pdf-to-word",
+    title: "PDF to Word Converter — Convert PDF to DOCX Free | CalmPDF",
+    h1: "PDF to Word",
+    tagline: "Convert simple PDFs into editable Word documents (.docx).",
     description:
-      "Convert a text-based PDF into a Word-compatible DOCX file directly in your browser. No upload, no signup.",
+      "Convert a text-based PDF into a Word-compatible .docx file directly in your browser. No upload, no signup.",
     keyword: "pdf to word",
     steps: [
       "Drop your PDF into the converter.",
-      "CalmPDF extracts the text and creates a Word-compatible DOCX file.",
-      "Download the DOCX file. Your original PDF stays on your device.",
+      "CalmPDF extracts text and creates a Word-compatible .docx file.",
+      "Download the Word file (.docx). Your original PDF stays on your device.",
     ],
     faqs: [
       {
@@ -286,7 +286,7 @@ export const TOOLS: Tool[] = [
         a: "No. The conversion runs in your browser, so your PDF never leaves your device.",
       },
       {
-        q: "Will the DOCX look exactly like the PDF?",
+        q: "Will the Word file look exactly like the PDF?",
         a: "Not in this first version. The MVP is best for simple, text-based PDFs and may not preserve complex layouts, images, or tables.",
       },
       {
