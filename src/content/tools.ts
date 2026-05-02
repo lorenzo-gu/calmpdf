@@ -229,12 +229,12 @@ export const TOOLS: Tool[] = [
 
   {
     slug: "docx-to-pdf",
-    title: "DOCX to PDF — Convert Word to PDF for Free | CalmPDF",
-    h1: "DOCX to PDF",
+    title: "Word to PDF (DOCX) — Convert Word Documents Online | CalmPDF",
+    h1: "Word to PDF (DOCX)",
     tagline: "Turn a Word document into a PDF in your browser.",
     description:
       "Convert a DOCX file into a PDF directly in your browser. Private, simple, and free.",
-    keyword: "docx to pdf",
+    keyword: "word to pdf",
     steps: [
       "Drop your DOCX file into the converter.",
       "CalmPDF renders the document in your browser.",
@@ -254,12 +254,17 @@ export const TOOLS: Tool[] = [
         a: "Not in this MVP. This version supports .docx files only.",
       },
       {
+        q: "Does CalmPDF preserve tracked changes and comments?",
+        a: "No. This converter is built for final DOCX content. Comments, tracked changes, and advanced Word review metadata may not render in the exported PDF.",
+      },
+      {
         q: "Does this work on mobile?",
         a: "It should work in modern browsers, but larger documents may work better on desktop.",
       },
     ],
     relatedGuides: [
-      { href: "/how-to/combine-pdf-files", label: "How to Combine PDF Files" },
+      { href: "/how-to/convert-word-to-pdf", label: "How to Convert Word to PDF" },
+      { href: "/how-to/pdf-conversion-troubleshooting", label: "PDF Conversion Troubleshooting" },
     ],
   },
   {
@@ -292,9 +297,14 @@ export const TOOLS: Tool[] = [
         q: "Can I edit the DOCX after downloading?",
         a: "Yes. The output is a Word-compatible DOCX file that can be opened in Word, Google Docs, Pages, and similar editors.",
       },
+      {
+        q: "Why is my converted Word file missing tables or images?",
+        a: "The current converter prioritizes text extraction. Complex elements like table structure, embedded images, and multi-column layout are not fully reconstructed in this MVP.",
+      },
     ],
     relatedGuides: [
-      { href: "/how-to/rotate-pdf", label: "How to Rotate a PDF" },
+      { href: "/how-to/convert-pdf-to-word", label: "How to Convert PDF to Word" },
+      { href: "/how-to/pdf-conversion-troubleshooting", label: "PDF Conversion Troubleshooting" },
     ],
   },
 ];
