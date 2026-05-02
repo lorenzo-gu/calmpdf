@@ -4,5 +4,27 @@ import { BLOG_POSTS } from "@/content/posts";
 import { ArticleShell } from "@/components/ArticleShell";
 
 const post = BLOG_POSTS.find((p) => p.slug === "convert-pdf-to-word")!;
-export const metadata: Metadata = { title: "Convert PDF to Word (DOCX) | CalmPDF", description: "Learn how to convert PDF to Word (DOCX), when conversion works best, and why scanned PDFs need OCR.", keywords: ["pdf to word", "pdf to docx", "convert pdf to editable word document", "word document", "docx file"], alternates: { canonical: `${SITE.url}/how-to/convert-pdf-to-word` } };
-export default function Page() { return <ArticleShell post={post}><h1 className="text-3xl font-semibold tracking-tight mb-4">How to Convert PDF to Word (DOCX)</h1><p className="text-sage-700 mb-6">If you searched for <strong>PDF to Word</strong>, you are in the right place. Most modern Word files are<strong> DOCX files</strong>, so "PDF to Word" and "PDF to DOCX" usually mean the same conversion.</p><p className="text-sage-700 mb-6"><a href="/pdf-to-docx" className="text-sage-900 underline underline-offset-4">Open CalmPDF&apos;s PDF to Word tool.</a></p><h2 className="text-2xl font-semibold mt-8 mb-3">PDF vs Word document vs DOCX vs DOC</h2><ul className="list-disc list-inside space-y-2 text-sage-700 mb-6"><li><strong>PDF:</strong> fixed layout for consistent viewing and sharing.</li><li><strong>Word document:</strong> editable text document opened in Microsoft Word or compatible editors.</li><li><strong>.docx:</strong> the modern Word format used by current versions of Word.</li><li><strong>.doc:</strong> older legacy Word format. CalmPDF does not output .doc.</li></ul><h2 className="text-2xl font-semibold mt-8 mb-3">How to convert PDF to an editable Word document</h2><ol className="list-decimal list-inside space-y-2 text-sage-700 mb-6"><li>Go to <strong>/pdf-to-docx</strong>.</li><li>Upload a text-based PDF (you should be able to select text in it).</li><li>Run conversion and download the generated DOCX file.</li><li>Open the DOCX in Word, Google Docs, or another editor and make edits.</li></ol><h2 className="text-2xl font-semibold mt-8 mb-3">What works well today</h2><p className="text-sage-700 mb-6">CalmPDF currently converts <strong>simple selectable-text PDFs</strong> best. This includes standard letters, plain reports, and straightforward contracts where the primary need is text editing.</p><h2 className="text-2xl font-semibold mt-8 mb-3">What may not preserve perfectly</h2><p className="text-sage-700 mb-4">PDF and Word formats are structurally different. Complex PDF layouts may need cleanup after conversion.</p><ul className="list-disc list-inside space-y-2 text-sage-700 mb-6"><li>Tables and multi-column layouts</li><li>Images and image wrapping</li><li>Headers, footers, and footnotes</li><li>Forms and advanced page elements</li></ul><h2 className="text-2xl font-semibold mt-8 mb-3">Why scanned PDFs need OCR</h2><p className="text-sage-700 mb-6">A scanned PDF is often just page images. If text is not selectable, the converter cannot reliably extract words without OCR (optical character recognition). CalmPDF&apos;s current browser-only MVP does not support OCR yet, so scanned/image-only PDFs are out of scope for now.</p><p className="text-sage-700 mb-6">Next steps: convert with <a href="/pdf-to-docx" className="text-sage-900 underline underline-offset-4">PDF to Word</a>, then use <a href="/edit-pdf" className="text-sage-900 underline underline-offset-4">Edit PDF</a>, <a href="/compress-pdf" className="text-sage-900 underline underline-offset-4">Compress PDF</a>, or <a href="/merge-pdf" className="text-sage-900 underline underline-offset-4">Merge PDF</a> for related tasks.</p></ArticleShell>; }
+
+export const metadata: Metadata = {
+  title: "How to Convert PDF to Word (DOCX) | CalmPDF",
+  description: "Step-by-step guide to convert PDF to editable Word documents, including current OCR and layout limitations.",
+  alternates: { canonical: `${SITE.url}/how-to/convert-pdf-to-word` },
+};
+
+export default function Page() {
+  return (
+    <ArticleShell post={post}>
+      <h1 className="text-3xl font-semibold tracking-tight mb-4">How to Convert PDF to Word (DOCX)</h1>
+      <p className="text-sage-700 mb-6">Use PDF to Word when you need to edit text from a PDF. CalmPDF outputs a DOCX file you can open in Microsoft Word, Google Docs, or Pages.</p>
+      <h2 className="text-2xl font-semibold mt-8 mb-3">Best use cases</h2>
+      <ul className="list-disc list-inside text-sage-700 space-y-2 mb-6">
+        <li>Text-based letters, short contracts, and reports.</li>
+        <li>Reusing copy from older PDFs in a new Word document.</li>
+        <li>Quick editing before exporting back to PDF.</li>
+      </ul>
+      <h2 className="text-2xl font-semibold mt-8 mb-3">Limitations to know</h2>
+      <p className="text-sage-700 mb-6">This tool does not support OCR yet, so scanned PDFs and image-only PDFs will not convert into editable text. It also does not fully rebuild complex tables, columns, headers, footers, or embedded images in this version.</p>
+      <p className="text-sage-700 mb-6"><a href="/pdf-to-docx" className="text-sage-900 underline underline-offset-4">Try CalmPDF PDF to Word converter.</a></p>
+    </ArticleShell>
+  );
+}
