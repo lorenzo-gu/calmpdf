@@ -87,7 +87,7 @@ export const TOOLS: Tool[] = [
     keyword: "compress pdf",
     steps: [
       "Drop your PDF into the box above — no upload required.",
-      "Click Compress PDF to run a lossless size-reduction pass in your browser.",
+      "Click Compress PDF to run automatic lossless optimization in your browser.",
       "Download the compressed PDF. The original stays untouched.",
     ],
     faqs: [
@@ -97,7 +97,7 @@ export const TOOLS: Tool[] = [
       },
       {
         q: "How much can CalmPDF compress a PDF?",
-        a: "Results vary by file. This MVP uses lossless cleanup, so text-heavy PDFs may shrink modestly while image-heavy scans may need lossy controls in a future release for larger reductions.",
+        a: "Results vary by file. Because this release is lossless, many PDFs shrink a little while image-heavy scans may not shrink much.",
       },
       {
         q: "Is there a file-size limit?",
@@ -105,7 +105,7 @@ export const TOOLS: Tool[] = [
       },
       {
         q: "Does compression reduce quality?",
-        a: "No. This release is lossless and does not downsample images. It removes overhead and recompresses objects without changing visible page quality.",
+        a: "No. This release is lossless and does not downsample images, so visible page quality stays the same.",
       },
       {
         q: "Is CalmPDF free?",
