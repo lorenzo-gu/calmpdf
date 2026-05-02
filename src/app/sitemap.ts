@@ -1,8 +1,6 @@
 import type { MetadataRoute } from "next";
 import { PUBLISHED_BLOG_POSTS } from "@/content/posts";
-import { PROGRAMMATIC_SITEMAP_ROUTES, STATIC_SITEMAP_ROUTES } from "@/content/routes";
-import { TOOLS } from "@/content/tools";
-import { SITE } from "@/lib/site";
+import { PROGRAMMATIC_PAGES } from "@/content/programmatic-pages";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -26,11 +24,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
-    ...PROGRAMMATIC_SITEMAP_ROUTES.map((route) => ({
-      url: `${SITE.url}/${route.slug}`,
-      lastModified: new Date(route.lastModified),
-      changeFrequency: route.changeFrequency,
-      priority: route.priority,
+    ...PROGRAMMATIC_PAGES.map((page) => ({
+      url: `${SITE.url}/${page.slug}`,
+      lastModified: now,
+      changeFrequency: page.sitemap.changeFrequency,
+      priority: page.sitemap.priority,
     })),
   ];
 }
