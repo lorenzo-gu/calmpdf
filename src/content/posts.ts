@@ -13,7 +13,40 @@ export type Post = {
 };
 
 export const BLOG_POSTS: Post[] = [
-    {
+  {
+        slug: "convert-pdf-to-word",
+        title: "How to Convert PDF to Word (DOCX)",
+        description:
+                "Learn when PDF to Word conversion works well, what breaks, and how to convert a text-based PDF into an editable DOCX without uploading your file.",
+        datePublished: "2026-05-02",
+        dateModified: "2026-05-02",
+        ctaHref: "/pdf-to-docx",
+        ctaLabel: "Convert PDF to Word",
+        published: true,
+  },
+  {
+        slug: "convert-word-to-pdf",
+        title: "How to Convert Word to PDF (DOCX)",
+        description:
+                "A practical guide to turning DOCX into PDF for sharing, applications, and printing, with clear limits for complex Word layouts.",
+        datePublished: "2026-05-02",
+        dateModified: "2026-05-02",
+        ctaHref: "/docx-to-pdf",
+        ctaLabel: "Convert Word to PDF",
+        published: true,
+  },
+  {
+        slug: "pdf-conversion-troubleshooting",
+        title: "PDF Conversion Troubleshooting (Word, DOCX, and Layout Issues)",
+        description:
+                "Fix common PDF conversion errors: blank output, broken formatting, missing fonts, scanned files, and failed Word/PDF exports.",
+        datePublished: "2026-05-02",
+        dateModified: "2026-05-02",
+        ctaHref: "/pdf-to-docx",
+        ctaLabel: "Try PDF to Word",
+        published: true,
+  },
+  {
         slug: "edit-pdf-free",
         title: "How to Edit a PDF for Free",
         description: "Learn the best free PDF editors including browser-based tools and desktop applications that work without uploading files.",
