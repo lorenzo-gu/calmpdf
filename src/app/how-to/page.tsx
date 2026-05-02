@@ -39,7 +39,7 @@ const TOPIC_CLUSTERS: Cluster[] = [
     title: "Rotate PDF",
     posts: PUBLISHED_BLOG_POSTS.filter((p) => p.slug.includes("rotate")),
   },
-  { title: "Convert PDF", posts: [] },
+  { title: "Convert PDF", posts: PUBLISHED_BLOG_POSTS.filter((p) => p.slug.includes("word") || p.slug.includes("docx") || p.slug.includes("convert-pdf")) },
   { title: "Images/PDF", posts: [] },
   { title: "Page Management", posts: [] },
 ];
