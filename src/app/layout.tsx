@@ -7,6 +7,11 @@ import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/JsonLd";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 
+const searchEngineVerification = {
+  google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  bing: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION,
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: `${SITE.name} — ${SITE.tagline}`,
@@ -27,6 +32,7 @@ export const metadata: Metadata = {
     description: SITE.description,
   },
   robots: { index: true, follow: true },
+  verification: searchEngineVerification,
 };
 
 export const viewport: Viewport = {

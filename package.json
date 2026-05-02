@@ -11,7 +11,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "check:pdfjs-assets": "node scripts/copy-pdfjs-worker.mjs && node scripts/verify-pdfjs-assets.mjs"
+    "check:pdfjs-assets": "node scripts/copy-pdfjs-worker.mjs && node scripts/verify-pdfjs-assets.mjs",
+    "audit:seo": "node scripts/seo-audit.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
