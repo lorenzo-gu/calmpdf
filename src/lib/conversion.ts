@@ -100,31 +100,56 @@ export async function pdfToDocx(file: File): Promise<Blob> {
 
   const { Document, Packer, Paragraph, TextRun, PageBreak } = docxLib;
 
-  let pages: ExtractedLine[][];
-  let totalRawChars = 0;
-  let totalItems = 0;
-  try {
+  async function extractPdfText(useSystemFonts: boolean): Promise<{
+    pages: ExtractedLine[][];
+    totalRawChars: number;
+    totalItems: number;
+  }> {
     const arrayBuffer = await file.arrayBuffer();
-    // CMaps and standard font data are needed to decode CID/embedded fonts.
-    // useSystemFonts: false keeps text extraction deterministic across browsers
-    // by preventing pdf.js from substituting host system fonts for missing ones.
     const loadingTask = pdfjsLib.getDocument({
       data: new Uint8Array(arrayBuffer),
       cMapUrl: PDFJS_CMAP_URL,
       cMapPacked: true,
       standardFontDataUrl: PDFJS_STANDARD_FONT_URL,
-      useSystemFonts: false,
+      useSystemFonts,
     });
     const pdf = await loadingTask.promise;
 
-    pages = [];
+    const extractedPages: ExtractedLine[][] = [];
+    let extractedChars = 0;
+    let extractedItems = 0;
     for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
       const page = await pdf.getPage(pageNumber);
       const textContent = await page.getTextContent();
       const items = (textContent.items as unknown[]).filter(isTextItem);
-      totalItems += items.length;
-      for (const item of items) totalRawChars += item.str.length;
-      pages.push(groupItemsIntoLines(items));
+      extractedItems += items.length;
+      for (const item of items) extractedChars += item.str.length;
+      extractedPages.push(groupItemsIntoLines(items));
+    }
+
+    return {
+      pages: extractedPages,
+      totalRawChars: extractedChars,
+      totalItems: extractedItems,
+    };
+  }
+
+  let pages: ExtractedLine[][];
+  let totalRawChars = 0;
+  let totalItems = 0;
+  try {
+    const primary = await extractPdfText(false);
+    pages = primary.pages;
+    totalRawChars = primary.totalRawChars;
+    totalItems = primary.totalItems;
+
+    if (totalRawChars < 10) {
+      const fallback = await extractPdfText(true);
+      if (fallback.totalRawChars > totalRawChars) {
+        pages = fallback.pages;
+        totalRawChars = fallback.totalRawChars;
+        totalItems = fallback.totalItems;
+      }
     }
   } catch {
     throw new Error("This file could not be converted. Try a simpler document or a smaller file.");
