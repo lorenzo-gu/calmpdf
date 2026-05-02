@@ -47,6 +47,17 @@ export const BLOG_POSTS: Post[] = [
         published: true,
   },
   {
+        slug: "pdf-to-word-not-working",
+        title: "PDF to Word Not Working? Fixes That Usually Help",
+        description:
+                "Troubleshoot failed PDF to Word conversions, blank DOCX output, and broken formatting with practical checks before retrying.",
+        datePublished: "2026-05-02",
+        dateModified: "2026-05-02",
+        ctaHref: "/pdf-to-docx",
+        ctaLabel: "Convert PDF to Word",
+        published: true,
+  },
+  {
         slug: "edit-pdf-free",
         title: "How to Edit a PDF for Free",
         description: "Learn the best free PDF editors including browser-based tools and desktop applications that work without uploading files.",
