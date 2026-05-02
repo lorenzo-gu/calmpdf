@@ -65,8 +65,9 @@ export default function Page() {
 
       <h3 className="text-xl font-medium mt-6 mb-2">Step 3: Set the order</h3>
       <p className="text-sage-700 mb-4">
-        After adding your files, drag them up or down in the list to set the order they'll
-        appear in the combined document. The first file in the list becomes the first pages
+        After adding your files, use the <strong>Move up</strong> and <strong>Move down</strong>
+        arrow buttons next to each file to set the order they'll appear in the combined
+        document. The first file in the list becomes the first pages
         of the output.
       </p>
 

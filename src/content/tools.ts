@@ -131,7 +131,7 @@ export const TOOLS: Tool[] = [
     keyword: "merge pdf",
     steps: [
       "Drop all the PDFs you want to combine into the box.",
-      "Drag the files to set the order you want them in.",
+      "Use the up/down arrow buttons to set the order you want them in.",
       "Click Merge and download the combined PDF.",
     ],
     faqs: [
@@ -145,7 +145,7 @@ export const TOOLS: Tool[] = [
       },
       {
         q: "Can I change the order of the PDFs?",
-        a: "Yes. After adding your files, drag them up or down in the list to change the order before merging.",
+        a: "Yes. After adding your files, use the Move up and Move down arrow buttons in the list to change the order before merging.",
       },
       {
         q: "Is it really private?",
