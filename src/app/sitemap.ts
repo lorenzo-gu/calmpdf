@@ -2,14 +2,7 @@ import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/site";
 import { TOOLS } from "@/content/tools";
 import { PUBLISHED_BLOG_POSTS } from "@/content/posts";
-
-const PROGRAMMATIC_SLUGS = [
-  "compress-pdf-to-100kb",
-  "compress-pdf-to-500kb",
-  "compress-pdf-to-200kb",
-  "compress-pdf-to-1mb",
-    "compress-pdf-for-email",
-];
+import { PROGRAMMATIC_PAGES } from "@/content/programmatic-pages";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -39,11 +32,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
-    ...PROGRAMMATIC_SLUGS.map((slug) => ({
-      url: `${SITE.url}/${slug}`,
+    ...PROGRAMMATIC_PAGES.map((page) => ({
+      url: `${SITE.url}/${page.slug}`,
       lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: 0.75,
+      changeFrequency: page.sitemap.changeFrequency,
+      priority: page.sitemap.priority,
     })),
   ];
 }
