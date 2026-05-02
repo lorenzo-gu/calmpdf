@@ -7,6 +7,7 @@ import { Dropzone } from "@/components/Dropzone";
 import { formatBytes, readFileAsArrayBuffer, triggerDownload } from "@/lib/pdf";
 
 type PdfPageMeta = { width: number; height: number };
+const PDFJS_WORKER_PATH = "/pdf.worker.min.js";
 
 type OverlayBase = {
   id: string;
@@ -113,9 +114,8 @@ export function EditPdfTool() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
 
-  const [pagePreviewUrl, setPagePreviewUrl] = useState<string | null>(null);
-
   const stageRef = useRef<HTMLDivElement | null>(null);
+  const previewCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const activeTextRef = useRef<HTMLTextAreaElement | null>(null);
   const imageUrlMapRef = useRef<Record<string, string>>({});
 
@@ -329,49 +329,46 @@ export function EditPdfTool() {
 
   useEffect(() => {
     let canceled = false;
-    let activeUrl: string | null = null;
+    let renderTask: { cancel?: () => void; promise?: Promise<unknown> } | null = null;
 
-    async function buildPagePreview() {
-      if (!file || !pages[currentPageIndex]) {
-        setPagePreviewUrl((previous) => {
-          if (previous) URL.revokeObjectURL(previous);
-          return null;
-        });
-        return;
+    async function renderPagePreview() {
+      if (!file || !pages[currentPageIndex] || !previewCanvasRef.current || !stageRef.current) return;
+      const [pdfjsLib] = await Promise.all([import("pdfjs-dist")]);
+      if (!pdfjsLib.GlobalWorkerOptions.workerSrc) {
+        pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER_PATH;
       }
 
-      try {
-        const sourceBytes = await readFileAsArrayBuffer(file);
-        const sourceDoc = await PDFDocument.load(sourceBytes, { ignoreEncryption: true });
-        const previewDoc = await PDFDocument.create();
-        const [previewPage] = await previewDoc.copyPages(sourceDoc, [currentPageIndex]);
-        previewDoc.addPage(previewPage);
-        const previewBytes = await previewDoc.save({ useObjectStreams: true, addDefaultPage: false });
-
-        if (canceled) return;
-
-        const previewBuffer = new Uint8Array(previewBytes.byteLength);
-        previewBuffer.set(previewBytes);
-        activeUrl = URL.createObjectURL(new Blob([previewBuffer], { type: "application/pdf" }));
-        setPagePreviewUrl((previous) => {
-          if (previous) URL.revokeObjectURL(previous);
-          return activeUrl;
-        });
-      } catch {
-        if (!canceled) {
-          setPagePreviewUrl((previous) => {
-            if (previous) URL.revokeObjectURL(previous);
-            return null;
-          });
-        }
-      }
+      const sourceBytes = await readFileAsArrayBuffer(file);
+      const loadingTask = pdfjsLib.getDocument({ data: new Uint8Array(sourceBytes) });
+      const pdf = await loadingTask.promise;
+      const page = await pdf.getPage(currentPageIndex + 1);
+      const baseViewport = page.getViewport({ scale: 1 });
+      const stageWidth = stageRef.current.getBoundingClientRect().width;
+      const scale = stageWidth > 0 ? stageWidth / baseViewport.width : 1;
+      const viewport = page.getViewport({ scale });
+      const canvas = previewCanvasRef.current;
+      const context = canvas.getContext("2d");
+      if (!context) return;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.floor(viewport.width * dpr);
+      canvas.height = Math.floor(viewport.height * dpr);
+      canvas.style.width = `${viewport.width}px`;
+      canvas.style.height = `${viewport.height}px`;
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+      context.clearRect(0, 0, viewport.width, viewport.height);
+      renderTask = page.render({ canvasContext: context, viewport, canvas });
+      await renderTask.promise;
+      if (!canceled) setError(null);
     }
 
-    buildPagePreview();
+    renderPagePreview().catch((e) => {
+      if (canceled) return;
+      setError(e instanceof Error ? e.message : "Could not render PDF preview.");
+    });
 
     return () => {
       canceled = true;
-      if (activeUrl) URL.revokeObjectURL(activeUrl);
+      renderTask?.cancel?.();
     };
   }, [file, pages, currentPageIndex]);
 
@@ -466,18 +463,10 @@ export function EditPdfTool() {
                 return [];
               });
               setSelectedId(null);
-              setPagePreviewUrl((previous) => {
-                if (previous) URL.revokeObjectURL(previous);
-                return null;
-              });
               setFile(next);
               await loadPdfMeta(next);
             } catch (e) {
               setFile(null);
-              setPagePreviewUrl((previous) => {
-                if (previous) URL.revokeObjectURL(previous);
-                return null;
-              });
               setError(e instanceof Error ? e.message : "Could not open PDF.");
             }
           }}
@@ -504,10 +493,6 @@ export function EditPdfTool() {
                   return [];
                 });
                 setSelectedId(null);
-                setPagePreviewUrl((previous) => {
-                  if (previous) URL.revokeObjectURL(previous);
-                  return null;
-                });
               }}
               disabled={busy}
             >
@@ -590,13 +575,11 @@ export function EditPdfTool() {
             className="relative mx-auto w-full max-w-[720px] overflow-hidden rounded-xl border-4 border-slate-400 bg-white"
             style={{ aspectRatio: `${1 / stageRatio}` }}
           >
-            {pagePreviewUrl && (
-              <iframe
-                title={`Preview of ${file.name} page ${currentPageIndex + 1}`}
-                src={pagePreviewUrl + "#toolbar=0&navpanes=0&scrollbar=0"}
-                className="pointer-events-none absolute inset-0 h-full w-full border-0"
-              />
-            )}
+            <canvas
+              ref={previewCanvasRef}
+              aria-label={`Preview of ${file.name} page ${currentPageIndex + 1}`}
+              className="pointer-events-none absolute inset-0 h-full w-full"
+            />
             {pageOverlays.map((overlay) => {
               const active = overlay.id === selectedId;
               const fittedSize = overlay.kind === "image" ? undefined : getOverlayDrawSize(overlay);

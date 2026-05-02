@@ -6,18 +6,6 @@
  */
 import type { Paragraph as DocxParagraph } from "docx";
 
-const PDF_PAGE_STYLES = `
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 12pt;
-  line-height: 1.5;
-  color: #111;
-  background: white;
-  width: 8.5in;
-  min-height: 11in;
-  padding: 0.75in;
-  box-sizing: border-box;
-`;
-
 const PDFJS_WORKER_PATH = "/pdf.worker.min.js";
 const PDFJS_CMAP_URL = "/pdfjs/cmaps/";
 const PDFJS_STANDARD_FONT_URL = "/pdfjs/standard_fonts/";
@@ -100,31 +88,56 @@ export async function pdfToDocx(file: File): Promise<Blob> {
 
   const { Document, Packer, Paragraph, TextRun, PageBreak } = docxLib;
 
-  let pages: ExtractedLine[][];
-  let totalRawChars = 0;
-  let totalItems = 0;
-  try {
+  async function extractPdfText(useSystemFonts: boolean): Promise<{
+    pages: ExtractedLine[][];
+    totalRawChars: number;
+    totalItems: number;
+  }> {
     const arrayBuffer = await file.arrayBuffer();
-    // CMaps and standard font data are needed to decode CID/embedded fonts.
-    // useSystemFonts: false keeps text extraction deterministic across browsers
-    // by preventing pdf.js from substituting host system fonts for missing ones.
     const loadingTask = pdfjsLib.getDocument({
       data: new Uint8Array(arrayBuffer),
       cMapUrl: PDFJS_CMAP_URL,
       cMapPacked: true,
       standardFontDataUrl: PDFJS_STANDARD_FONT_URL,
-      useSystemFonts: false,
+      useSystemFonts,
     });
     const pdf = await loadingTask.promise;
 
-    pages = [];
+    const extractedPages: ExtractedLine[][] = [];
+    let extractedChars = 0;
+    let extractedItems = 0;
     for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
       const page = await pdf.getPage(pageNumber);
       const textContent = await page.getTextContent();
       const items = (textContent.items as unknown[]).filter(isTextItem);
-      totalItems += items.length;
-      for (const item of items) totalRawChars += item.str.length;
-      pages.push(groupItemsIntoLines(items));
+      extractedItems += items.length;
+      for (const item of items) extractedChars += item.str.length;
+      extractedPages.push(groupItemsIntoLines(items));
+    }
+
+    return {
+      pages: extractedPages,
+      totalRawChars: extractedChars,
+      totalItems: extractedItems,
+    };
+  }
+
+  let pages: ExtractedLine[][];
+  let totalRawChars = 0;
+  let totalItems = 0;
+  try {
+    const primary = await extractPdfText(false);
+    pages = primary.pages;
+    totalRawChars = primary.totalRawChars;
+    totalItems = primary.totalItems;
+
+    if (totalRawChars < 10) {
+      const fallback = await extractPdfText(true);
+      if (fallback.totalRawChars > totalRawChars) {
+        pages = fallback.pages;
+        totalRawChars = fallback.totalRawChars;
+        totalItems = fallback.totalItems;
+      }
     }
   } catch {
     throw new Error("This file could not be converted. Try a simpler document or a smaller file.");
@@ -182,14 +195,82 @@ export async function pdfToDocx(file: File): Promise<Blob> {
   }
 }
 
+type DocxPdfBlock = {
+  text: string;
+  kind: "paragraph" | "heading" | "list-item";
+  level?: number;
+};
+
+const PDF_LAYOUT = {
+  width: 612,
+  height: 792,
+  margin: 54,
+  baseFontSize: 12,
+  lineHeight: 1.45,
+} as const;
+
+function normalizeBlockText(text: string): string {
+  return text.replace(/\s+/g, " ").trim();
+}
+
+function extractDocxPdfBlocks(html: string): DocxPdfBlock[] {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, "text/html");
+  const blocks: DocxPdfBlock[] = [];
+
+  const selectors = ["h1", "h2", "h3", "h4", "h5", "h6", "p", "li"].join(",");
+  const nodes = Array.from(doc.body.querySelectorAll(selectors));
+
+  for (const node of nodes) {
+    const text = normalizeBlockText(node.textContent ?? "");
+    if (!text) continue;
+
+    if (node.tagName.toLowerCase() === "p") {
+      blocks.push({ text, kind: "paragraph" });
+      continue;
+    }
+
+    if (node.tagName.toLowerCase() === "li") {
+      const depth = node.closest("ul ul, ol ol") ? 1 : 0;
+      blocks.push({ text, kind: "list-item", level: depth });
+      continue;
+    }
+
+    const headingLevel = Number(node.tagName.slice(1));
+    blocks.push({
+      text,
+      kind: "heading",
+      level: Number.isFinite(headingLevel) ? headingLevel : 2,
+    });
+  }
+
+  if (blocks.length > 0) return blocks;
+
+  const fallbackText = normalizeBlockText(doc.body.textContent ?? "");
+  return fallbackText ? [{ text: fallbackText, kind: "paragraph" }] : [];
+}
+
+function headingFontSize(level: number | undefined): number {
+  switch (level) {
+    case 1:
+      return 22;
+    case 2:
+      return 18;
+    case 3:
+      return 15;
+    default:
+      return 13;
+  }
+}
+
 export async function docxToPdf(file: File): Promise<Blob> {
   if (!/\.docx$/i.test(file.name)) {
     throw new Error("Please choose a DOCX file.");
   }
 
-  const [{ default: mammoth }, { default: html2pdf }] = await Promise.all([
+  const [{ default: mammoth }, pdfLib] = await Promise.all([
     import("mammoth"),
-    import("html2pdf.js"),
+    import("pdf-lib"),
   ]);
 
   let html: string;
@@ -201,32 +282,66 @@ export async function docxToPdf(file: File): Promise<Blob> {
     throw new Error("This file could not be converted. Try a simpler document or a smaller file.");
   }
 
-  const wrapper = document.createElement("div");
-  // Hide via positioning on the wrapper only. html2pdf.js clones the source
-  // element into an internal render iframe, and `position: fixed` on the
-  // source causes html2canvas to capture an empty frame, producing a blank PDF.
-  wrapper.style.cssText = "position:absolute;left:-10000px;top:0;pointer-events:none;";
-  const page = document.createElement("div");
-  page.setAttribute("style", PDF_PAGE_STYLES);
-  page.innerHTML = html;
-  wrapper.appendChild(page);
-  document.body.appendChild(wrapper);
+  const blocks = extractDocxPdfBlocks(html);
+  if (blocks.length === 0) {
+    throw new Error("This DOCX appears to be empty.");
+  }
 
   try {
-    const blob: Blob = await html2pdf()
-      .set({
-        margin: 0,
-        filename: "converted.pdf",
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-      })
-      .from(page)
-      .outputPdf("blob");
-    return blob;
+    const pdfDoc = await pdfLib.PDFDocument.create();
+    const regularFont = await pdfDoc.embedFont(pdfLib.StandardFonts.Helvetica);
+    const boldFont = await pdfDoc.embedFont(pdfLib.StandardFonts.HelveticaBold);
+
+    let page = pdfDoc.addPage([PDF_LAYOUT.width, PDF_LAYOUT.height]);
+    let cursorY = PDF_LAYOUT.height - PDF_LAYOUT.margin;
+
+    const ensureSpace = (neededHeight: number) => {
+      if (cursorY - neededHeight < PDF_LAYOUT.margin) {
+        page = pdfDoc.addPage([PDF_LAYOUT.width, PDF_LAYOUT.height]);
+        cursorY = PDF_LAYOUT.height - PDF_LAYOUT.margin;
+      }
+    };
+
+    for (const block of blocks) {
+      const isHeading = block.kind === "heading";
+      const fontSize = isHeading ? headingFontSize(block.level) : PDF_LAYOUT.baseFontSize;
+      const lineHeight = fontSize * PDF_LAYOUT.lineHeight;
+      const indent = block.kind === "list-item" ? 18 + (block.level ?? 0) * 14 : 0;
+      const bulletPrefix = block.kind === "list-item" ? "• " : "";
+      const x = PDF_LAYOUT.margin + indent;
+      const maxWidth = PDF_LAYOUT.width - PDF_LAYOUT.margin * 2 - indent;
+      const font = isHeading ? boldFont : regularFont;
+      const text = `${bulletPrefix}${block.text}`;
+
+      const wrapped = pdfLib.layoutMultilineText(text, {
+        alignment: pdfLib.TextAlignment.Left,
+        font,
+        fontSize,
+        bounds: { x, y: 0, width: maxWidth, height: PDF_LAYOUT.height },
+      });
+
+      const blockHeight = wrapped.lines.length * lineHeight;
+      const spacingAfter = isHeading ? lineHeight * 0.35 : lineHeight * 0.5;
+
+      ensureSpace(blockHeight + spacingAfter);
+
+      page.drawText(text, {
+        x,
+        y: cursorY - blockHeight,
+        size: fontSize,
+        font,
+        lineHeight,
+        maxWidth,
+      });
+
+      cursorY -= blockHeight + spacingAfter;
+    }
+
+    const bytes = await pdfDoc.save();
+    const pdfBytes = new Uint8Array(bytes.byteLength);
+    pdfBytes.set(bytes);
+    return new Blob([pdfBytes], { type: "application/pdf" });
   } catch {
     throw new Error("This file could not be converted. Try a simpler document or a smaller file.");
-  } finally {
-    wrapper.remove();
   }
 }

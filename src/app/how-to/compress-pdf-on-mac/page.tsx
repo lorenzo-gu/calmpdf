@@ -77,8 +77,7 @@ export default function Page() {
       <ol className="list-decimal list-inside space-y-2 text-sage-700 mb-6">
         <li>Open <strong>calmpdf.com/compress-pdf</strong> in any browser.</li>
         <li>Drop your PDF into the upload area.</li>
-        <li>Choose a compression level — <em>High quality</em> keeps images crisp;
-        <em>Smaller file</em> reduces size more aggressively.</li>
+        <li>Click <strong>Compress</strong> to run the current lossless optimization pass.</li>
         <li>Click <strong>Compress</strong> and download the result.</li>
       </ol>
       <p className="text-sage-700 mb-6">
@@ -97,7 +96,7 @@ export default function Page() {
       </p>
       <p className="text-sage-700 mb-6">
         <strong>Use CalmPDF</strong> if you need predictable results, want to compare
-        compression levels side by side, or are working with confidential documents that
+        results over multiple passes, or are working with confidential documents that
         shouldn't be uploaded to cloud services.
       </p>
 
@@ -121,7 +120,7 @@ export default function Page() {
       <h3 className="text-lg font-medium mt-5 mb-2">Does compressing a PDF reduce quality?</h3>
       <p className="text-sage-700 mb-4">
         It depends on the method. The Quartz filter in Preview is lossy and can soften images.
-        CalmPDF's high-quality preset is designed to preserve readability while still reducing
+        CalmPDF's lossless mode is designed to preserve readability while still reducing
         size. Text in PDFs is vector-based and is never affected by image compression.
       </p>
 

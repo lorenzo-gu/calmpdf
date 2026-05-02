@@ -67,9 +67,9 @@ export default function Page() {
       <ol className="list-decimal list-inside space-y-3 text-sage-700 mb-8">
         <li>Go to <strong>calmpdf.com/compress-pdf</strong> — no account needed.</li>
         <li>Drop your PDF into the upload area. It processes locally — nothing leaves your device.</li>
-        <li>Start with the <strong>Balanced</strong> compression level.</li>
+        <li>Run a first <strong>Compress</strong> pass.</li>
         <li>Click <strong>Compress</strong> and check the output file size.</li>
-        <li>If still over 500KB, go back and choose <strong>Smaller file</strong> for heavier compression.</li>
+        <li>If still over 500KB, reduce images in the source file and compress again.</li>
         <li>Download and verify the output looks acceptable.</li>
       </ol>
 
@@ -103,7 +103,7 @@ export default function Page() {
       <p className="text-sage-700 mb-4">
         At balanced compression settings, most documents look fine at normal reading sizes.
         Try the output at 100% zoom — if images look acceptable for your use case, you're done.
-        Text is always sharp regardless of image compression level.
+        Text is always sharp regardless of image lossless compression.
       </p>
 
       <h3 className="text-lg font-medium mt-5 mb-2">Does CalmPDF have a file size limit?</h3>

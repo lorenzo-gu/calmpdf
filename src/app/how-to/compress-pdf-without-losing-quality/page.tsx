@@ -29,7 +29,7 @@ export default function Page() {
         Whether you can compress a PDF without losing quality depends on what's in the file.
         Text and vector graphics compress losslessly — they look identical at any file size.
         Images are trickier: most compression tools reduce image resolution, which does
-        affect sharpness. The key is choosing the right compression level for your content.
+        affect sharpness. The key is using a lossless method first for your content.
       </p>
       <p className="text-sage-700 mb-6">
         <a href="/compress-pdf" className="text-sage-900 underline underline-offset-4">
@@ -63,7 +63,7 @@ export default function Page() {
       <p className="text-sage-700 mb-6">
         This means: if your PDF is a text report with no photos, you can compress it aggressively
         with no perceptible quality loss. If it's a scanned document or photo-heavy brochure, some
-        image softening is inevitable at high compression levels.
+        image softening is inevitable at aggressive lossy compression.
       </p>
 
       <h2 className="text-2xl font-semibold mt-8 mb-3">How to compress a PDF with minimal quality loss</h2>
@@ -75,9 +75,9 @@ export default function Page() {
         regardless of the tool you use — the question is how much.
       </p>
 
-      <h3 className="text-xl font-medium mt-6 mb-2">Step 2: Choose the right compression level</h3>
+      <h3 className="text-xl font-medium mt-6 mb-2">Step 2: Start with lossless compression</h3>
       <p className="text-sage-700 mb-4">
-        Most PDF compression tools offer a quality slider or preset. Start with the highest quality
+        Many PDF tools offer quality controls. If you need zero visual change, start with lossless compression
         setting and work down until you find the smallest file that still looks acceptable. For
         documents you'll only share digitally, 150 DPI images are usually fine. For anything
         you'll print professionally, stay at 200 DPI or higher.
@@ -87,7 +87,7 @@ export default function Page() {
       <p className="text-sage-700 mb-6">
         Download the compressed file and open it at 100% zoom. Check any images or charts that
         matter. If they look acceptable, you're done. If not, go back and choose a higher quality
-        setting. CalmPDF lets you try different compression levels with instant side-by-side
+        setting. CalmPDF currently provides a lossless pass for structure optimization
         comparison.
       </p>
 
@@ -99,7 +99,7 @@ export default function Page() {
       <ol className="list-decimal list-inside space-y-2 text-sage-700 mb-6">
         <li>Go to <strong>calmpdf.com/compress-pdf</strong>.</li>
         <li>Drop your PDF into the upload area.</li>
-        <li>Choose <strong>High quality</strong> to prioritize image sharpness, or <strong>Smaller file</strong> for maximum compression.</li>
+        <li>Click <strong>Compress</strong> to run the current lossless optimization.</li>
         <li>Click Compress and download. Open the result and inspect it.</li>
         <li>If the quality is acceptable, done. If not, go back and choose a lighter setting.</li>
       </ol>
@@ -119,7 +119,7 @@ export default function Page() {
       <p className="text-sage-700 mb-4">
         Scanned PDFs are entirely images — each page is a photo of a piece of paper. Some quality
         loss is unavoidable if you want significant file size reduction. Choose a high-quality
-        preset and check the output. For archiving, keep the original; send the compressed version.
+        method and check the output. For archiving, keep the original; send the compressed version.
       </p>
 
       <h3 className="text-lg font-medium mt-5 mb-2">Does compression affect PDF bookmarks or links?</h3>

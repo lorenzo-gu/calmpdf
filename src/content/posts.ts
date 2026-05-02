@@ -55,7 +55,7 @@ export const BLOG_POSTS: Post[] = [
         ctaHref: "/compress-pdf",
         ctaLabel: "Compress PDF free",
         published: true,
-        faqs: [{ q: "Does compressing a PDF reduce quality?", a: "It depends on the method. The Quartz filter in Preview is lossy and can soften images. CalmPDF's high-quality preset is designed to preserve readability while still reducing size. Text in PDFs is vector-based and is never affected by image compression." }],
+        faqs: [{ q: "Does compressing a PDF reduce quality?", a: "It depends on the method. The Quartz filter in Preview is lossy and can soften images. CalmPDF currently uses lossless compression, so readability and image detail are preserved while file structure is optimized. Text in PDFs is vector-based and is never affected by image compression." }],
   },
   {
         slug: "compress-pdf-without-losing-quality",
@@ -67,7 +67,7 @@ export const BLOG_POSTS: Post[] = [
         ctaHref: "/compress-pdf",
         ctaLabel: "Compress PDF free",
         published: true,
-        faqs: [{ q: "Can I compress a scanned PDF without losing quality?", a: "Scanned PDFs are entirely images — each page is a photo of a piece of paper. Some quality loss is unavoidable if you want significant file size reduction. Choose a high-quality preset and check the output. For archiving, keep the original; send the compressed version." }],
+        faqs: [{ q: "Can I compress a scanned PDF without losing quality?", a: "Scanned PDFs are entirely images — each page is a photo of a piece of paper. Some quality loss is unavoidable if you want significant file size reduction. Use a lossless tool first and check the output. For archiving, keep the original; send the compressed version." }],
   },
   {
         slug: "merge-pdf-files-free",
