@@ -29,11 +29,15 @@ export function ArticleShell({
       <JsonLdScript
         data={{
           "@context": "https://schema.org",
-          "@type": "Article",
+          "@type": "BlogPosting",
           headline: post.title,
           description: post.description,
           datePublished: post.datePublished,
           dateModified: post.dateModified ?? post.datePublished,
+          inLanguage: "en-US",
+          isAccessibleForFree: true,
+          articleSection: "How-to guides",
+          about: ["PDF", "Document management", "How-to"],
           author: {
             "@type": "Organization",
             name: SITE.name,
