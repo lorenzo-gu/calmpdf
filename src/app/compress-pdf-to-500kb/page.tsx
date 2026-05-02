@@ -111,6 +111,16 @@ export default function Page() {
         CalmPDF has no enforced size limit. The practical limit is your device's available
         memory — most modern laptops handle files up to 200MB without issue.
       </p>
-    </main>
+    
+      <section className="rounded-2xl border border-sage-100 p-6 mt-10">
+        <h2 className="text-xl font-semibold mb-3">Related compression guides</h2>
+        <ul className="list-disc list-inside space-y-2 text-sage-700">
+          <li><Link href="/compress-pdf" className="underline">Compress PDF tool</Link></li>
+          <li><Link href="/how-to/reduce-pdf-file-size" className="underline">How to Reduce PDF File Size</Link></li>
+          <li><Link href="/how-to/compress-pdf-without-losing-quality" className="underline">How to Compress a PDF Without Losing Quality</Link></li>
+          <li><Link href="/compress-pdf-for-email" className="underline">Compress PDF for Email</Link></li>
+        </ul>
+      </section>
+</main>
   );
 }
