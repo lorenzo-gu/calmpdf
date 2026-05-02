@@ -43,8 +43,8 @@ const howToJsonLd = {
     },
     {
       "@type": "HowToStep",
-      name: "Choose a compression preset",
-      text: "Pick the Balanced preset to start — it usually clears 2MB while preserving readability. Switch to Smaller file if you need more reduction.",
+      name: "Run compression",
+      text: "Run the current lossless compression first, then check whether the file is under 2MB.",
     },
     {
       "@type": "HowToStep",
@@ -151,7 +151,7 @@ export default function Page() {
         </li>
         <li>
           <strong>PDFs exported with embedded fonts and graphics.</strong>{" "}
-          Re-exporting from the source app with a smaller-file preset often
+          Re-exporting from the source app with a smaller-file export setting often
           beats compressing the bloated output.
         </li>
       </ul>
@@ -169,11 +169,11 @@ export default function Page() {
           to a server.
         </li>
         <li>
-          Try <strong>Balanced</strong> first — it clears 2MB for most files
+          Run lossless compression first — it may clear 2MB for many files
           while keeping text and images crisp.
         </li>
         <li>
-          If the result is still over 2MB, switch to <strong>Smaller file</strong>{" "}
+          If the result is still over 2MB, compress again{" "}
           and compress again.
         </li>
         <li>
@@ -277,8 +277,7 @@ export default function Page() {
       <p className="text-sage-700 mb-4">
         For a normal text-based resume, no — text-only compression is lossless
         and the visible result is identical. If your resume has a photo or a
-        graphic-heavy header, the Balanced preset preserves those well. Reach
-        for Smaller file only if you need the extra reduction.
+        graphic-heavy header, lossless compression preserves those well. If you still need more reduction, re-export with lower-resolution images before compressing.
       </p>
 
       <h3 className="text-lg font-medium mt-5 mb-2">Is CalmPDF really free?</h3>

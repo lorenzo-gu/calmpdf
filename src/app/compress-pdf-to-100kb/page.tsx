@@ -63,7 +63,7 @@ export default function Page() {
       <ol className="list-decimal list-inside space-y-3 text-sage-700 mb-8">
         <li>Go to <strong>calmpdf.com/compress-pdf</strong> — no signup required.</li>
         <li>Drop your PDF into the upload area. It loads locally; nothing is sent to a server.</li>
-        <li>Choose <strong>Smaller file</strong> for maximum compression.</li>
+        <li>Click <strong>Compress</strong> to run the current lossless optimization.</li>
         <li>Click <strong>Compress</strong> and check the output file size.</li>
         <li>If it's still over 100KB, the PDF contains high-resolution imagery that resists compression — see tips below.</li>
       </ol>
@@ -101,7 +101,7 @@ export default function Page() {
 
       <h3 className="text-lg font-medium mt-5 mb-2">Will text quality be affected?</h3>
       <p className="text-sage-700 mb-4">
-        No. PDF text is vector-based and stays perfectly sharp regardless of compression level.
+        No. PDF text is vector-based and stays perfectly sharp with lossless compression.
         Only images are affected.
       </p>
 

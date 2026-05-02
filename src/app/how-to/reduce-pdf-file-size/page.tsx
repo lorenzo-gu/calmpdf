@@ -90,11 +90,9 @@ export default function Page() {
       <ol className="list-decimal list-inside space-y-2 text-sage-700 mb-6">
         <li>Go to <strong>calmpdf.com/compress-pdf</strong>.</li>
         <li>Drop your PDF into the upload area — it loads in your browser without uploading.</li>
-        <li>Choose a compression level:
+        <li>Run lossless compression:
           <ul className="list-disc list-inside ml-6 mt-2 space-y-1">
-            <li><strong>High quality</strong> — conservative compression, minimal visual change.</li>
-            <li><strong>Balanced</strong> — good reduction with acceptable quality for most use cases.</li>
-            <li><strong>Smaller file</strong> — maximum compression, some image softening.</li>
+            <li><strong>Lossless mode</strong> — optimizes PDF structure without reducing image quality.</li>
           </ul>
         </li>
         <li>Click <strong>Compress</strong> and download the result.</li>
@@ -124,7 +122,7 @@ export default function Page() {
       <h3 className="text-lg font-medium mt-5 mb-2">Does reducing file size affect the text?</h3>
       <p className="text-sage-700 mb-4">
         No. Text in PDFs is vector-based and unaffected by image compression. Characters
-        remain perfectly sharp at any compression level.
+        remain perfectly sharp at lossless compression.
       </p>
 
       <h3 className="text-lg font-medium mt-5 mb-2">Can I reduce a PDF below a specific size?</h3>

@@ -66,7 +66,7 @@ export default function Page() {
       <ol className="list-decimal list-inside space-y-3 text-sage-700 mb-8">
         <li>Open <strong>calmpdf.com/compress-pdf</strong> — no signup, no install.</li>
         <li>Drag your PDF into the upload area. The file is loaded into your browser; nothing is sent to a server.</li>
-        <li>Choose a compression level. <strong>Smaller file</strong> works best for email since you&apos;re optimizing for size, not print quality.</li>
+        <li>Click <strong>Compress</strong> to run a lossless optimization pass before attaching.</li>
         <li>Click <strong>Compress</strong> and wait a few seconds.</li>
         <li>Download the compressed PDF and attach it to your email as normal.</li>
       </ol>
@@ -111,9 +111,7 @@ export default function Page() {
       </p>
       <h3 className="text-lg font-medium mt-5 mb-2">Will compression change how the PDF looks?</h3>
       <p className="text-sage-700 mb-4">
-        Text stays sharp at any compression level — PDF text is vector-based. Images may look
-        slightly softer at &ldquo;Smaller file&rdquo; settings, but they remain perfectly
-        legible for typical documents like contracts, invoices, and reports.
+        Text stays sharp with lossless compression — PDF text is vector-based, and images remain         legible for typical documents like contracts, invoices, and reports.
       </p>
       <h3 className="text-lg font-medium mt-5 mb-2">Is it really private?</h3>
       <p className="text-sage-700 mb-4">

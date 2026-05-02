@@ -43,7 +43,7 @@ const howToJsonLd = {
     {
       "@type": "HowToStep",
       name: "Choose smaller file",
-      text: "Pick the Smaller file preset to apply maximum compression for the tightest size targets.",
+      text: "Run the current lossless compressor, then verify whether you reached 200KB.",
     },
     {
       "@type": "HowToStep",
@@ -153,7 +153,7 @@ export default function Page() {
           to a server.
         </li>
         <li>
-          Choose <strong>Smaller file</strong> for the tightest output.
+          Use <strong>Compress</strong> and review the output size.
         </li>
         <li>
           Click <strong>Compress</strong> and download the result.
@@ -254,7 +254,7 @@ export default function Page() {
         Will compression damage my signature or seal?
       </h3>
       <p className="text-sage-700 mb-4">
-        At standard compression levels, signatures and seals stay readable. At
+        With lossless compression, signatures and seals stay readable. At
         maximum compression, fine lines may soften slightly. If readability is
         critical, compress, then open the file and zoom in to confirm before
         submitting.
