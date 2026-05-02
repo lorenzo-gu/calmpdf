@@ -167,8 +167,8 @@ export const TOOLS: Tool[] = [
     keyword: "split pdf",
     steps: [
       "Drop your PDF into the box above.",
-      "Pick a page range, or choose 'Every page' to split into single-page PDFs.",
-      "Download the resulting file or ZIP.",
+      "Pick the page range you want to extract.",
+      "Download the resulting PDF file.",
     ],
     faqs: [
       {
@@ -176,8 +176,8 @@ export const TOOLS: Tool[] = [
         a: "Yes. Enter the page number in both 'from' and 'to' fields (for example, 5 to 5) to extract just that page.",
       },
       {
-        q: "What does 'Every page' do?",
-        a: "It splits the PDF so each page becomes its own PDF file, then packages them into a ZIP download.",
+        q: "Can I split every page into separate files?",
+        a: "Not yet. This version supports extracting a single page range per run.",
       },
       {
         q: "Are the original PDFs changed?",
