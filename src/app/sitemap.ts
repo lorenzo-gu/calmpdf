@@ -1,49 +1,37 @@
 import type { MetadataRoute } from "next";
-import { SITE } from "@/lib/site";
-import { TOOLS } from "@/content/tools";
 import { PUBLISHED_BLOG_POSTS } from "@/content/posts";
-
-const PROGRAMMATIC_SLUGS = [
-  "compress-pdf-to-100kb",
-  "compress-pdf-to-500kb",
-  "compress-pdf-to-200kb",
-  "compress-pdf-to-1mb",
-    "compress-pdf-for-email",
-];
+import { PROGRAMMATIC_PAGES } from "@/content/programmatic-pages";
+import { STATIC_SITEMAP_ROUTES } from "@/content/routes";
+import { TOOLS } from "@/content/tools";
+import { SITE } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const staticPaths = ["", "about", "privacy", "terms", "contact", "blog", "tools", "pdf-to-images", "images-to-pdf", "jpg-to-pdf", "png-to-pdf", "pdf-to-jpg", "pdf-to-png", "extract-pdf-pages", "remove-pdf-pages", "reorder-pdf-pages", "add-page-numbers-to-pdf", "protect-pdf", "unlock-pdf", "pdf-metadata-viewer", "pdf-metadata-editor"];
+
   return [
-    ...staticPaths.map((p) => ({
-      url: `${SITE.url}${p ? `/${p}` : ""}`,
+    ...STATIC_SITEMAP_ROUTES.map((route) => ({
+      url: `${SITE.url}${route.path === "/" ? "" : route.path}`,
       lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: p === "" ? 1 : 0.5,
+      changeFrequency: route.changeFrequency,
+      priority: route.priority,
     })),
-    ...TOOLS.map((t) => ({
-      url: `${SITE.url}/${t.slug}`,
+    ...TOOLS.map((tool) => ({
+      url: `${SITE.url}/${tool.slug}`,
       lastModified: now,
       changeFrequency: "weekly" as const,
       priority: 0.9,
     })),
-    {
-      url: `${SITE.url}/how-to`,
-      lastModified: now,
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    },
     ...PUBLISHED_BLOG_POSTS.map((post) => ({
       url: `${SITE.url}/how-to/${post.slug}`,
-      lastModified: new Date(post.datePublished),
+      lastModified: new Date(post.dateModified || post.datePublished),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
-    ...PROGRAMMATIC_SLUGS.map((slug) => ({
-      url: `${SITE.url}/${slug}`,
+    ...PROGRAMMATIC_PAGES.map((page) => ({
+      url: `${SITE.url}/${page.slug}`,
       lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: 0.75,
+      changeFrequency: page.sitemap.changeFrequency,
+      priority: page.sitemap.priority,
     })),
   ];
 }

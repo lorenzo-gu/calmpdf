@@ -9,6 +9,7 @@ export type Post = {
     ctaLabel: string;
     published: boolean;
     faqs?: { q: string; a: string }[];
+    relatedLinks?: { href: string; label: string }[];
 };
 
 export const BLOG_POSTS: Post[] = [
@@ -56,6 +57,7 @@ export const BLOG_POSTS: Post[] = [
         ctaLabel: "Compress PDF free",
         published: true,
         faqs: [{ q: "Does compressing a PDF reduce quality?", a: "It depends on the method. The Quartz filter in Preview is lossy and can soften images. CalmPDF currently uses lossless compression, so readability and image detail are preserved while file structure is optimized. Text in PDFs is vector-based and is never affected by image compression." }],
+        relatedLinks: [{ href: "/compress-pdf", label: "Compress PDF tool" }, { href: "/how-to/compress-pdf-without-losing-quality", label: "How to Compress a PDF Without Losing Quality" }],
   },
   {
         slug: "compress-pdf-without-losing-quality",
@@ -68,6 +70,7 @@ export const BLOG_POSTS: Post[] = [
         ctaLabel: "Compress PDF free",
         published: true,
         faqs: [{ q: "Can I compress a scanned PDF without losing quality?", a: "Scanned PDFs are entirely images — each page is a photo of a piece of paper. Some quality loss is unavoidable if you want significant file size reduction. Use a lossless tool first and check the output. For archiving, keep the original; send the compressed version." }],
+        relatedLinks: [{ href: "/compress-pdf", label: "Compress PDF tool" }, { href: "/compress-pdf-to-1mb", label: "Compress PDF to 1MB" }],
   },
   {
         slug: "merge-pdf-files-free",
@@ -80,6 +83,7 @@ export const BLOG_POSTS: Post[] = [
         ctaLabel: "Merge PDF free",
         published: true,
         faqs: [{ q: "Does merging PDFs reduce quality?", a: "No. Merging combines the pages of multiple PDFs into one file without re-encoding anything. Images, fonts, and formatting stay exactly as they were in the originals." }],
+        relatedLinks: [{ href: "/merge-pdf", label: "Merge PDF tool" }, { href: "/how-to/combine-pdf-files", label: "How to Combine PDF Files" }],
   },
   {
         slug: "split-pdf-into-multiple-files",
@@ -92,6 +96,7 @@ export const BLOG_POSTS: Post[] = [
         ctaLabel: "Split PDF free",
         published: true,
         faqs: [{ q: "Does splitting a PDF affect quality?", a: "No. Splitting extracts pages without re-encoding them. Images, fonts, and text remain exactly as they were in the original document." }],
+        relatedLinks: [{ href: "/split-pdf", label: "Split PDF tool" }, { href: "/extract-pdf-pages", label: "Extract PDF Pages" }],
   },
   {
         slug: "reduce-pdf-file-size",
@@ -104,6 +109,7 @@ export const BLOG_POSTS: Post[] = [
         ctaLabel: "Compress PDF free",
         published: true,
         faqs: [{ q: "What's the maximum PDF size for email?", a: "Gmail and Outlook both support attachments up to 25 MB. Many corporate email systems have lower limits (10 MB is common). If your PDF exceeds the limit, aim to compress it below 10 MB to be safe for most recipients." }],
+        relatedLinks: [{ href: "/compress-pdf", label: "Compress PDF tool" }, { href: "/compress-pdf-for-email", label: "Compress PDF for Email" }],
   },
   {
         slug: "combine-pdf-files",
@@ -116,6 +122,7 @@ export const BLOG_POSTS: Post[] = [
         ctaLabel: "Combine PDFs free",
         published: true,
         faqs: [{ q: "Does combining PDFs reduce quality?", a: "No. Combining PDFs joins the pages without re-encoding or compressing anything. Images, fonts, and text remain exactly as they were in the original files." }],
+        relatedLinks: [{ href: "/merge-pdf", label: "Merge PDF tool" }, { href: "/how-to/merge-pdf-files-free", label: "How to Merge PDF Files Free" }],
   },
   ];
 
