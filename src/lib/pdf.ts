@@ -83,6 +83,20 @@ export async function splitPdf(
   return await out.save({ useObjectStreams: true });
 }
 
+
+export async function reorderPdf(file: File, order: number[]): Promise<Uint8Array> {
+  const buf = await readFileAsArrayBuffer(file);
+  const src = await PDFDocument.load(buf, { ignoreEncryption: true });
+  const total = src.getPageCount();
+  if (order.length !== total) {
+    throw new Error("Page order does not match PDF page count.");
+  }
+  const out = await PDFDocument.create();
+  const pages = await out.copyPages(src, order);
+  pages.forEach((p) => out.addPage(p));
+  return await out.save({ useObjectStreams: true, addDefaultPage: false });
+}
+
 export async function pdfPageCount(file: File): Promise<number> {
   const buf = await readFileAsArrayBuffer(file);
   const src = await PDFDocument.load(buf, { ignoreEncryption: true });
