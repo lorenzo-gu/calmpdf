@@ -7,6 +7,7 @@ const FOOTER_TOOL_LINKS = [
   { href: "/compress-pdf", label: "Compress PDF" },
   { href: "/merge-pdf", label: "Merge PDF" },
   { href: "/split-pdf", label: "Split PDF" },
+  { href: "/pdf-to-word", label: "PDF to Word" },
   { href: "/tools", label: "All PDF Tools" },
 ] as const;
 
