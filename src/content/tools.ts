@@ -191,6 +191,43 @@ export const TOOLS: Tool[] = [
     ],
   },
   {
+    slug: "reorder-pdf-pages",
+    title: "Reorder PDF Pages — Rearrange Page Order Online | CalmPDF",
+    h1: "Reorder PDF pages",
+    tagline: "Move PDF pages into the exact order you need, directly in your browser.",
+    description:
+      "Reorder PDF pages using drag-and-drop or move buttons, then download a new PDF copy. CalmPDF keeps your document on your device.",
+    keyword: "reorder pdf pages",
+    steps: [
+      "Drop your PDF into the reorder tool.",
+      "Move pages with drag-and-drop or up/down controls.",
+      "Download the reordered PDF copy.",
+    ],
+    faqs: [
+      {
+        q: "Are my PDF pages uploaded to a server?",
+        a: "No. Reordering runs entirely in your browser, so your file stays on your device.",
+      },
+      {
+        q: "Can I reorder pages without drag-and-drop?",
+        a: "Yes. Each page row includes Move up and Move down buttons for keyboard-friendly reordering.",
+      },
+      {
+        q: "What if my PDF has one page?",
+        a: "You can still load and download it, but page order cannot change because there is only one page.",
+      },
+      {
+        q: "Can CalmPDF open every PDF?",
+        a: "Most standard PDFs work. Some encrypted or damaged PDFs may fail to load in browser-only tools.",
+      },
+    ],
+    relatedGuides: [
+      { href: "/how-to/combine-pdf-files", label: "How to Combine PDF Files" },
+      { href: "/how-to/split-pdf-into-multiple-files", label: "How to Split a PDF into Multiple Files" },
+    ],
+  },
+
+  {
     slug: "docx-to-pdf",
     title: "DOCX to PDF — Convert Word to PDF for Free | CalmPDF",
     h1: "DOCX to PDF",
