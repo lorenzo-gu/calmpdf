@@ -14,11 +14,14 @@ export type Post = {
 
 export const BLOG_POSTS: Post[] = [
     {
-            slug: "edit-pdf-free",
-            title: "How to Edit a PDF for Free",
-            description: "Learn the best free PDF editors including browser-based tools and desktop applications that work without uploading files.",
-            datePublished: "2026-05-02",
-            cta: "/compress-pdf",
+        slug: "edit-pdf-free",
+        title: "How to Edit a PDF for Free",
+        description: "Learn the best free PDF editors including browser-based tools and desktop applications that work without uploading files.",
+        datePublished: "2026-05-02",
+        dateModified: "2026-05-02",
+        ctaHref: "/compress-pdf",
+        ctaLabel: "Compress PDF Free",
+        published: true,
     },
   {
     slug: "rotate-pdf",
