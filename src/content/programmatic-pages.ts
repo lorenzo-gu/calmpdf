@@ -13,6 +13,8 @@ export type ProgrammaticPage = {
   metaDescription: string;
   introCopy: string;
   targetIntent: string;
+  useCases: string[];
+  practicalSteps: string[];
   limitationNote: string;
   ctaLabel: string;
   ctaHref: "/compress-pdf";
@@ -32,6 +34,8 @@ export const PROGRAMMATIC_PAGES: ProgrammaticPage[] = [
     metaDescription: "Try to reduce your PDF below 100KB with private browser-only compression. Learn what files can realistically hit 100KB and what to do if they cannot.",
     introCopy: "Need a strict 100KB upload? This is common on government and admissions forms. Use CalmPDF to reduce file size directly in your browser.",
     targetIntent: "Users trying to satisfy strict form limits (100KB) for resumes, IDs, and official submissions.",
+    useCases: ["Government and visa portals", "University admissions uploads", "Job applications with strict attachment caps"],
+    practicalSteps: ["Compress once in CalmPDF and check final file size", "If still above limit, re-export source file with smallest-size settings", "For scanned pages, lower DPI and remove unnecessary pages"],
     limitationNote: "Exact 100KB output is not guaranteed. Image-heavy scans may stay above target even after compression.",
     ctaLabel: "Compress PDF to the smallest size",
     ctaHref: "/compress-pdf",
@@ -52,6 +56,8 @@ export const PROGRAMMATIC_PAGES: ProgrammaticPage[] = [
     metaDescription: "Need your PDF under 200KB? Compress in your browser and learn realistic expectations for scans, photos, and text-based documents.",
     introCopy: "A 200KB cap is common in KYC, application, and exam portals. CalmPDF helps you reduce size privately, with no upload.",
     targetIntent: "Users targeting a 200KB hard limit for online forms and verification systems.",
+    useCases: ["KYC/banking upload forms", "Scholarship and exam portals", "HR onboarding workflows"],
+    practicalSteps: ["Start with browser compression", "If needed, re-scan at 150-200 DPI", "Split long scanned PDFs and submit only required pages"],
     limitationNote: "Exact 200KB output is not guaranteed, especially for multi-page scanned PDFs.",
     ctaLabel: "Compress PDF for 200KB targets",
     ctaHref: "/compress-pdf",
@@ -72,6 +78,8 @@ export const PROGRAMMATIC_PAGES: ProgrammaticPage[] = [
     metaDescription: "Reduce a PDF toward 500KB using private in-browser compression. Great for upload forms and lightweight document sharing.",
     introCopy: "500KB is a practical target for many uploads. Use CalmPDF to shrink PDFs quickly while keeping workflow private.",
     targetIntent: "Users aiming for a moderate size cap that balances quality and compatibility.",
+    useCases: ["General online forms", "School and healthcare portals", "Lightweight document sharing"],
+    practicalSteps: ["Run one compression pass", "Check if visuals remain acceptable", "If still large, reduce image dimensions in source and compress again"],
     limitationNote: "Exact 500KB output is not guaranteed. Heavily visual PDFs may remain larger.",
     ctaLabel: "Compress PDF now",
     ctaHref: "/compress-pdf",
@@ -92,6 +100,8 @@ export const PROGRAMMATIC_PAGES: ProgrammaticPage[] = [
     metaDescription: "Need a PDF under 1MB? Use CalmPDF in your browser and see what impacts whether image-heavy files can hit the target.",
     introCopy: "1MB is a common upload threshold for applications and forms. CalmPDF gives you a private way to reduce file size quickly.",
     targetIntent: "Users trying to meet a standard 1MB upload requirement.",
+    useCases: ["Resume and cover letter submissions", "Client/contract document portals", "Application systems with medium limits"],
+    practicalSteps: ["Compress and verify size", "Re-export source as web-optimized PDF", "Split appendices or extra pages when allowed"],
     limitationNote: "Exact 1MB output is not guaranteed; outcomes depend on image density and original export settings.",
     ctaLabel: "Compress PDF for 1MB limit",
     ctaHref: "/compress-pdf",
@@ -112,6 +122,8 @@ export const PROGRAMMATIC_PAGES: ProgrammaticPage[] = [
     metaDescription: "Bring large PDFs closer to 2MB for job portals, school systems, and support forms using browser-only compression.",
     introCopy: "2MB is one of the most common document caps online. CalmPDF helps you reduce PDFs in-browser with no account required.",
     targetIntent: "Users with 2MB submission caps that still need readable output.",
+    useCases: ["ATS and recruiting systems", "School and support ticket uploads", "Government filing forms"],
+    practicalSteps: ["Compress first to preserve readability", "Reduce page count where permitted", "For scans, lower DPI before exporting"],
     limitationNote: "Exact 2MB output is not guaranteed for large scans or image-rich portfolios.",
     ctaLabel: "Compress PDF for 2MB uploads",
     ctaHref: "/compress-pdf",
@@ -132,6 +144,8 @@ export const PROGRAMMATIC_PAGES: ProgrammaticPage[] = [
     metaDescription: "Make oversized PDFs easier to email by reducing file size in your browser. See realistic size goals for major inbox providers.",
     introCopy: "If your attachment is too large for Gmail, Outlook, or work email, reduce your PDF before sending using CalmPDF.",
     targetIntent: "Users who need smaller attachments to pass email limits.",
+    useCases: ["Gmail/Outlook attachment issues", "Corporate inbox restrictions", "Sending contracts and signed forms"],
+    practicalSteps: ["Compress before attaching", "Aim under 10MB, or 5MB for stricter inboxes", "If still too large, split file or send cloud link"],
     limitationNote: "Exact target sizes are not guaranteed. Very image-heavy PDFs may still exceed strict inbox limits.",
     ctaLabel: "Compress PDF before sending",
     ctaHref: "/compress-pdf",

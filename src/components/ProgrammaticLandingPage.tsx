@@ -15,6 +15,21 @@ export function ProgrammaticLandingPage({ page }: { page: ProgrammaticPage }) {
       <h1 className="text-3xl font-semibold tracking-tight mb-4">{page.h1}</h1>
       <p className="text-sage-700 mb-4">{page.introCopy}</p>
       <p className="text-sage-700 mb-4"><strong>Best for:</strong> {page.targetIntent}</p>
+
+      <h2 className="text-2xl font-semibold mt-8 mb-3">Common use cases</h2>
+      <ul className="list-disc list-inside space-y-2 text-sage-700 mb-6">
+        {page.useCases.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+
+      <h2 className="text-2xl font-semibold mt-8 mb-3">How to get the best result</h2>
+      <ol className="list-decimal list-inside space-y-2 text-sage-700 mb-6">
+        {page.practicalSteps.map((step) => (
+          <li key={step}>{step}</li>
+        ))}
+      </ol>
+
       <p className="text-sage-700 mb-6"><strong>Important:</strong> {page.limitationNote}</p>
 
       <div className="rounded-2xl border border-sage-100 bg-sage-50 p-6 my-8">
