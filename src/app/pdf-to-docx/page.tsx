@@ -1,17 +1,12 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ToolShell } from "@/components/ToolShell";
 import { PdfToDocxTool } from "@/components/tools/PdfToDocxTool";
 import { getTool } from "@/content/tools";
+import { buildToolMetadata } from "@/lib/metadata";
 
 const tool = getTool("pdf-to-docx")!;
 
-export const metadata: Metadata = {
-  title: tool.title,
-  description: tool.description,
-  alternates: { canonical: `/${tool.slug}` },
-  openGraph: { title: tool.title, description: tool.description, url: `/${tool.slug}` },
-};
+export const metadata = buildToolMetadata(tool);
 
 export default function Page() {
   return (
