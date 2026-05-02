@@ -38,6 +38,10 @@ export default function Page() {
         <p>
           Compatible with modern Chrome, Edge, Firefox, and Safari on desktop and mobile. Because everything happens locally, the file is never uploaded to a server and is not sent to any third-party service.
         </p>
+        <p>
+          Need help first? Read <Link href="/how-to/convert-pdf-to-word" className="underline underline-offset-2 hover:no-underline">How to Convert PDF to Word</Link> and <Link href="/how-to/pdf-to-word-not-working" className="underline underline-offset-2 hover:no-underline">PDF to Word Not Working?</Link> for troubleshooting.
+        </p>
+
       </section>
     </ToolShell>
   );

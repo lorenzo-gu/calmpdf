@@ -14,6 +14,48 @@ export type Post = {
 
 export const BLOG_POSTS: Post[] = [
     {
+        slug: "convert-pdf-to-word",
+        title: "How to Convert PDF to Word (DOCX)",
+        description: "Convert PDF to Word in your browser, understand PDF vs DOCX, and avoid common formatting surprises.",
+        datePublished: "2026-05-02",
+        dateModified: "2026-05-02",
+        ctaHref: "/pdf-to-docx",
+        ctaLabel: "Convert PDF to Word",
+        published: true,
+        faqs: [
+          { q: "Is PDF to Word the same as PDF to DOCX?", a: "For most people, yes. Modern Microsoft Word files use the .docx format, so a PDF to Word converter usually creates a DOCX file." },
+          { q: "Can CalmPDF convert scanned PDFs to editable Word files?", a: "Not yet. Scanned or image-only PDFs require OCR, and CalmPDF's current browser-only MVP does not include OCR." },
+          { q: "Will tables and images look exactly the same after conversion?", a: "Not always. Simple selectable-text PDFs convert best. Complex layouts, tables, multi-column designs, headers, footers, forms, and images may need manual cleanup in Word." },
+        ],
+        relatedLinks: [
+          { href: "/pdf-to-docx", label: "PDF to Word tool" },
+          { href: "/how-to/pdf-to-word-not-working", label: "PDF to Word not working? Troubleshooting guide" },
+          { href: "/docx-to-pdf", label: "DOCX to PDF tool" },
+          { href: "/edit-pdf", label: "Edit PDF tool" },
+        ],
+    },
+    {
+        slug: "pdf-to-word-not-working",
+        title: "PDF to Word Not Working? Fixes That Usually Help",
+        description: "Troubleshoot PDF to Word conversion failures, blank outputs, and layout issues, including scanned PDFs that need OCR.",
+        datePublished: "2026-05-02",
+        dateModified: "2026-05-02",
+        ctaHref: "/pdf-to-docx",
+        ctaLabel: "Try PDF to Word again",
+        published: true,
+        faqs: [
+          { q: "Why does my PDF to Word conversion return almost no text?", a: "Your PDF is likely image-only (a scan). Without OCR there is no selectable text to extract, so conversion can produce an almost empty Word document." },
+          { q: "Does CalmPDF support old .doc output?", a: "No. CalmPDF outputs modern .docx files only." },
+          { q: "Why did my layout change after PDF to DOCX conversion?", a: "PDFs store fixed page layout, while Word files are reflowable for editing. Complex elements like columns, tables, forms, and layered graphics may shift and need manual adjustment." },
+        ],
+        relatedLinks: [
+          { href: "/pdf-to-docx", label: "PDF to Word tool" },
+          { href: "/how-to/convert-pdf-to-word", label: "How to convert PDF to Word" },
+          { href: "/compress-pdf", label: "Compress PDF tool" },
+          { href: "/merge-pdf", label: "Merge PDF tool" },
+        ],
+    },
+    {
         slug: "edit-pdf-free",
         title: "How to Edit a PDF for Free",
         description: "Learn the best free PDF editors including browser-based tools and desktop applications that work without uploading files.",
