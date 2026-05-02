@@ -115,7 +115,7 @@ export const TOOLS: Tool[] = [
     relatedGuides: [
       { href: "/how-to/compress-pdf-on-windows", label: "How to Compress a PDF on Windows" },
       { href: "/how-to/compress-pdf-on-mac", label: "How to Compress a PDF on Mac" },
-      { href: "/how-to/reduce-pdf-file-size", label: "How to Reduce PDF File Size" },
+      { href: "/how-to/rotate-pdf", label: "How to Rotate a PDF" },
     ],
   },
   {
@@ -151,7 +151,7 @@ export const TOOLS: Tool[] = [
     ],
     relatedGuides: [
       { href: "/how-to/merge-pdf-files-free", label: "How to Merge PDF Files Free" },
-      { href: "/how-to/combine-pdf-files", label: "How to Combine PDF Files" },
+      { href: "/how-to/compress-pdf-on-windows", label: "How to Compress a PDF on Windows" },
     ],
   },
   {
@@ -187,6 +187,7 @@ export const TOOLS: Tool[] = [
     ],
     relatedGuides: [
       { href: "/how-to/split-pdf-into-multiple-files", label: "How to Split a PDF into Multiple Files" },
+      { href: "/extract-pdf-pages", label: "Extract PDF Pages tool" },
     ],
   },
   {
@@ -220,6 +221,9 @@ export const TOOLS: Tool[] = [
         a: "It should work in modern browsers, but larger documents may work better on desktop.",
       },
     ],
+    relatedGuides: [
+      { href: "/how-to/combine-pdf-files", label: "How to Combine PDF Files" },
+    ],
   },
   {
     slug: "pdf-to-docx",
@@ -251,6 +255,9 @@ export const TOOLS: Tool[] = [
         q: "Can I edit the DOCX after downloading?",
         a: "Yes. The output is a Word-compatible DOCX file that can be opened in Word, Google Docs, Pages, and similar editors.",
       },
+    ],
+    relatedGuides: [
+      { href: "/how-to/rotate-pdf", label: "How to Rotate a PDF" },
     ],
   },
 ];
