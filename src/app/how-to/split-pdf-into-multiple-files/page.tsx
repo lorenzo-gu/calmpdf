@@ -69,14 +69,14 @@ export default function Page() {
         number in both fields (e.g., 5 to 5).
       </p>
       <p className="text-sage-700 mb-4">
-        To split every page into its own file, choose the <strong>Every page</strong> option.
-        CalmPDF will package all the individual pages into a ZIP download.
+        CalmPDF currently supports extracting one page range per run. To export multiple
+        sections, repeat the split with a new From/To range each time.
       </p>
 
       <h3 className="text-xl font-medium mt-6 mb-2">Step 4: Download the result</h3>
       <p className="text-sage-700 mb-6">
-        Click <strong>Split</strong>. For a page range, you get a single PDF. For every-page
-        splits, you get a ZIP containing one PDF per page. Your original file is not modified.
+        Click <strong>Split</strong> to download the extracted page range as a new PDF.
+        Your original file is not modified.
       </p>
 
       <h2 className="text-2xl font-semibold mt-8 mb-3">Splitting a PDF on Mac without a tool</h2>
@@ -116,9 +116,8 @@ export default function Page() {
 
       <h3 className="text-lg font-medium mt-5 mb-2">Can I split a PDF into equal parts?</h3>
       <p className="text-sage-700 mb-4">
-        CalmPDF currently splits by page range. To create equal parts from a 20-page PDF, you'd
-        run the split operation multiple times (pages 1–5, 6–10, etc.). The every-page option
-        splits into individual pages automatically.
+        CalmPDF currently splits by page range. To create equal parts from a 20-page PDF, run
+        the split operation multiple times (pages 1–5, 6–10, etc.).
       </p>
 
       <h3 className="text-lg font-medium mt-5 mb-2">Can I split password-protected PDFs?</h3>
