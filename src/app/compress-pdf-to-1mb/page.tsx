@@ -36,8 +36,8 @@ const jsonLd = {
     },
     {
       "@type": "HowToStep",
-      name: "Choose a compression level",
-      text: "Select Balanced for most files. Switch to Smaller file if your PDF is still above 1MB after the first pass.",
+      name: "Run compression",
+      text: "Use the current lossless compression pass, then check whether the file is below 1MB.",
     },
     {
       "@type": "HowToStep",
@@ -201,7 +201,7 @@ export default function CompressPdfTo1MbPage() {
             Image-heavy PDFs are more challenging. A 5-page brochure with
             full-bleed photography may only compress to around 1.5–2&nbsp;MB
             with moderate settings. For these files, try the{" "}
-            <strong>Smaller file</strong> compression mode, which applies more
+            lossless compression, which applies
             aggressive image down-sampling. If the file still exceeds 1&nbsp;MB,
             splitting it into sections before compressing is the most effective
             workaround.
@@ -230,7 +230,7 @@ export default function CompressPdfTo1MbPage() {
               are never sent to a server.
             </li>
             <li>
-              <strong>Select "Balanced" compression</strong> — this mode
+              <strong>Run lossless compression</strong> — this mode
               reduces image resolution to a web-friendly 150&nbsp;DPI and
               removes redundant data. It's the right starting point for nearly
               every document.
@@ -242,9 +242,9 @@ export default function CompressPdfTo1MbPage() {
               Properties on Windows).
             </li>
             <li>
-              <strong>Re-compress with "Smaller file" if needed</strong> — if
+              <strong>Re-compress if needed</strong> — if
               the result is still over 1&nbsp;MB, re-upload and switch to the
-              Smaller file mode, which pushes image quality lower to achieve a
+              the current lossless mode, which preserves image quality while trying to achieve a
               more aggressive reduction.
             </li>
           </ol>

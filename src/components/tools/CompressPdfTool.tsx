@@ -73,7 +73,7 @@ export function CompressPdfTool() {
       </div>
 
       <p className="text-xs text-sage-700">
-        Tip: this first release uses lossless compression. Image-heavy scans will shrink more once
+        Tip: this release uses lossless compression only. Image-heavy scans will shrink more once
         we ship the &quot;rasterize&quot; option in the next update.
       </p>
     </div>
