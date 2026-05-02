@@ -121,6 +121,21 @@ export function ArticleShell({
         </div>
       </aside>
 
+      {post.relatedLinks && post.relatedLinks.length > 0 && (
+        <section className="mx-auto max-w-3xl px-4 md:px-6 pb-12">
+          <h2 className="text-xl font-semibold mb-4">Related guides and tools</h2>
+          <ul className="grid gap-3 sm:grid-cols-2">
+            {post.relatedLinks.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className="card block no-underline hover:border-sage-300 transition-colors">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {/* Related tools grid */}
       <section className="mx-auto max-w-3xl px-4 md:px-6 pb-16">
         <h2 className="text-xl font-semibold mb-4">Other free PDF tools</h2>
