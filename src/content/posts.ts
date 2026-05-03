@@ -177,6 +177,7 @@ export const BLOG_POSTS: Post[] = [
         published: true,
         faqs: [{ q: "Does combining PDFs reduce quality?", a: "No. Combining PDFs joins the pages without re-encoding or compressing anything. Images, fonts, and text remain exactly as they were in the original files." }],
         relatedLinks: [{ href: "/merge-pdf", label: "Merge PDF tool" }, { href: "/how-to/merge-pdf-files-free", label: "How to Merge PDF Files Free" }],
+      {\n    slug: \"add-text-to-pdf\",\n    title: \"How to Add Text to a PDF\",\n    description: \"Learn how to add text to a PDF for free using browser-based tools. Step-by-step guide with multiple methods, no software installation needed.\",\n    datePublished: \"2026-05-03\",\n    cta: \"Start Compressing PDFs\",\n  },
   },
   ];
 
