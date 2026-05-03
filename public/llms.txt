@@ -32,6 +32,7 @@
 - [How to Combine PDF Files](https://calmpdf.com/how-to/combine-pdf-files): Step-by-step guide for merging PDFs on any platform.
 
 - [How to Rotate a PDF](https://calmpdf.com/how-to/rotate-pdf): Step-by-step guide for rotating one or every page of a PDF in your browser.
+- How to Add Text to a PDF (https://calmpdf.com/how-to/add-text-to-pdf): Learn how to add text to a PDF for free using browser-based tools.
 
 ## About
 
