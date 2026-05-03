@@ -1,12 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-const TOOL_GROUPS = [
+type ToolLink = { href: string; label: string };
+
+type ToolGroup = {
+  title: string;
+  active: ToolLink[];
+  comingSoon?: ToolLink[];
+};
+
+const TOOL_GROUPS: ToolGroup[] = [
   {
     title: "Convert PDF",
-    links: [
-      { href: "/pdf-to-docx", label: "PDF to Word (DOCX)" },
+    active: [
+      { href: "/pdf-to-word", label: "PDF to Word (DOCX)" },
       { href: "/docx-to-pdf", label: "Word (DOCX) to PDF" },
+    ],
+    comingSoon: [
       { href: "/pdf-to-jpg", label: "PDF to JPG" },
       { href: "/jpg-to-pdf", label: "JPG to PDF" },
       { href: "/pdf-to-png", label: "PDF to PNG" },
@@ -15,30 +25,35 @@ const TOOL_GROUPS = [
   },
   {
     title: "Edit PDF",
-    links: [
+    active: [
       { href: "/edit-pdf", label: "Edit PDF" },
       { href: "/rotate-pdf", label: "Rotate PDF" },
+      { href: "/reorder-pdf-pages", label: "Reorder PDF Pages" },
+    ],
+    comingSoon: [
+      { href: "/add-page-numbers-to-pdf", label: "Add Page Numbers" },
+      { href: "/remove-pdf-pages", label: "Remove PDF Pages" },
+      { href: "/extract-pdf-pages", label: "Extract PDF Pages" },
+      { href: "/pdf-metadata-editor", label: "PDF Metadata Editor" },
+      { href: "/pdf-metadata-viewer", label: "PDF Metadata Viewer" },
     ],
   },
   {
     title: "Organize PDF",
-    links: [
+    active: [
       { href: "/merge-pdf", label: "Merge PDF" },
       { href: "/split-pdf", label: "Split PDF" },
+    ],
+    comingSoon: [
+      { href: "/protect-pdf", label: "Protect PDF" },
+      { href: "/unlock-pdf", label: "Unlock PDF" },
     ],
   },
   {
     title: "Optimize PDF",
-    links: [{ href: "/compress-pdf", label: "Compress PDF" }],
+    active: [{ href: "/compress-pdf", label: "Compress PDF" }],
   },
-  {
-    title: "Convert PDF",
-    links: [
-      { href: "/pdf-to-word", label: "PDF to Word" },
-      { href: "/docx-to-pdf", label: "Word to PDF" },
-    ],
-  },
-] as const;
+];
 
 export const metadata: Metadata = {
   title: "Free Online PDF Tools | CalmPDF",
@@ -72,23 +87,36 @@ export default function ToolsPage() {
         fast workflow.
       </p>
 
-      <p className="mt-4 text-sage-700">
-        If you are comparing converters, start with the <Link href="/pdf-to-docx" className="underline underline-offset-2 hover:no-underline">PDF to Word</Link> and <Link href="/docx-to-pdf" className="underline underline-offset-2 hover:no-underline">Word to PDF</Link> tools. They are optimized for common text-based documents and clearly state current limitations, including no OCR for scanned PDFs and DOCX-only Word input.
-      </p>
-
       <section className="mt-10 space-y-6" aria-label="PDF tool categories">
         {TOOL_GROUPS.map((group) => (
-          <div key={group.title} className="card">
+          <div key={group.title} className="card space-y-4">
             <h2 className="text-xl font-semibold">{group.title}</h2>
-            <ul className="mt-4 space-y-2">
-              {group.links.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-sage-800 no-underline hover:underline">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+
+            <div>
+              <h3 className="text-sm font-semibold uppercase tracking-wide text-sage-700">Available now</h3>
+              <ul className="mt-3 space-y-2">
+                {group.active.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-sage-800 no-underline hover:underline">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {group.comingSoon && group.comingSoon.length > 0 && (
+              <div>
+                <h3 className="text-sm font-semibold uppercase tracking-wide text-sage-500">Coming soon</h3>
+                <ul className="mt-3 space-y-2">
+                  {group.comingSoon.map((link) => (
+                    <li key={link.href} className="text-sage-500">
+                      <span aria-label={`${link.label} coming soon`}>{link.label}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         ))}
       </section>
