@@ -20,7 +20,7 @@ export default function HomePage() {
             All PDF tools
           </Link>
           {TOOLS.map((t) => (
-            <Link key={t.slug} href={`/${t.slug}`} className="btn-primary">
+            <Link key={t.slug} href={`/${t.slug}`} className="btn-primary whitespace-nowrap snap-start shrink-0">
               {t.h1}
             </Link>
           ))}

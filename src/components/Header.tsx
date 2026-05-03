@@ -16,6 +16,9 @@ export function Header() {
               {t.h1}
             </Link>
           ))}
+          <Link href="/tools" className="text-sage-700 no-underline hover:text-sage-900 sm:hidden whitespace-nowrap">
+            More
+          </Link>
         </nav>
         <Link href="/tools" className="md:hidden text-sm font-medium text-sage-700 no-underline hover:text-sage-900">
           All tools
