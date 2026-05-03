@@ -10,12 +10,9 @@ export function Header() {
           <span aria-hidden className="inline-block h-6 w-6 rounded-md bg-sage-500" />
           <span className="font-semibold text-sage-900 tracking-tight text-sm sm:text-base">{SITE.name}</span>
         </Link>
-        <nav aria-label="Primary" className="flex items-center gap-3 sm:gap-6 text-sm shrink-0">
-          <Link href="/tools" className="text-sage-700 no-underline hover:text-sage-900 whitespace-nowrap">
-            All tools
-          </Link>
-          {TOOLS.slice(0, 3).map((t) => (
-            <Link key={t.slug} href={`/${t.slug}`} className="text-sage-700 no-underline hover:text-sage-900 hidden sm:inline">
+        <nav aria-label="Primary" className="hidden md:flex items-center gap-6 text-sm">
+          {TOOLS.map((t) => (
+            <Link key={t.slug} href={`/${t.slug}`} className="text-sage-700 no-underline hover:text-sage-900">
               {t.h1}
             </Link>
           ))}
@@ -23,6 +20,9 @@ export function Header() {
             More
           </Link>
         </nav>
+        <Link href="/tools" className="md:hidden text-sm font-medium text-sage-700 no-underline hover:text-sage-900">
+          All tools
+        </Link>
       </div>
     </header>
   );

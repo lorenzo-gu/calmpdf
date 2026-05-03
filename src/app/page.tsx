@@ -10,13 +10,13 @@ export default function HomePage() {
         <h1 className="text-3xl sm:text-4xl md:text-6xl font-semibold tracking-tight leading-tight">
           PDF tools. <span className="text-sage-500">No drama.</span>
         </h1>
-        <p className="mt-5 text-base sm:text-lg md:text-xl text-sage-700 max-w-2xl mx-auto">
+        <p className="mt-4 md:mt-6 text-base sm:text-lg md:text-xl text-sage-700 max-w-2xl mx-auto">
           Compress, merge, and split PDF files in your browser.
           Your files never leave your device — no upload, no signup, no limits.
         </p>
 
-        <div className="mt-8 flex justify-start sm:justify-center gap-2 sm:gap-3 overflow-x-auto pb-2 sm:pb-0 snap-x">
-          <Link href="/tools" className="btn-primary">
+        <div className="mt-8 grid w-full max-w-xl mx-auto grid-cols-2 md:flex md:max-w-none md:flex-wrap gap-3 justify-center">
+          <Link href="/tools" className="btn-primary col-span-2 md:col-span-1">
             All PDF tools
           </Link>
           {TOOLS.map((t) => (
@@ -39,7 +39,7 @@ export default function HomePage() {
           A small, focused set of PDF tools that just work. More coming soon.
         </p>
 
-        <div className="mt-8 grid gap-3 sm:gap-4 sm:grid-cols-2 md:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
           {TOOLS.map((t) => (
             <Link key={t.slug} href={`/${t.slug}`} className="card no-underline hover:border-sage-300 transition-colors">
               <FileText className="h-5 w-5 text-sage-500" />
