@@ -25,6 +25,12 @@ type ExtractedLine = {
   text: string;
 };
 
+type PdfToDocxStage =
+  | "load-libraries"
+  | "extract-text"
+  | "build-docx"
+  | "pack-docx";
+
 function isTextItem(item: unknown): item is PdfTextItem {
   return (
     typeof item === "object" &&
@@ -35,7 +41,7 @@ function isTextItem(item: unknown): item is PdfTextItem {
 }
 
 
-function toUserFacingPdfToDocxError(error: unknown): Error {
+function toUserFacingPdfToDocxError(error: unknown, stage?: PdfToDocxStage): Error {
   if (error instanceof Error) {
     const message = error.message?.trim() || ""
     const lower = message.toLowerCase()
@@ -56,8 +62,21 @@ function toUserFacingPdfToDocxError(error: unknown): Error {
       return new Error("This PDF appears to be encrypted or password-protected. Unlock it first, then try again.");
     }
 
+    if (
+      lower.includes("undefined is not a function") ||
+      lower.includes("not implemented") ||
+      lower.includes("not supported")
+    ) {
+      return new Error(
+        "Your browser hit a compatibility issue while converting this PDF to Word. Please update Safari/iOS and try again, or retry in Chrome/Firefox.",
+      );
+    }
+
     if (message) {
-      return new Error(`Conversion failed: ${message}`);
+      if (stage === "pack-docx") {
+        return new Error("Failed to generate the Word file in this browser. Please try again or switch browsers.");
+      }
+      return new Error("Conversion failed for this PDF. Please try again or use a different browser.");
     }
   }
 
@@ -107,10 +126,16 @@ export async function pdfToDocx(file: File): Promise<Blob> {
     throw new Error("Please choose a PDF file.");
   }
 
-  const [pdfjsLib, docxLib] = await Promise.all([
-    import("pdfjs-dist"),
-    import("docx"),
-  ]);
+  let pdfjsLib: typeof import("pdfjs-dist");
+  let docxLib: typeof import("docx");
+  try {
+    [pdfjsLib, docxLib] = await Promise.all([
+      import("pdfjs-dist"),
+      import("docx"),
+    ]);
+  } catch (error) {
+    throw toUserFacingPdfToDocxError(error, "load-libraries");
+  }
 
   if (!pdfjsLib.GlobalWorkerOptions.workerSrc) {
     pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER_PATH;
@@ -170,7 +195,7 @@ export async function pdfToDocx(file: File): Promise<Blob> {
       }
     }
   } catch (error) {
-    throw toUserFacingPdfToDocxError(error);
+    throw toUserFacingPdfToDocxError(error, "extract-text");
   }
 
   // Run the empty-PDF check against raw extracted characters rather than the
@@ -215,13 +240,41 @@ export async function pdfToDocx(file: File): Promise<Blob> {
     }
   }
 
+  let doc: InstanceType<typeof Document>;
   try {
-    const doc = new Document({
+    doc = new Document({
       sections: [{ properties: {}, children }],
     });
+  } catch (error) {
+    throw toUserFacingPdfToDocxError(error, "build-docx");
+  }
+
+  try {
     return await Packer.toBlob(doc);
   } catch (error) {
-    throw toUserFacingPdfToDocxError(error);
+    if (typeof console !== "undefined") {
+      console.error("[CalmPDF] PDF->DOCX pack stage failed.", {
+        stage: "pack-docx",
+        name: error instanceof Error ? error.name : "UnknownError",
+        message: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined,
+      });
+    }
+
+    try {
+      const base64 = await Packer.toBase64String(doc);
+      const binary = atob(base64);
+      const bytes = new Uint8Array(binary.length);
+      for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+      return new Blob(
+        [bytes],
+        {
+          type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        },
+      );
+    } catch (fallbackError) {
+      throw toUserFacingPdfToDocxError(fallbackError, "pack-docx");
+    }
   }
 }
 
