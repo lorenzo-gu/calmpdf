@@ -34,6 +34,36 @@ function isTextItem(item: unknown): item is PdfTextItem {
   );
 }
 
+
+function toUserFacingPdfToDocxError(error: unknown): Error {
+  if (error instanceof Error) {
+    const message = error.message?.trim() || ""
+    const lower = message.toLowerCase()
+
+    if (
+      lower.includes("out of memory") ||
+      lower.includes("allocation failed") ||
+      lower.includes("array buffer allocation") ||
+      lower.includes("invalid string length") ||
+      lower.includes("maximum call stack")
+    ) {
+      return new Error(
+        "This PDF is too large for your browser to convert locally. Try a smaller file, split the PDF, or use a device with more memory.",
+      );
+    }
+
+    if (lower.includes("password") || lower.includes("encrypted")) {
+      return new Error("This PDF appears to be encrypted or password-protected. Unlock it first, then try again.");
+    }
+
+    if (message) {
+      return new Error(`Conversion failed: ${message}`);
+    }
+  }
+
+  return new Error("Conversion failed for an unknown reason. Try a simpler document or a smaller file.");
+}
+
 function groupItemsIntoLines(items: PdfTextItem[]): ExtractedLine[] {
   if (items.length === 0) return [];
 
@@ -139,8 +169,8 @@ export async function pdfToDocx(file: File): Promise<Blob> {
         totalItems = fallback.totalItems;
       }
     }
-  } catch {
-    throw new Error("This file could not be converted. Try a simpler document or a smaller file.");
+  } catch (error) {
+    throw toUserFacingPdfToDocxError(error);
   }
 
   // Run the empty-PDF check against raw extracted characters rather than the
@@ -190,8 +220,8 @@ export async function pdfToDocx(file: File): Promise<Blob> {
       sections: [{ properties: {}, children }],
     });
     return await Packer.toBlob(doc);
-  } catch {
-    throw new Error("This file could not be converted. Try a simpler document or a smaller file.");
+  } catch (error) {
+    throw toUserFacingPdfToDocxError(error);
   }
 }
 
