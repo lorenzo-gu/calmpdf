@@ -41,9 +41,9 @@ export default function HomePage() {
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
           {TOOLS.map((t) => (
-            <Link key={t.slug} href={`/${t.slug}`} className="card no-underline hover:border-sage-300 transition-colors">
+            <Link key={t.slug} href={`/${t.slug}`} className="card no-underline hover:border-sage-300 transition-colors min-w-0 h-full">
               <FileText className="h-5 w-5 text-sage-500" />
-              <h3 className="mt-3 font-semibold text-sage-900">{t.h1}</h3>
+              <h3 className="mt-3 font-semibold text-sage-900 break-words">{t.slug === "docx-to-pdf" ? "Word to PDF" : t.h1}</h3>
               <p className="mt-1 text-sm text-sage-700">{t.tagline}</p>
             </Link>
           ))}
