@@ -6,22 +6,22 @@ import { SITE } from "@/lib/site";
 export default function HomePage() {
   return (
     <>
-      <section className="mx-auto max-w-content px-4 md:px-6 pt-20 pb-16 text-center">
-        <h1 className="text-4xl md:text-6xl font-semibold tracking-tight">
+      <section className="mx-auto max-w-content px-4 md:px-6 pt-14 md:pt-20 pb-14 md:pb-16 text-center">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl font-semibold tracking-tight leading-tight">
           PDF tools. <span className="text-sage-500">No drama.</span>
         </h1>
-        <p className="mt-6 text-lg md:text-xl text-sage-700 max-w-2xl mx-auto">
+        <p className="mt-4 md:mt-6 text-base sm:text-lg md:text-xl text-sage-700 max-w-2xl mx-auto">
           Compress, merge, and split PDF files in your browser.
           Your files never leave your device — no upload, no signup, no limits.
         </p>
 
-        <div className="mt-8 grid w-full grid-cols-1 gap-3 sm:grid-cols-2 md:flex md:w-auto md:flex-wrap md:justify-center">
-          <Link href="/tools" className="btn-primary">
+        <div className="mt-8 grid w-full max-w-xl mx-auto grid-cols-2 md:flex md:max-w-none md:flex-wrap gap-3 justify-center">
+          <Link href="/tools" className="btn-primary col-span-2 md:col-span-1">
             All PDF tools
           </Link>
           {TOOLS.map((t) => (
-            <Link key={t.slug} href={`/${t.slug}`} className="btn-primary text-center min-h-11 flex items-center justify-center">
-              {t.slug === "docx-to-pdf" ? "Word to PDF" : t.h1}
+            <Link key={t.slug} href={`/${t.slug}`} className="btn-primary whitespace-nowrap snap-start shrink-0">
+              {t.h1}
             </Link>
           ))}
         </div>
@@ -39,7 +39,7 @@ export default function HomePage() {
           A small, focused set of PDF tools that just work. More coming soon.
         </p>
 
-        <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 md:gap-4">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
           {TOOLS.map((t) => (
             <Link key={t.slug} href={`/${t.slug}`} className="card no-underline hover:border-sage-300 transition-colors min-w-0 h-full">
               <FileText className="h-5 w-5 text-sage-500" />
