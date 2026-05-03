@@ -12,7 +12,8 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "check:pdfjs-assets": "node scripts/copy-pdfjs-worker.mjs && node scripts/verify-pdfjs-assets.mjs",
-    "audit:seo": "node scripts/seo-audit.mjs"
+    "audit:seo": "node scripts/seo-audit.mjs",
+    "test:mobile-homepage": "playwright test tests/homepage-mobile.spec.ts"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
@@ -37,6 +38,7 @@
     "eslint-config-next": "^15.5.15",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.14",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "@playwright/test": "^1.54.2"
   }
 }

@@ -105,6 +105,19 @@ These tools require a backend or an AI API and break the browser-only model. Con
 
 ---
 
+
+## Mobile homepage regression checks
+
+Playwright coverage verifies the homepage at key mobile/tablet widths (320, 375, 390, 430, and 768 pixels), checks for horizontal overflow, asserts the header/hero/tools section are visible, and captures viewport snapshots.
+
+```bash
+npm install
+npx playwright install --with-deps chromium
+npm run test:mobile-homepage
+```
+
+In CI, run the same command (`npm run test:mobile-homepage`). Failures indicate either horizontal overflow (`document.documentElement.scrollWidth > window.innerWidth`) or a layout/visual regression in the homepage shell.
+
 ## Deploy to Vercel
 
 1. Push this folder to a new GitHub repo.
