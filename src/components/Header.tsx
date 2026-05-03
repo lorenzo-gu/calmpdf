@@ -1,8 +1,13 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import { SITE } from "@/lib/site";
 import { TOOLS } from "@/content/tools";
 
 export function Header() {
+  const [isMobileToolsOpen, setIsMobileToolsOpen] = useState(false);
+
   return (
     <header className="border-b border-sand-200 bg-sand-50/80 backdrop-blur sticky top-0 z-40">
       <div className="mx-auto max-w-content px-4 md:px-6 h-16 flex items-center justify-between gap-3">
