@@ -6,11 +6,11 @@ import { SITE } from "@/lib/site";
 export default function HomePage() {
   return (
     <>
-      <section className="mx-auto max-w-content px-4 md:px-6 pt-20 pb-16 text-center">
-        <h1 className="text-4xl md:text-6xl font-semibold tracking-tight">
+      <section className="mx-auto max-w-content px-4 md:px-6 pt-12 pb-10 sm:pt-14 sm:pb-12 md:pt-20 md:pb-16 text-center">
+        <h1 className="mx-auto max-w-[14ch] text-[clamp(2rem,8vw,3.75rem)] leading-[1.05] font-semibold tracking-tight">
           PDF tools. <span className="text-sage-500">No drama.</span>
         </h1>
-        <p className="mt-6 text-lg md:text-xl text-sage-700 max-w-2xl mx-auto">
+        <p className="mt-4 sm:mt-5 md:mt-6 text-[clamp(1rem,3.2vw,1.25rem)] leading-relaxed text-sage-700 max-w-[34ch] sm:max-w-[40ch] md:max-w-2xl mx-auto">
           Compress, merge, and split PDF files in your browser.
           Your files never leave your device — no upload, no signup, no limits.
         </p>
