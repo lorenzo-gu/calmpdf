@@ -13,8 +13,8 @@ const TOOL_GROUPS: ToolGroup[] = [
   {
     title: "Convert PDF",
     active: [
-      { href: "/pdf-to-word", label: "PDF to Word (DOCX)" },
-      { href: "/docx-to-pdf", label: "Word (DOCX) to PDF" },
+      { href: "/pdf-to-word", label: "PDF to Word" },
+      { href: "/word-to-pdf", label: "Word to PDF" },
     ],
     comingSoon: [
       { href: "/pdf-to-jpg", label: "PDF to JPG" },
