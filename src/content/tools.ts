@@ -352,7 +352,7 @@ export const TOOLS: Tool[] = [
   },
 
   {
-    slug: "docx-to-pdf",
+    slug: "word-to-pdf",
     title: "Word to PDF — Convert Word Documents Online | CalmPDF",
     h1: "Word to PDF",
     tagline: "Turn a Word document into a PDF in your browser.",
