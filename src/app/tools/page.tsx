@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { TOOL_NAMES } from "@/content/naming";
 
 type ToolLink = { href: string; label: string };
 
@@ -13,8 +14,8 @@ const TOOL_GROUPS: ToolGroup[] = [
   {
     title: "Convert PDF",
     active: [
-      { href: "/pdf-to-word", label: "PDF to Word (DOCX)" },
-      { href: "/docx-to-pdf", label: "Word (DOCX) to PDF" },
+      { href: "/pdf-to-word", label: TOOL_NAMES.pdfToWord },
+      { href: "/docx-to-pdf", label: TOOL_NAMES.wordToPdf },
     ],
     comingSoon: [
       { href: "/pdf-to-jpg", label: "PDF to JPG" },
