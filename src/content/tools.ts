@@ -229,8 +229,8 @@ export const TOOLS: Tool[] = [
 
   {
     slug: "docx-to-pdf",
-    title: "Word to PDF (DOCX) — Convert Word Documents Online | CalmPDF",
-    h1: "Word to PDF (DOCX)",
+    title: "Word to PDF — Convert Word Documents Online | CalmPDF",
+    h1: "Word to PDF",
     tagline: "Turn a Word document into a PDF in your browser.",
     description:
       "Convert a DOCX file into a PDF directly in your browser. Private, simple, and free.",
@@ -269,7 +269,7 @@ export const TOOLS: Tool[] = [
   },
   {
     slug: "pdf-to-word",
-    title: "PDF to Word Converter — Convert PDF to DOCX Free | CalmPDF",
+    title: "PDF to Word Converter — Convert PDF to Word Free | CalmPDF",
     h1: "PDF to Word",
     tagline: "Convert simple PDFs into editable Word documents (.docx).",
     description:

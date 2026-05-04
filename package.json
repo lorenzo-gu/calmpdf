@@ -13,7 +13,8 @@
     "typecheck": "tsc --noEmit",
     "check:pdfjs-assets": "node scripts/copy-pdfjs-worker.mjs && node scripts/verify-pdfjs-assets.mjs",
     "audit:seo": "node scripts/seo-audit.mjs",
-    "test:mobile-homepage": "playwright test tests/homepage-mobile.spec.ts"
+    "test:mobile-homepage": "playwright test tests/homepage-mobile.spec.ts",
+    "check:terminology": "node scripts/check-terminology.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
