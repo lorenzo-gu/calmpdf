@@ -6,6 +6,10 @@ export type Tool = {
   description: string;
   keyword: string;
   steps: [string, string, string];
+  uploadInstructions: string[];
+  useCases: string[];
+  limitations: string[];
+  troubleshooting: string[];
   faqs: { q: string; a: string }[];
   relatedGuides?: { href: string; label: string }[];
 };
@@ -23,6 +27,26 @@ export const TOOLS: Tool[] = [
       "Drop your PDF into the editor and choose the page you want to edit.",
       "Add text, images, signatures, or initials and drag each item into position.",
       "Download the edited PDF copy. Your original file stays unchanged.",
+    ],
+    uploadInstructions: [
+      "Choose one PDF to open in the editor.",
+      "Use toolbar actions to place text, images, signatures, or initials.",
+      "Download a new edited copy when you are done.",
+    ],
+    useCases: [
+      "Adding signature blocks to contracts before sending them.",
+      "Placing initials on each reviewed page in approval workflows.",
+      "Annotating forms with extra notes, labels, or corrections.",
+    ],
+    limitations: [
+      "This MVP focuses on overlays, not rewriting existing embedded PDF text.",
+      "Complex interactive form logic is not fully preserved in all files.",
+      "Very large PDFs can feel slower on older phones or low-memory devices.",
+    ],
+    troubleshooting: [
+      "If items do not place where expected, zoom in and re-position precisely.",
+      "If a PDF fails to open, try a non-encrypted copy of the document.",
+      "If performance slows down, close heavy tabs and reload the tool.",
     ],
     faqs: [
       {
@@ -57,6 +81,26 @@ export const TOOLS: Tool[] = [
       "Choose how far you want to rotate the pages.",
       "Download the rotated PDF. Your original file stays untouched.",
     ],
+    uploadInstructions: [
+      "Select one PDF from your device.",
+      "Pick 90°, 180°, or 270° rotation.",
+      "Export the rotated copy.",
+    ],
+    useCases: [
+      "Fixing sideways scans from mobile scanning apps.",
+      "Correcting upside-down pages before sharing or printing.",
+      "Standardizing document orientation across multi-page reports.",
+    ],
+    limitations: [
+      "Current behavior applies one rotation setting to every page.",
+      "Per-page rotation controls are not available in this release.",
+      "Password-protected PDFs may need to be unlocked first.",
+    ],
+    troubleshooting: [
+      "If output still looks wrong, verify your viewer is not auto-rotating pages.",
+      "If loading stalls, retry with a smaller PDF to rule out memory limits.",
+      "If the file is protected, unlock it first and rotate again.",
+    ],
     faqs: [
       {
         q: "Will CalmPDF rotate every page?",
@@ -89,6 +133,26 @@ export const TOOLS: Tool[] = [
       "Drop your PDF into the box above — no upload required.",
       "Click Compress PDF and wait for the lossless optimization to finish in your browser.",
       "Download the compressed PDF. The original stays untouched.",
+    ],
+    uploadInstructions: [
+      "Choose one PDF file to compress.",
+      "Start compression and wait for local browser processing.",
+      "Download the optimized PDF file.",
+    ],
+    useCases: [
+      "Meeting strict upload limits on portals and government forms.",
+      "Sending scan-heavy files by email without bounce-backs.",
+      "Reducing storage usage for shared document archives.",
+    ],
+    limitations: [
+      "Current compression is lossless, so size reductions vary by file.",
+      "Image-heavy scanned documents may only shrink modestly.",
+      "No quality slider is available in this MVP.",
+    ],
+    troubleshooting: [
+      "If compression appears stuck, refresh and retry with fewer open tabs.",
+      "If the reduction is small, the PDF may already be optimized.",
+      "If your device is low on memory, try the file on desktop.",
     ],
     faqs: [
       {
@@ -131,6 +195,26 @@ export const TOOLS: Tool[] = [
       "Use the up/down arrow buttons to set the order you want them in.",
       "Click Merge and download the combined PDF.",
     ],
+    uploadInstructions: [
+      "Add two or more PDF files.",
+      "Set file order with the move controls.",
+      "Merge and download one combined PDF.",
+    ],
+    useCases: [
+      "Combining invoice batches into one monthly package.",
+      "Merging report sections from different teams.",
+      "Creating one printable file from multiple attachments.",
+    ],
+    limitations: [
+      "File ordering uses button controls, not drag-and-drop.",
+      "Very large merge jobs depend on available device memory.",
+      "Encrypted PDFs may need to be unlocked before merging.",
+    ],
+    troubleshooting: [
+      "If merge fails, remove one file at a time to find the problematic input.",
+      "If ordering is wrong, re-check sequence before clicking Merge.",
+      "If the browser becomes unresponsive, split the merge into smaller batches.",
+    ],
     faqs: [
       {
         q: "How many PDFs can I merge at once?",
@@ -166,6 +250,26 @@ export const TOOLS: Tool[] = [
       "Drop your PDF into the box above.",
       "Pick the page range you want to extract.",
       "Download the resulting PDF file.",
+    ],
+    uploadInstructions: [
+      "Upload one PDF to split.",
+      "Enter the start and end pages for the range.",
+      "Export the extracted range as a new PDF.",
+    ],
+    useCases: [
+      "Sending only signature pages to clients.",
+      "Extracting chapters from long handbooks.",
+      "Separating appendices before sharing a draft.",
+    ],
+    limitations: [
+      "This version exports one page range per run.",
+      "It does not auto-generate one file per page yet.",
+      "Encrypted or damaged source files may not load.",
+    ],
+    troubleshooting: [
+      "If output pages are wrong, verify page numbers in your PDF viewer.",
+      "If extraction fails, retry with a narrower range first.",
+      "If the document is protected, unlock it before splitting.",
     ],
     faqs: [
       {
@@ -203,6 +307,26 @@ export const TOOLS: Tool[] = [
       "Move pages with drag-and-drop or up/down controls.",
       "Download the reordered PDF copy.",
     ],
+    uploadInstructions: [
+      "Open one PDF in the page organizer.",
+      "Move pages into the desired order.",
+      "Download the reordered PDF copy.",
+    ],
+    useCases: [
+      "Reordering scanned packets into final reading order.",
+      "Moving summary pages to the front of a report.",
+      "Fixing out-of-order pages after manual scanning.",
+    ],
+    limitations: [
+      "Large page counts can be slower on low-memory devices.",
+      "Some secured PDFs may not open without prior unlocking.",
+      "Exact rendering speed depends on browser and hardware.",
+    ],
+    troubleshooting: [
+      "If moving pages feels laggy, close other heavy tabs first.",
+      "If order is still wrong, re-open and verify before export.",
+      "If loading fails, save a fresh PDF copy and try again.",
+    ],
     faqs: [
       {
         q: "Are my PDF pages uploaded to a server?",
@@ -228,9 +352,9 @@ export const TOOLS: Tool[] = [
   },
 
   {
-    slug: "docx-to-pdf",
-    title: "Word to PDF (DOCX) — Convert Word Documents Online | CalmPDF",
-    h1: "Word to PDF (DOCX)",
+    slug: "word-to-pdf",
+    title: "Word to PDF — Convert Word Documents Online | CalmPDF",
+    h1: "Word to PDF",
     tagline: "Turn a Word document into a PDF in your browser.",
     description:
       "Convert a DOCX file into a PDF directly in your browser. Private, simple, and free.",
@@ -239,6 +363,26 @@ export const TOOLS: Tool[] = [
       "Drop your DOCX file into the converter.",
       "CalmPDF renders the document in your browser.",
       "Download the converted PDF. Your document is never uploaded.",
+    ],
+    uploadInstructions: [
+      "Choose one .docx file.",
+      "Start conversion to render the document to PDF.",
+      "Download the generated PDF file.",
+    ],
+    useCases: [
+      "Finalizing resumes before job applications.",
+      "Sharing proposals in a fixed print-friendly format.",
+      "Converting drafts for cross-device consistency.",
+    ],
+    limitations: [
+      "This MVP supports .docx only (not legacy .doc).",
+      "Complex layouts, custom fonts, and tracked changes may differ.",
+      "Advanced Word objects may not match pixel-perfect output.",
+    ],
+    troubleshooting: [
+      "If layout shifts, simplify fonts/styles in Word and convert again.",
+      "If conversion fails, re-save the file as a fresh .docx first.",
+      "If mobile conversion is slow, try desktop for better memory headroom.",
     ],
     faqs: [
       {
@@ -269,7 +413,7 @@ export const TOOLS: Tool[] = [
   },
   {
     slug: "pdf-to-word",
-    title: "PDF to Word Converter — Convert PDF to DOCX Free | CalmPDF",
+    title: "PDF to Word Converter — Convert PDF to Word Free | CalmPDF",
     h1: "PDF to Word",
     tagline: "Convert simple PDFs into editable Word documents (.docx).",
     description:
@@ -279,6 +423,26 @@ export const TOOLS: Tool[] = [
       "Drop your PDF into the converter.",
       "CalmPDF extracts text and creates a Word-compatible .docx file.",
       "Download the Word file (.docx). Your original PDF stays on your device.",
+    ],
+    uploadInstructions: [
+      "Select one PDF to convert.",
+      "Run conversion to generate an editable .docx.",
+      "Download the DOCX and review formatting.",
+    ],
+    useCases: [
+      "Reusing text from old PDFs in new proposals.",
+      "Editing policy drafts originally shared as PDF.",
+      "Creating a starting DOCX for translation/localization.",
+    ],
+    limitations: [
+      "Best results are for simple text-first PDFs.",
+      "Scanned PDFs require OCR, which is not included yet.",
+      "Complex tables, images, and multi-column layouts may degrade.",
+    ],
+    troubleshooting: [
+      "If output is missing text, confirm the source PDF is selectable text.",
+      "If layout is rough, copy core text into a fresh Word template.",
+      "If conversion fails, retry with a smaller or simpler PDF first.",
     ],
     faqs: [
       {
