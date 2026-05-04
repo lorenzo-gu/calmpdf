@@ -36,7 +36,7 @@ export function ArticleShell({
           dateModified: post.dateModified ?? post.datePublished,
           inLanguage: "en-US",
           isAccessibleForFree: true,
-          articleSection: "How-to guides",
+          articleSection: "PDF How-to Guides",
           about: ["PDF", "Document management", "How-to"],
           author: {
             "@type": "Organization",
@@ -79,7 +79,7 @@ export function ArticleShell({
           "@type": "BreadcrumbList",
           itemListElement: [
             { "@type": "ListItem", position: 1, name: "Home", item: SITE.url },
-            { "@type": "ListItem", position: 2, name: "How-to guides", item: `${SITE.url}/how-to` },
+            { "@type": "ListItem", position: 2, name: "PDF How-to Guides", item: `${SITE.url}/how-to` },
             { "@type": "ListItem", position: 3, name: post.title, item: canonicalUrl },
           ],
         }}
@@ -92,7 +92,7 @@ export function ArticleShell({
       >
         <Link href="/" className="no-underline hover:underline">Home</Link>
         <span className="mx-2">/</span>
-        <Link href="/how-to" className="no-underline hover:underline">How-to guides</Link>
+        <Link href="/how-to" className="no-underline hover:underline">PDF How-to Guides</Link>
         <span className="mx-2">/</span>
         <span className="text-sage-900">{post.title}</span>
       </nav>

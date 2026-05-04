@@ -26,7 +26,7 @@ export function Header() {
           </Link>
         </nav>
         <Link href="/tools" className="md:hidden text-sm font-medium text-sage-700 no-underline hover:text-sage-900">
-          All tools
+          All PDF tools
         </Link>
       </div>
     </header>

@@ -33,7 +33,7 @@ const TOPIC_CLUSTERS: Cluster[] = [
   },
   {
     title: "Split PDF",
-    posts: PUBLISHED_BLOG_POSTS.filter((p) => p.slug.includes("split")),
+    posts: PUBLISHED_BLOG_POSTS.filter((p) => p.slug.includes("split") && !p.slug.includes("split-merge-reorder-rotate-which-to-use")),
   },
   {
     title: "Rotate PDF",
@@ -41,7 +41,7 @@ const TOPIC_CLUSTERS: Cluster[] = [
   },
   { title: "Convert PDF", posts: PUBLISHED_BLOG_POSTS.filter((p) => p.slug.includes("word") || p.slug.includes("docx") || p.slug.includes("convert-pdf")) },
   { title: "Images/PDF", posts: [] },
-  { title: "Page Management", posts: [] },
+  { title: "Page Management", posts: PUBLISHED_BLOG_POSTS.filter((p) => p.slug.includes("reorder") || p.slug.includes("rotate-selected") || p.slug.includes("split-merge-reorder-rotate-which-to-use")) },
 ];
 
 export default function HowToIndexPage() {

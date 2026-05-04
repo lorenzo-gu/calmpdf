@@ -44,7 +44,7 @@ export default function Page() {
 
         <h3 className="text-xl font-semibold text-sage-900">Related tools</h3>
         <p>
-          Continue with <Link href="/split-pdf" className="underline underline-offset-2 hover:no-underline">Split PDF</Link>, <Link href="/rotate-pdf" className="underline underline-offset-2 hover:no-underline">Rotate PDF</Link>, <Link href="/edit-pdf" className="underline underline-offset-2 hover:no-underline">Edit PDF</Link>, or browse all tools in <Link href="/tools" className="underline underline-offset-2 hover:no-underline">PDF Tools</Link>.
+          Continue with <Link href="/split-pdf" className="underline underline-offset-2 hover:no-underline">Split PDF</Link>, <Link href="/rotate-pdf" className="underline underline-offset-2 hover:no-underline">Rotate PDF</Link>, <Link href="/edit-pdf" className="underline underline-offset-2 hover:no-underline">Edit PDF</Link>, or browse all tools in <Link href="/tools" className="underline underline-offset-2 hover:no-underline">All PDF tools</Link>.
         </p>
       </section>
     </ToolShell>

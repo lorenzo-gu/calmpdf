@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { TOOL_NAMES } from "@/content/naming";
 
 type ToolLink = { href: string; label: string };
 
@@ -13,8 +14,8 @@ const TOOL_GROUPS: ToolGroup[] = [
   {
     title: "Convert PDF",
     active: [
-      { href: "/pdf-to-word", label: "PDF to Word (DOCX)" },
-      { href: "/docx-to-pdf", label: "Word (DOCX) to PDF" },
+      { href: "/pdf-to-word", label: TOOL_NAMES.pdfToWord },
+      { href: "/docx-to-pdf", label: TOOL_NAMES.wordToPdf },
     ],
     comingSoon: [
       { href: "/pdf-to-jpg", label: "PDF to JPG" },
@@ -28,8 +29,7 @@ const TOOL_GROUPS: ToolGroup[] = [
     active: [
       { href: "/edit-pdf", label: "Edit PDF" },
       { href: "/rotate-pdf", label: "Rotate PDF" },
-      { href: "/reorder-pdf-pages", label: "Reorder PDF Pages" },
-    ],
+          ],
     comingSoon: [
       { href: "/add-page-numbers-to-pdf", label: "Add Page Numbers" },
       { href: "/remove-pdf-pages", label: "Remove PDF Pages" },
@@ -43,6 +43,7 @@ const TOOL_GROUPS: ToolGroup[] = [
     active: [
       { href: "/merge-pdf", label: "Merge PDF" },
       { href: "/split-pdf", label: "Split PDF" },
+      { href: "/reorder-pdf-pages", label: "Reorder PDF Pages" },
     ],
     comingSoon: [
       { href: "/protect-pdf", label: "Protect PDF" },
@@ -76,7 +77,7 @@ export default function ToolsPage() {
           Home
         </Link>
         <span className="mx-2">/</span>
-        <span className="text-sage-900">Tools</span>
+        <span className="text-sage-900">All PDF tools</span>
       </nav>
 
       <h1 className="mt-4 text-3xl md:text-4xl font-semibold">Free Online PDF Tools</h1>
