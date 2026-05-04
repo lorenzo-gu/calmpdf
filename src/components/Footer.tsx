@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HUB_LABELS, TOOL_NAMES } from "@/content/naming";
 import { SITE } from "@/lib/site";
 
 const FOOTER_TOOL_LINKS = [
@@ -7,8 +8,8 @@ const FOOTER_TOOL_LINKS = [
   { href: "/compress-pdf", label: "Compress PDF" },
   { href: "/merge-pdf", label: "Merge PDF" },
   { href: "/split-pdf", label: "Split PDF" },
-  { href: "/pdf-to-word", label: "PDF to Word" },
-  { href: "/tools", label: "All PDF Tools" },
+  { href: "/pdf-to-word", label: TOOL_NAMES.pdfToWord },
+  { href: "/tools", label: HUB_LABELS.tools },
 ] as const;
 
 export function Footer() {
@@ -26,7 +27,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h3 className="mb-3 font-semibold text-sage-900">PDF Tools</h3>
+          <h3 className="mb-3 font-semibold text-sage-900">PDF tools</h3>
           <ul className="space-y-2">
             {FOOTER_TOOL_LINKS.map((link) => (
               <li key={link.href}>
@@ -43,7 +44,7 @@ export function Footer() {
           <ul className="space-y-2">
             <li>
               <Link href="/how-to" className="text-sage-700 no-underline hover:underline">
-                PDF How-to Guides
+                {HUB_LABELS.guides}
               </Link>
             </li>
           </ul>

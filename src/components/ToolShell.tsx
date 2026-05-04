@@ -54,6 +54,14 @@ export function ToolShell({
 
       <section className="mx-auto max-w-content px-4 md:px-6 py-10 grid gap-8 md:grid-cols-2">
         <div className="card">
+          <h2 className="text-xl font-semibold">Upload & controls</h2>
+          <ul className="mt-4 list-disc pl-6 space-y-2 text-sage-700">
+            {tool.uploadInstructions.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="card">
           <h2 className="text-xl font-semibold">How it works</h2>
           <ol className="mt-4 space-y-4">
             {tool.steps.map((s, i) => (
@@ -67,11 +75,35 @@ export function ToolShell({
           </ol>
         </div>
         <div className="card">
-          <h2 className="text-xl font-semibold">Why CalmPDF</h2>
+          <h2 className="text-xl font-semibold">When to use this tool</h2>
+          <ul className="mt-4 list-disc pl-6 space-y-2 text-sage-700">
+            {tool.useCases.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="card">
+          <h2 className="text-xl font-semibold">Limitations</h2>
+          <ul className="mt-4 list-disc pl-6 space-y-2 text-sage-700">
+            {tool.limitations.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="card">
+          <h2 className="text-xl font-semibold">Privacy</h2>
           <ul className="mt-4 space-y-3 text-sage-700">
             <li><strong className="text-sage-900">Private by design.</strong> Your PDF is processed inside your browser. It is never uploaded to a server.</li>
             <li><strong className="text-sage-900">Fast.</strong> No round trip to the cloud, so it works as fast as your laptop can run JavaScript.</li>
             <li><strong className="text-sage-900">Free.</strong> All tools are free to use with no signup and no daily limits.</li>
+          </ul>
+        </div>
+        <div className="card">
+          <h2 className="text-xl font-semibold">Troubleshooting</h2>
+          <ul className="mt-4 list-disc pl-6 space-y-2 text-sage-700">
+            {tool.troubleshooting.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
           </ul>
         </div>
       </section>
