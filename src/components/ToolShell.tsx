@@ -26,7 +26,7 @@ export function ToolShell({
       <Breadcrumbs
         crumbs={[
           { label: "Home", href: "/" },
-          { label: "PDF Tools", href: "/tools" },
+          { label: "All PDF tools", href: "/tools" },
           { label: tool.h1 },
         ]}
       />

@@ -29,8 +29,7 @@ const TOOL_GROUPS: ToolGroup[] = [
     active: [
       { href: "/edit-pdf", label: "Edit PDF" },
       { href: "/rotate-pdf", label: "Rotate PDF" },
-      { href: "/reorder-pdf-pages", label: "Reorder PDF Pages" },
-    ],
+          ],
     comingSoon: [
       { href: "/add-page-numbers-to-pdf", label: "Add Page Numbers" },
       { href: "/remove-pdf-pages", label: "Remove PDF Pages" },
@@ -44,6 +43,7 @@ const TOOL_GROUPS: ToolGroup[] = [
     active: [
       { href: "/merge-pdf", label: "Merge PDF" },
       { href: "/split-pdf", label: "Split PDF" },
+      { href: "/reorder-pdf-pages", label: "Reorder PDF Pages" },
     ],
     comingSoon: [
       { href: "/protect-pdf", label: "Protect PDF" },
@@ -77,7 +77,7 @@ export default function ToolsPage() {
           Home
         </Link>
         <span className="mx-2">/</span>
-        <span className="text-sage-900">Tools</span>
+        <span className="text-sage-900">All PDF tools</span>
       </nav>
 
       <h1 className="mt-4 text-3xl md:text-4xl font-semibold">Free Online PDF Tools</h1>
