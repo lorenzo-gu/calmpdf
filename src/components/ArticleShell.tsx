@@ -104,6 +104,9 @@ export function ArticleShell({
       {/* Article body */}
       <article className="mx-auto max-w-3xl px-4 md:px-6 pt-6 pb-12 leading-relaxed">
         {children}
+
+        {/* Keep in-article placement moderate to avoid aggressive ad density. */}
+        <InArticleAd />
       </article>
 
       <section className="mx-auto max-w-3xl px-4 md:px-6">

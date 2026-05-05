@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SITE } from "@/lib/site";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/JsonLd";
+import { FooterAd, HeaderAd } from "@/components/PageAds";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -70,7 +71,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <OrganizationJsonLd />
         <WebSiteJsonLd />
         <Header />
+        <HeaderAd />
         <main className="flex-1">{children}</main>
+        <FooterAd />
         <Footer />
         <Analytics />
       </body>
