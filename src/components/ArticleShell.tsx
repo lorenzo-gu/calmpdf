@@ -3,6 +3,7 @@ import { SITE } from "@/lib/site";
 import { TOOLS } from "@/content/tools";
 import type { Post } from "@/content/posts";
 import { VerticalResponsiveAd } from "@/components/VerticalResponsiveAd";
+import { InArticleAd } from "@/components/PageAds";
 
 function JsonLdScript({ data }: { data: object }) {
   return (
@@ -100,6 +101,9 @@ export function ArticleShell({
       {/* Article body */}
       <article className="mx-auto max-w-3xl px-4 md:px-6 pt-6 pb-12 leading-relaxed">
         {children}
+
+        {/* Keep in-article placement moderate to avoid aggressive ad density. */}
+        <InArticleAd />
       </article>
 
       {/* Footer ad slot for how-to pages after primary content. */}
