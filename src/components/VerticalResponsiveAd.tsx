@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { trackAdEvent } from "@/lib/analytics";
 
 declare global {
   interface Window {
@@ -13,6 +14,8 @@ const ADSENSE_SLOT = "3722029870";
 
 export function VerticalResponsiveAd() {
   const pushed = useRef(false);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const impressionTracked = useRef(false);
 
   useEffect(() => {
     if (pushed.current) return;
@@ -25,12 +28,33 @@ export function VerticalResponsiveAd() {
     }
   }, []);
 
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= 0.5);
+        if (!visible || impressionTracked.current) return;
+        impressionTracked.current = true;
+        trackAdEvent("impression", { slot: ADSENSE_SLOT, component: "VerticalResponsiveAd" });
+      },
+      { threshold: [0.5] },
+    );
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   if (process.env.NODE_ENV !== "production") {
     return null;
   }
 
   return (
-    <div className="my-6 md:my-8 w-full overflow-hidden">
+    <div
+      ref={containerRef}
+      className="my-6 md:my-8 w-full overflow-hidden"
+      onClickCapture={() => {
+        trackAdEvent("click", { slot: ADSENSE_SLOT, component: "VerticalResponsiveAd" });
+      }}
+    >
       <div className="min-h-[90px] md:min-h-[120px]">
         <ins
           className="adsbygoogle"
