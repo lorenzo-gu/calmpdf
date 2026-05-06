@@ -411,6 +411,51 @@ export const TOOLS: Tool[] = [
       { href: "/how-to/pdf-conversion-troubleshooting", label: "PDF Conversion Troubleshooting" },
     ],
   },
+
+  {
+    slug: "pdf-to-jpg",
+    title: "PDF to JPG Converter — Export PDF Pages as JPG Images | CalmPDF",
+    h1: "PDF to JPG",
+    tagline: "Convert every PDF page into JPG images locally in your browser.",
+    description:
+      "Turn PDF pages into JPG files without uploading your document. Adjust image quality, preview pages, and download individual JPGs or one ZIP archive.",
+    keyword: "pdf to jpg",
+    steps: [
+      "Drop one PDF into the converter.",
+      "Preview rendered pages and set JPG quality.",
+      "Download page JPGs one-by-one or as a ZIP archive.",
+    ],
+    uploadInstructions: [
+      "Choose one PDF file from your device.",
+      "Wait for page previews to render in-browser.",
+      "Export individual JPG files or one ZIP download.",
+    ],
+    useCases: [
+      "Extracting pages as images for slide decks and docs.",
+      "Creating social-ready JPG snapshots from PDF reports.",
+      "Sharing selected pages where image uploads are required.",
+    ],
+    limitations: [
+      "Very large PDFs can take longer on low-memory devices.",
+      "The current version exports JPG only, not PNG/WebP.",
+      "Password-protected files must be unlocked first.",
+    ],
+    troubleshooting: [
+      "If conversion stalls, close heavy tabs and retry.",
+      "If JPGs look too soft, increase quality and reconvert.",
+      "If the PDF will not load, verify the file is not encrypted.",
+    ],
+    faqs: [
+      { q: "Is my PDF uploaded to CalmPDF servers?", a: "No. Rendering and JPG export happen entirely in your browser, so your file stays on your device." },
+      { q: "Can I download just one page as JPG?", a: "Yes. After conversion, each preview card includes its own Download JPG action." },
+      { q: "Can I download all pages at once?", a: "Yes. Use Download ZIP to export every page image in one archive." },
+      { q: "How does the quality slider work?", a: "Higher quality keeps more detail but creates larger JPG files. Lower quality reduces file size." },
+    ],
+    relatedGuides: [
+      { href: "/how-to/pdf-conversion-troubleshooting", label: "PDF Conversion Troubleshooting" },
+      { href: "/how-to/convert-pdf-to-word", label: "How to Convert PDF to Word" },
+    ],
+  },
   {
     slug: "pdf-to-word",
     title: "PDF to Word Converter — Convert PDF to Word Free | CalmPDF",
