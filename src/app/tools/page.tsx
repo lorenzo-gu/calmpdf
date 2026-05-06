@@ -17,7 +17,7 @@ const TOOL_GROUPS: ToolGroup[] = [
       { href: "/pdf-to-word", label: TOOL_NAMES.pdfToWord },
       { href: "/docx-to-pdf", label: TOOL_NAMES.wordToPdf },
     ],
-    comingSoon: [
+    inProgress: [
       { href: "/jpg-to-pdf", label: "JPG to PDF" },
       { href: "/pdf-to-png", label: "PDF to PNG" },
       { href: "/png-to-pdf", label: "PNG to PDF" },
