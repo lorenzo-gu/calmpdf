@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { trackAdEvent } from "@/lib/analytics";
 
 declare global {
   interface Window {
@@ -13,6 +14,8 @@ const ADSENSE_SLOT = "3722029870";
 export function VerticalResponsiveAd() {
   const client = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
   const pushed = useRef(false);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const impressionTracked = useRef(false);
 
   useEffect(() => {
     if (!client) return;
@@ -31,7 +34,13 @@ export function VerticalResponsiveAd() {
   }
 
   return (
-    <div className="my-6 md:my-8 w-full overflow-hidden">
+    <div
+      ref={containerRef}
+      className="my-6 md:my-8 w-full overflow-hidden"
+      onClickCapture={() => {
+        trackAdEvent("click", { slot: ADSENSE_SLOT, component: "VerticalResponsiveAd" });
+      }}
+    >
       <div className="min-h-[90px] md:min-h-[120px]">
         <ins
           className="adsbygoogle"

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { trackAdEvent } from "@/lib/analytics";
 
 declare global {
   interface Window {
@@ -43,6 +44,8 @@ export function AdSlot({
 }: AdSlotProps) {
   const client = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
   const pushed = useRef(false);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const impressionTracked = useRef(false);
 
   useEffect(() => {
     if (!client || !slot) return;
@@ -55,12 +58,33 @@ export function AdSlot({
     }
   }, [client, slot]);
 
+  useEffect(() => {
+    if (!client || !slot || !containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= 0.5);
+        if (!visible || impressionTracked.current) return;
+        impressionTracked.current = true;
+        trackAdEvent("impression", { slot, component: "AdSlot" });
+      },
+      { threshold: [0.5] },
+    );
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [client, slot]);
+
   if (!client || !slot) return null;
 
   return (
     <div
+      ref={containerRef}
       className={`my-8 mx-auto max-w-3xl px-4 md:px-6 ${className}`.trim()}
       aria-label={label}
+      onClickCapture={() => {
+        trackAdEvent("click", { slot, component: "AdSlot" });
+      }}
     >
       <p className="mb-1 text-[10px] uppercase tracking-wide text-sage-700/70">
         {label}
