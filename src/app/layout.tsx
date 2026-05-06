@@ -13,6 +13,8 @@ const searchEngineVerification = {
   bing: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION,
 };
 
+const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: `${SITE.name} — ${SITE.tagline}`,
@@ -34,6 +36,13 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   verification: searchEngineVerification,
+  ...(ADSENSE_CLIENT
+    ? {
+        other: {
+          "google-adsense-account": ADSENSE_CLIENT,
+        },
+      }
+    : {}),
 };
 
 export const viewport: Viewport = {
