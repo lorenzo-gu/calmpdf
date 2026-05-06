@@ -8,7 +8,11 @@ const FOOTER_TOOL_LINKS = [
   { href: "/compress-pdf", label: "Compress PDF" },
   { href: "/merge-pdf", label: "Merge PDF" },
   { href: "/split-pdf", label: "Split PDF" },
+  { href: "/reorder-pdf-pages", label: "Reorder PDF Pages" },
   { href: "/pdf-to-word", label: TOOL_NAMES.pdfToWord },
+  { href: "/docx-to-pdf", label: TOOL_NAMES.wordToPdf },
+  { href: "/extract-pdf-pages", label: "Extract PDF Pages" },
+  { href: "/jpg-to-pdf", label: "JPG to PDF" },
   { href: "/tools", label: HUB_LABELS.tools },
 ] as const;
 

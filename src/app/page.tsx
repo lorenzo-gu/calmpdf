@@ -4,6 +4,13 @@ import { TOOLS } from "@/content/tools";
 import { SITE } from "@/lib/site";
 
 export default function HomePage() {
+  const inProgressTools = [
+    { href: "/extract-pdf-pages", label: "Extract PDF Pages" },
+    { href: "/pdf-to-jpg", label: "PDF to JPG" },
+    { href: "/jpg-to-pdf", label: "JPG to PDF" },
+    { href: "/pdf-metadata-editor", label: "PDF Metadata Editor" },
+  ];
+
   return (
     <>
       <section className="mx-auto max-w-content px-4 md:px-6 pt-14 md:pt-20 pb-14 md:pb-16 text-center">
@@ -36,7 +43,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-content px-4 md:px-6 py-12" id="tools">
         <h2 className="text-2xl md:text-3xl font-semibold">Every tool you need</h2>
         <p className="mt-2 text-sage-700 max-w-2xl">
-          A small, focused set of PDF tools that just work. More coming soon.
+          A focused set of PDF tools that just work, plus in-progress pages you can already browse.
         </p>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
@@ -47,6 +54,24 @@ export default function HomePage() {
               <p className="mt-1 text-sm text-sage-700">{t.tagline}</p>
             </Link>
           ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-content px-4 md:px-6 py-8">
+        <div className="card">
+          <h2 className="text-xl font-semibold">Explore in-progress tools</h2>
+          <p className="mt-2 text-sage-700">
+            Follow new tool rollouts from one place and jump across related workflows.
+          </p>
+          <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+            {inProgressTools.map((tool) => (
+              <li key={tool.href}>
+                <Link href={tool.href} className="text-sage-800 no-underline hover:underline">
+                  {tool.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
