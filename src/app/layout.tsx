@@ -12,6 +12,8 @@ const searchEngineVerification = {
   bing: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION,
 };
 
+const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: `${SITE.name} — ${SITE.tagline}`,
@@ -33,6 +35,13 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   verification: searchEngineVerification,
+  ...(ADSENSE_CLIENT
+    ? {
+        other: {
+          "google-adsense-account": ADSENSE_CLIENT,
+        },
+      }
+    : {}),
 };
 
 export const viewport: Viewport = {
@@ -58,13 +67,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', 'G-J1GR90ETYW');
           `}
         </Script>
-        <Script
-          id="google-adsense"
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8704043209936495"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
+        {ADSENSE_CLIENT ? (
+          <Script
+            id="google-adsense"
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+        ) : null}
       </head>
       <body className="min-h-screen flex flex-col">
         <OrganizationJsonLd />
