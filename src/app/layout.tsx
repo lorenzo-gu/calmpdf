@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SITE } from "@/lib/site";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/JsonLd";
+import { FooterAd, HeaderAd } from "@/components/PageAds";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -67,21 +68,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', 'G-J1GR90ETYW');
           `}
         </Script>
-        {ADSENSE_CLIENT ? (
-          <Script
-            id="google-adsense"
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
-            crossOrigin="anonymous"
-            strategy="afterInteractive"
-          />
-        ) : null}
+        <Script
+          id="google-adsense"
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8704043209936495"
+          crossOrigin="anonymous"
+          strategy="beforeInteractive"
+        />
       </head>
       <body className="min-h-screen flex flex-col">
         <OrganizationJsonLd />
         <WebSiteJsonLd />
         <Header />
+        <HeaderAd />
         <main className="flex-1">{children}</main>
+        <FooterAd />
         <Footer />
         <Analytics />
       </body>
