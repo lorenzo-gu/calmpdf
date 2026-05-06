@@ -97,6 +97,44 @@ export async function reorderPdf(file: File, order: number[]): Promise<Uint8Arra
   return await out.save({ useObjectStreams: true, addDefaultPage: false });
 }
 
+
+export function parsePageSelection(input: string, totalPages: number): number[] {
+  const chunks = input.split(',').map((c) => c.trim()).filter(Boolean);
+  if (!chunks.length) {
+    throw new Error("Enter at least one page or range (example: 1-3, 6, 9-11).");
+  }
+  const pages = new Set<number>();
+  for (const chunk of chunks) {
+    const part = chunk.trim();
+    if (/^\d+$/.test(part)) {
+      const n = Number(part);
+      if (n < 1 || n > totalPages) throw new Error(`Page ${n} is outside 1-${totalPages}.`);
+      pages.add(n);
+      continue;
+    }
+    const m = part.match(/^(\d+)\s*-\s*(\d+)$/);
+    if (!m) throw new Error(`Invalid range "${part}".`);
+    const start = Number(m[1]);
+    const end = Number(m[2]);
+    if (start > end) throw new Error(`Range "${part}" must be ascending.`);
+    if (start < 1 || end > totalPages) throw new Error(`Range "${part}" is outside 1-${totalPages}.`);
+    for (let i = start; i <= end; i += 1) pages.add(i);
+  }
+  return [...pages].sort((a, b) => a - b);
+}
+
+export async function extractPdfPages(file: File, indices: number[]): Promise<Uint8Array> {
+  if (indices.length === 0) throw new Error("Select at least one page.");
+  const buf = await readFileAsArrayBuffer(file);
+  const src = await PDFDocument.load(buf, { ignoreEncryption: true });
+  const total = src.getPageCount();
+  if (indices.some((i) => i < 0 || i >= total)) throw new Error("One or more page selections are out of bounds.");
+  const out = await PDFDocument.create();
+  const copied = await out.copyPages(src, indices);
+  copied.forEach((page) => out.addPage(page));
+  return await out.save({ useObjectStreams: true, addDefaultPage: false });
+}
+
 export async function pdfPageCount(file: File): Promise<number> {
   const buf = await readFileAsArrayBuffer(file);
   const src = await PDFDocument.load(buf, { ignoreEncryption: true });

@@ -32,7 +32,7 @@ const TOOL_GROUPS: ToolGroup[] = [
     comingSoon: [
       { href: "/add-page-numbers-to-pdf", label: "Add Page Numbers" },
       { href: "/remove-pdf-pages", label: "Remove PDF Pages" },
-      { href: "/extract-pdf-pages", label: "Extract PDF Pages" },
+      
       { href: "/pdf-metadata-editor", label: "PDF Metadata Editor" },
       { href: "/pdf-metadata-viewer", label: "PDF Metadata Viewer" },
     ],
@@ -43,6 +43,7 @@ const TOOL_GROUPS: ToolGroup[] = [
       { href: "/merge-pdf", label: "Merge PDF" },
       { href: "/split-pdf", label: "Split PDF" },
       { href: "/reorder-pdf-pages", label: "Reorder PDF Pages" },
+      { href: "/extract-pdf-pages", label: "Extract PDF Pages" },
     ],
     comingSoon: [
       { href: "/protect-pdf", label: "Protect PDF" },

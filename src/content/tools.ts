@@ -294,6 +294,53 @@ export const TOOLS: Tool[] = [
       { href: "/extract-pdf-pages", label: "Extract PDF Pages tool" },
     ],
   },
+
+  {
+    slug: "extract-pdf-pages",
+    title: "Extract PDF Pages — Select Specific PDF Pages Online | CalmPDF",
+    h1: "Extract PDF pages",
+    tagline: "Select specific pages and export a new PDF in your browser.",
+    description:
+      "Extract selected pages from a PDF using page clicks or ranges like 1-3, 5, 8-10. CalmPDF keeps processing local on your device.",
+    keyword: "extract pdf pages",
+    steps: [
+      "Drop your PDF into the extractor.",
+      "Select pages by clicking or entering page ranges.",
+      "Download a new PDF with only selected pages.",
+    ],
+    uploadInstructions: [
+      "Upload one source PDF file.",
+      "Choose pages visually or use quick range entry.",
+      "Download the extracted-page PDF copy.",
+    ],
+    useCases: [
+      "Sending only invoice pages needed for reimbursement.",
+      "Sharing signature pages from a longer contract packet.",
+      "Building a shorter resume or appendix packet from one file.",
+    ],
+    limitations: [
+      "This tool exports selected pages into one output file.",
+      "It does not edit page contents directly.",
+      "Protected or corrupted PDFs may fail to open in-browser.",
+    ],
+    troubleshooting: [
+      "If ranges fail, use ascending input like 1-3, 5, 8-10.",
+      "If extraction fails, try a non-encrypted source document.",
+      "If performance is slow, close heavy tabs and retry.",
+    ],
+    faqs: [
+      { q: "Can I extract non-consecutive pages?", a: "Yes. Mix single pages and ranges in one selection, such as 1, 4, 8-10." },
+      { q: "Will this upload my PDF?", a: "No. CalmPDF processes extraction entirely in your browser." },
+      { q: "Can I reorder during extraction?", a: "Selection preserves source order. Use Reorder PDF Pages if you need custom ordering." },
+      { q: "Does extraction lower quality?", a: "No. CalmPDF copies the selected original pages into a new PDF." },
+    ],
+    relatedGuides: [
+      { href: "/split-pdf", label: "Split PDF tool" },
+      { href: "/reorder-pdf-pages", label: "Reorder PDF Pages" },
+      { href: "/merge-pdf", label: "Merge PDF" },
+    ],
+  },
+
   {
     slug: "reorder-pdf-pages",
     title: "Reorder PDF Pages — Rearrange Page Order Online | CalmPDF",
