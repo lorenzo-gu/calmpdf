@@ -1,13 +1,23 @@
 import Link from "next/link";
 import type { ProgrammaticPage } from "@/content/programmatic-pages";
 
+const TOOL_BREADCRUMB_BY_CTA: Record<ProgrammaticPage["ctaHref"], { href: string; label: string }> = {
+  "/compress-pdf": { href: "/compress-pdf", label: "Compress PDF" },
+  "/pdf-to-word": { href: "/pdf-to-word", label: "PDF to Word" },
+  "/merge-pdf": { href: "/merge-pdf", label: "Merge PDF" },
+  "/split-pdf": { href: "/split-pdf", label: "Split PDF" },
+  "/rotate-pdf": { href: "/rotate-pdf", label: "Rotate PDF" },
+};
+
 export function ProgrammaticLandingPage({ page }: { page: ProgrammaticPage }) {
+  const breadcrumbTool = TOOL_BREADCRUMB_BY_CTA[page.ctaHref];
+
   return (
     <main className="mx-auto max-w-3xl px-4 md:px-6 py-12">
       <nav aria-label="Breadcrumb" className="text-sm text-sage-700 mb-6">
         <Link href="/" className="no-underline hover:underline">Home</Link>
         <span className="mx-2">/</span>
-        <Link href="/compress-pdf" className="no-underline hover:underline">Compress PDF</Link>
+        <Link href={breadcrumbTool.href} className="no-underline hover:underline">{breadcrumbTool.label}</Link>
         <span className="mx-2">/</span>
         <span className="text-sage-900">{page.h1}</span>
       </nav>

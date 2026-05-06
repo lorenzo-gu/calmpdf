@@ -1,0 +1,124 @@
+import type { MetadataRoute } from "next";
+
+export type ComparisonPage = {
+  slug:
+    | "ilovepdf-alternative"
+    | "smallpdf-alternative"
+    | "browser-only-pdf-editor"
+    | "private-pdf-tools-online"
+    | "free-pdf-merger-without-signup";
+  title: string;
+  h1: string;
+  metaDescription: string;
+  intro: string;
+  summary: string;
+  comparisonRows: { criterion: string; calmpdf: string; others: string }[];
+  faqs: { q: string; a: string }[];
+  toolLinks: { href: string; label: string }[];
+  sitemap: {
+    changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
+    priority: number;
+  };
+};
+
+export const COMPARISON_PAGES: ComparisonPage[] = [
+  {
+    slug: "ilovepdf-alternative",
+    title: "iLovePDF Alternative | CalmPDF",
+    h1: "CalmPDF as an iLovePDF Alternative",
+    metaDescription: "An honest iLovePDF alternative page focused on private, browser-only PDF workflows and direct links to CalmPDF tools.",
+    intro: "If you are comparing iLovePDF alternatives, the most important difference is where your files are processed. CalmPDF focuses on browser-side processing so documents stay on your device.",
+    summary: "Choose CalmPDF when privacy-first workflows matter and you want quick no-signup access to common PDF tasks.",
+    comparisonRows: [
+      { criterion: "Processing model", calmpdf: "Local browser processing for core tools", others: "Often upload-first cloud workflow" },
+      { criterion: "Account requirement", calmpdf: "No signup for standard usage", others: "May gate advanced actions behind account" },
+      { criterion: "Best fit", calmpdf: "Privacy-sensitive everyday PDF edits", others: "Teams already standardized on cloud stacks" },
+    ],
+    faqs: [
+      { q: "Is CalmPDF always better than iLovePDF?", a: "Not always. If your team needs account-based cloud collaboration, another product may fit better." },
+      { q: "When is CalmPDF the best alternative?", a: "When you want fast personal workflows and browser-local processing for sensitive files." },
+    ],
+    toolLinks: [{ href: "/merge-pdf", label: "Merge PDF" }, { href: "/compress-pdf", label: "Compress PDF" }, { href: "/edit-pdf", label: "Edit PDF" }],
+    sitemap: { changeFrequency: "monthly", priority: 0.7 },
+  },
+  {
+    slug: "smallpdf-alternative",
+    title: "Smallpdf Alternative | CalmPDF",
+    h1: "CalmPDF as a Smallpdf Alternative",
+    metaDescription: "Compare CalmPDF and Smallpdf style workflows with a privacy-first perspective and practical tool links.",
+    intro: "Smallpdf is well known, but many users look for alternatives that keep processing in-browser and avoid unnecessary account steps.",
+    summary: "CalmPDF is ideal for users who want straightforward tools, local processing, and minimal friction.",
+    comparisonRows: [
+      { criterion: "Privacy posture", calmpdf: "Browser-first processing approach", others: "Mixed cloud and local patterns" },
+      { criterion: "Friction", calmpdf: "Simple start with no signup", others: "Signup prompts can appear by feature" },
+      { criterion: "Use case", calmpdf: "Quick single-user tasks", others: "Broader suite with plan-driven features" },
+    ],
+    faqs: [
+      { q: "Can I do daily PDF tasks with CalmPDF?", a: "Yes. Merging, compressing, splitting, rotating, and editing are available without signup." },
+      { q: "Should businesses still compare options?", a: "Yes. Teams should validate compliance, collaboration needs, and cost before selecting a stack." },
+    ],
+    toolLinks: [{ href: "/split-pdf", label: "Split PDF" }, { href: "/rotate-pdf", label: "Rotate PDF" }, { href: "/pdf-to-word", label: "PDF to Word" }],
+    sitemap: { changeFrequency: "monthly", priority: 0.7 },
+  },
+  {
+    slug: "browser-only-pdf-editor",
+    title: "Browser-Only PDF Editor | CalmPDF",
+    h1: "Browser-Only PDF Editor Comparison",
+    metaDescription: "Looking for a browser-only PDF editor? Compare what matters: local processing, ease of use, and practical editing workflows.",
+    intro: "A browser-only editor is usually about convenience and data handling. CalmPDF is built for in-browser workflows that avoid unnecessary upload complexity.",
+    summary: "For text edits, page changes, and common conversions, browser-only tools can be the simplest path.",
+    comparisonRows: [
+      { criterion: "Install required", calmpdf: "No installation", others: "Some tools push desktop apps" },
+      { criterion: "Workflow speed", calmpdf: "Open, edit, export quickly", others: "Can require extra onboarding steps" },
+      { criterion: "Privacy", calmpdf: "Local-first processing", others: "Varies by vendor and feature" },
+    ],
+    faqs: [
+      { q: "Are browser-only editors enough for professional work?", a: "For many workflows yes, especially standard edits and document packaging." },
+      { q: "When do I still need desktop software?", a: "For advanced prepress, signature orchestration, or enterprise policy constraints." },
+    ],
+    toolLinks: [{ href: "/edit-pdf", label: "Edit PDF" }, { href: "/reorder-pdf-pages", label: "Reorder Pages" }, { href: "/add-page-numbers-to-pdf", label: "Add Page Numbers" }],
+    sitemap: { changeFrequency: "monthly", priority: 0.72 },
+  },
+  {
+    slug: "private-pdf-tools-online",
+    title: "Private PDF Tools Online | CalmPDF",
+    h1: "Private PDF Tools Online: What to Compare",
+    metaDescription: "Compare private online PDF tools and learn which workflows can stay local in your browser with CalmPDF.",
+    intro: "Privacy claims vary. This page focuses on practical criteria: where files are processed, whether signup is required, and how quickly you can finish tasks.",
+    summary: "If you handle contracts, IDs, or financial docs, choose tools that minimize data exposure and keep workflows simple.",
+    comparisonRows: [
+      { criterion: "File handling", calmpdf: "Browser-local processing for core tasks", others: "May upload to remote servers" },
+      { criterion: "Data minimization", calmpdf: "No account needed for typical usage", others: "Accounts and storage can be encouraged" },
+      { criterion: "Practical trust", calmpdf: "Clear privacy page + direct task links", others: "Policies can be harder to map to each tool" },
+    ],
+    faqs: [
+      { q: "Is any online PDF workflow perfectly risk-free?", a: "No tool is zero-risk; always review privacy docs and avoid unnecessary sharing." },
+      { q: "What should I check before using a PDF tool?", a: "Processing model, retention policy, and whether your task can stay local in-browser." },
+    ],
+    toolLinks: [{ href: "/privacy", label: "Read CalmPDF privacy page" }, { href: "/compress-pdf", label: "Private PDF compression" }, { href: "/merge-pdf", label: "Private PDF merge" }],
+    sitemap: { changeFrequency: "monthly", priority: 0.72 },
+  },
+  {
+    slug: "free-pdf-merger-without-signup",
+    title: "Free PDF Merger Without Signup | CalmPDF",
+    h1: "Free PDF Merger Without Signup",
+    metaDescription: "Need a free PDF merger without signup? Compare options and use CalmPDF to combine files directly in your browser.",
+    intro: "Many users just want to merge a few files quickly without creating accounts. CalmPDF supports that workflow with browser-first processing.",
+    summary: "Best for students, applicants, and professionals who need fast document assembly with low friction.",
+    comparisonRows: [
+      { criterion: "Cost", calmpdf: "Free for common merge workflows", others: "Free tiers may limit volume" },
+      { criterion: "Signup", calmpdf: "No signup required", others: "Account prompts are common" },
+      { criterion: "Follow-up tasks", calmpdf: "Direct links to compress/reorder tools", others: "May require plan upgrades" },
+    ],
+    faqs: [
+      { q: "Can I merge multiple PDFs in one go?", a: "Yes, then reorder pages if needed before downloading." },
+      { q: "What if the merged file is too large?", a: "Use the compression tool right after merging to meet upload limits." },
+    ],
+    toolLinks: [{ href: "/merge-pdf", label: "Merge PDFs now" }, { href: "/reorder-pdf-pages", label: "Reorder merged pages" }, { href: "/compress-pdf", label: "Compress merged PDF" }],
+    sitemap: { changeFrequency: "monthly", priority: 0.72 },
+  },
+];
+
+export const COMPARISON_PAGE_BY_SLUG = Object.fromEntries(
+  COMPARISON_PAGES.map((page) => [page.slug, page]),
+) as Record<ComparisonPage["slug"], ComparisonPage>;

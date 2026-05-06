@@ -17,8 +17,7 @@ const TOOL_GROUPS: ToolGroup[] = [
       { href: "/pdf-to-word", label: TOOL_NAMES.pdfToWord },
       { href: "/docx-to-pdf", label: TOOL_NAMES.wordToPdf },
     ],
-    inProgress: [
-      { href: "/pdf-to-jpg", label: "PDF to JPG" },
+    comingSoon: [
       { href: "/jpg-to-pdf", label: "JPG to PDF" },
       { href: "/pdf-to-png", label: "PDF to PNG" },
       { href: "/png-to-pdf", label: "PNG to PDF" },
@@ -35,7 +34,7 @@ const TOOL_GROUPS: ToolGroup[] = [
     inProgress: [
       { href: "/add-page-numbers-to-pdf", label: "Add Page Numbers" },
       { href: "/remove-pdf-pages", label: "Remove PDF Pages" },
-      { href: "/extract-pdf-pages", label: "Extract PDF Pages" },
+      
       { href: "/pdf-metadata-editor", label: "PDF Metadata Editor" },
       { href: "/pdf-metadata-viewer", label: "PDF Metadata Viewer" },
     ],
@@ -46,6 +45,7 @@ const TOOL_GROUPS: ToolGroup[] = [
       { href: "/merge-pdf", label: "Merge PDF" },
       { href: "/split-pdf", label: "Split PDF" },
       { href: "/reorder-pdf-pages", label: "Reorder PDF Pages" },
+      { href: "/extract-pdf-pages", label: "Extract PDF Pages" },
     ],
     inProgress: [
       { href: "/protect-pdf", label: "Protect PDF" },

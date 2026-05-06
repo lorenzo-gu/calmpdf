@@ -294,6 +294,53 @@ export const TOOLS: Tool[] = [
       { href: "/extract-pdf-pages", label: "Extract PDF Pages tool" },
     ],
   },
+
+  {
+    slug: "extract-pdf-pages",
+    title: "Extract PDF Pages — Select Specific PDF Pages Online | CalmPDF",
+    h1: "Extract PDF pages",
+    tagline: "Select specific pages and export a new PDF in your browser.",
+    description:
+      "Extract selected pages from a PDF using page clicks or ranges like 1-3, 5, 8-10. CalmPDF keeps processing local on your device.",
+    keyword: "extract pdf pages",
+    steps: [
+      "Drop your PDF into the extractor.",
+      "Select pages by clicking or entering page ranges.",
+      "Download a new PDF with only selected pages.",
+    ],
+    uploadInstructions: [
+      "Upload one source PDF file.",
+      "Choose pages visually or use quick range entry.",
+      "Download the extracted-page PDF copy.",
+    ],
+    useCases: [
+      "Sending only invoice pages needed for reimbursement.",
+      "Sharing signature pages from a longer contract packet.",
+      "Building a shorter resume or appendix packet from one file.",
+    ],
+    limitations: [
+      "This tool exports selected pages into one output file.",
+      "It does not edit page contents directly.",
+      "Protected or corrupted PDFs may fail to open in-browser.",
+    ],
+    troubleshooting: [
+      "If ranges fail, use ascending input like 1-3, 5, 8-10.",
+      "If extraction fails, try a non-encrypted source document.",
+      "If performance is slow, close heavy tabs and retry.",
+    ],
+    faqs: [
+      { q: "Can I extract non-consecutive pages?", a: "Yes. Mix single pages and ranges in one selection, such as 1, 4, 8-10." },
+      { q: "Will this upload my PDF?", a: "No. CalmPDF processes extraction entirely in your browser." },
+      { q: "Can I reorder during extraction?", a: "Selection preserves source order. Use Reorder PDF Pages if you need custom ordering." },
+      { q: "Does extraction lower quality?", a: "No. CalmPDF copies the selected original pages into a new PDF." },
+    ],
+    relatedGuides: [
+      { href: "/split-pdf", label: "Split PDF tool" },
+      { href: "/reorder-pdf-pages", label: "Reorder PDF Pages" },
+      { href: "/merge-pdf", label: "Merge PDF" },
+    ],
+  },
+
   {
     slug: "reorder-pdf-pages",
     title: "Reorder PDF Pages — Rearrange Page Order Online | CalmPDF",
@@ -409,6 +456,51 @@ export const TOOLS: Tool[] = [
     relatedGuides: [
       { href: "/how-to/convert-word-to-pdf", label: "How to Convert Word to PDF" },
       { href: "/how-to/pdf-conversion-troubleshooting", label: "PDF Conversion Troubleshooting" },
+    ],
+  },
+
+  {
+    slug: "pdf-to-jpg",
+    title: "PDF to JPG Converter — Export PDF Pages as JPG Images | CalmPDF",
+    h1: "PDF to JPG",
+    tagline: "Convert every PDF page into JPG images locally in your browser.",
+    description:
+      "Turn PDF pages into JPG files without uploading your document. Adjust image quality, preview pages, and download individual JPGs or one ZIP archive.",
+    keyword: "pdf to jpg",
+    steps: [
+      "Drop one PDF into the converter.",
+      "Preview rendered pages and set JPG quality.",
+      "Download page JPGs one-by-one or as a ZIP archive.",
+    ],
+    uploadInstructions: [
+      "Choose one PDF file from your device.",
+      "Wait for page previews to render in-browser.",
+      "Export individual JPG files or one ZIP download.",
+    ],
+    useCases: [
+      "Extracting pages as images for slide decks and docs.",
+      "Creating social-ready JPG snapshots from PDF reports.",
+      "Sharing selected pages where image uploads are required.",
+    ],
+    limitations: [
+      "Very large PDFs can take longer on low-memory devices.",
+      "The current version exports JPG only, not PNG/WebP.",
+      "Password-protected files must be unlocked first.",
+    ],
+    troubleshooting: [
+      "If conversion stalls, close heavy tabs and retry.",
+      "If JPGs look too soft, increase quality and reconvert.",
+      "If the PDF will not load, verify the file is not encrypted.",
+    ],
+    faqs: [
+      { q: "Is my PDF uploaded to CalmPDF servers?", a: "No. Rendering and JPG export happen entirely in your browser, so your file stays on your device." },
+      { q: "Can I download just one page as JPG?", a: "Yes. After conversion, each preview card includes its own Download JPG action." },
+      { q: "Can I download all pages at once?", a: "Yes. Use Download ZIP to export every page image in one archive." },
+      { q: "How does the quality slider work?", a: "Higher quality keeps more detail but creates larger JPG files. Lower quality reduces file size." },
+    ],
+    relatedGuides: [
+      { href: "/how-to/pdf-conversion-troubleshooting", label: "PDF Conversion Troubleshooting" },
+      { href: "/how-to/convert-pdf-to-word", label: "How to Convert PDF to Word" },
     ],
   },
   {
