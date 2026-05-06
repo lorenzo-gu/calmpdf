@@ -3,6 +3,7 @@ import { SITE } from "@/lib/site";
 import { TOOLS } from "@/content/tools";
 import type { Post } from "@/content/posts";
 import { VerticalResponsiveAd } from "@/components/VerticalResponsiveAd";
+import { useAdExperiment } from "@/components/AdExperimentProvider";
 
 function JsonLdScript({ data }: { data: object }) {
   return (
@@ -22,6 +23,7 @@ export function ArticleShell({
   children: React.ReactNode;
 }) {
   const canonicalUrl = `${SITE.url}/how-to/${post.slug}`;
+  const { variant } = useAdExperiment();
 
   return (
     <>
@@ -104,6 +106,7 @@ export function ArticleShell({
 
       {/* Footer ad slot for how-to pages after primary content. */}
       <section className="mx-auto max-w-3xl px-4 md:px-6">
+        {variant !== "low" ? <VerticalResponsiveAd /> : null}
         <VerticalResponsiveAd />
       </section>
 
@@ -139,6 +142,12 @@ export function ArticleShell({
           </ul>
         </section>
       )}
+
+      {variant === "high" ? (
+        <section className="mx-auto max-w-3xl px-4 md:px-6">
+          <VerticalResponsiveAd />
+        </section>
+      ) : null}
 
       {/* Related tools grid */}
       <section className="mx-auto max-w-3xl px-4 md:px-6 pb-16">

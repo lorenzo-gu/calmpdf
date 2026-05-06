@@ -5,6 +5,7 @@ import type { Tool } from "@/content/tools";
 import { TOOLS } from "@/content/tools";
 import { SoftwareAppJsonLd, HowToJsonLd, FaqJsonLd, BreadcrumbJsonLd } from "./JsonLd";
 import { VerticalResponsiveAd } from "@/components/VerticalResponsiveAd";
+import { useAdExperiment } from "@/components/AdExperimentProvider";
 
 export function ToolShell({
   tool,
@@ -15,6 +16,7 @@ export function ToolShell({
 }) {
   const related = TOOLS.filter((t) => t.slug !== tool.slug);
   const relatedGuides = tool.relatedGuides ?? [];
+  const { variant } = useAdExperiment();
 
   return (
     <>
@@ -48,6 +50,8 @@ export function ToolShell({
         </div>
 
         <div className="mt-8">{children}</div>
+
+        {variant !== "low" ? <VerticalResponsiveAd /> : null}
 
         <VerticalResponsiveAd />
       </section>
@@ -122,6 +126,12 @@ export function ToolShell({
               </details>
             ))}
           </div>
+        </section>
+      ) : null}
+
+      {variant === "high" ? (
+        <section className="mx-auto max-w-content px-4 md:px-6">
+          <VerticalResponsiveAd />
         </section>
       ) : null}
 

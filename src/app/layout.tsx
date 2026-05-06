@@ -6,6 +6,7 @@ import { SITE } from "@/lib/site";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/JsonLd";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
+import { AdExperimentProvider } from "@/components/AdExperimentProvider";
 
 const searchEngineVerification = {
   google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
@@ -70,7 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <OrganizationJsonLd />
         <WebSiteJsonLd />
         <Header />
-        <main className="flex-1">{children}</main>
+        <AdExperimentProvider><main className="flex-1">{children}</main></AdExperimentProvider>
         <Footer />
         <Analytics />
       </body>
