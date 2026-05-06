@@ -7,7 +7,10 @@ export type ProgrammaticPage = {
     | "compress-pdf-to-500kb"
     | "compress-pdf-to-1mb"
     | "compress-pdf-to-2mb"
-    | "compress-pdf-for-email";
+    | "compress-pdf-for-email"
+    | "pdf-to-word-for-contracts"
+    | "merge-pdf-for-mortgage-application"
+    | "compress-pdf-for-visa-application";
   title: string;
   h1: string;
   metaDescription: string;
@@ -17,7 +20,7 @@ export type ProgrammaticPage = {
   practicalSteps: string[];
   limitationNote: string;
   ctaLabel: string;
-  ctaHref: "/compress-pdf";
+  ctaHref: "/compress-pdf" | "/pdf-to-word" | "/merge-pdf";
   faqs: { q: string; a: string }[];
   relatedLinks: { href: string; label: string }[];
   sitemap: {
@@ -158,6 +161,72 @@ export const PROGRAMMATIC_PAGES: ProgrammaticPage[] = [
       { href: "/compress-pdf-to-500kb", label: "Compress PDF to 500KB" },
     ],
     sitemap: { changeFrequency: "monthly", priority: 0.75 },
+  },
+  {
+    slug: "pdf-to-word-for-contracts",
+    title: "PDF to Word for Contracts | CalmPDF",
+    h1: "Convert PDF to Word for Contracts",
+    metaDescription: "Turn contract PDFs into editable Word files in your browser so you can revise clauses, pricing tables, and terms faster.",
+    introCopy: "Need to edit a contract that only exists as PDF? Convert it to Word first, then make redlines or comments before sharing back with legal or procurement.",
+    targetIntent: "Teams and freelancers who need contract edits without retyping entire documents.",
+    useCases: ["MSA and SOW revisions", "Vendor agreement redlines", "Procurement and legal review cycles"],
+    practicalSteps: ["Convert PDF to Word and review formatting", "Apply tracked changes in Word before final approval", "Export final version back to PDF for signatures"],
+    limitationNote: "Complex layouts (tables, stamps, scanned signatures) may need light cleanup after conversion.",
+    ctaLabel: "Convert contract PDF to Word",
+    ctaHref: "/pdf-to-word",
+    faqs: [
+      { q: "Will the converted file be editable?", a: "Yes, headings, paragraphs, and most tables become editable Word content." },
+      { q: "Is this suitable for signed contracts?", a: "Use it for drafting and redlines; keep the signed original PDF for records." },
+    ],
+    relatedLinks: [
+      { href: "/how-to/convert-pdf-to-word", label: "How to convert PDF to Word" },
+      { href: "/word-to-pdf", label: "Convert Word back to PDF" },
+    ],
+    sitemap: { changeFrequency: "monthly", priority: 0.8 },
+  },
+  {
+    slug: "merge-pdf-for-mortgage-application",
+    title: "Merge PDF for Mortgage Application | CalmPDF",
+    h1: "Merge PDF for Mortgage Applications",
+    metaDescription: "Combine pay stubs, bank statements, ID scans, and forms into one clean PDF before uploading to a mortgage portal.",
+    introCopy: "Lenders often ask for one consolidated file. Merge your mortgage documents in order so underwriting teams can review faster.",
+    targetIntent: "Home buyers and loan officers preparing complete mortgage document packets.",
+    useCases: ["Purchase mortgage submissions", "Refinance document packages", "Broker and lender portal uploads"],
+    practicalSteps: ["Arrange documents in lender-requested order", "Merge into one PDF", "Verify readability and page order before upload"],
+    limitationNote: "Large scanned files may create oversized packets; compress after merging if your portal has size limits.",
+    ctaLabel: "Merge mortgage PDFs",
+    ctaHref: "/merge-pdf",
+    faqs: [
+      { q: "What order should I use?", a: "Follow the exact checklist from your lender so underwriting can process it quickly." },
+      { q: "Can I combine statements from multiple banks?", a: "Yes. Include clear page labels and keep statement months in sequence." },
+    ],
+    relatedLinks: [
+      { href: "/how-to/combine-pdf-files", label: "How to combine PDF files" },
+      { href: "/compress-pdf-to-2mb", label: "Compress PDF to 2MB" },
+    ],
+    sitemap: { changeFrequency: "monthly", priority: 0.8 },
+  },
+  {
+    slug: "compress-pdf-for-visa-application",
+    title: "Compress PDF for Visa Application | CalmPDF",
+    h1: "Compress PDF for Visa Applications",
+    metaDescription: "Reduce visa-support PDFs to meet strict embassy and portal upload limits without sharing files to a server.",
+    introCopy: "Visa systems often reject files that are too large. Compress passports, bank letters, and supporting documents before submission.",
+    targetIntent: "Applicants trying to pass strict visa portal size limits on first upload.",
+    useCases: ["Tourist and student visa portals", "Work permit document uploads", "Embassy appointment documentation"],
+    practicalSteps: ["Compress each supporting PDF", "Check if each file is within the required size cap", "Rename clearly before uploading to the visa portal"],
+    limitationNote: "Exact size targets are not guaranteed for image-heavy passport scans; rescanning at lower DPI may be required.",
+    ctaLabel: "Compress visa PDFs",
+    ctaHref: "/compress-pdf",
+    faqs: [
+      { q: "Will compression affect document readability?", a: "Usually text remains readable; always review names, numbers, and stamps before submission." },
+      { q: "Is this private enough for personal documents?", a: "CalmPDF processes files in your browser, so documents stay on your device." },
+    ],
+    relatedLinks: [
+      { href: "/compress-pdf-to-500kb", label: "Compress PDF to 500KB" },
+      { href: "/how-to/compress-pdf-without-losing-quality", label: "Compress without losing quality" },
+    ],
+    sitemap: { changeFrequency: "monthly", priority: 0.8 },
   },
 ];
 
