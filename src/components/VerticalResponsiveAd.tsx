@@ -9,15 +9,16 @@ declare global {
   }
 }
 
-const ADSENSE_CLIENT = "ca-pub-8704043209936495";
 const ADSENSE_SLOT = "3722029870";
 
 export function VerticalResponsiveAd() {
+  const client = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
   const pushed = useRef(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const impressionTracked = useRef(false);
 
   useEffect(() => {
+    if (!client) return;
     if (pushed.current) return;
     pushed.current = true;
 
@@ -26,24 +27,9 @@ export function VerticalResponsiveAd() {
     } catch {
       // Fail silently when AdSense is unavailable or blocked.
     }
-  }, []);
+  }, [client]);
 
-  useEffect(() => {
-    if (!containerRef.current) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= 0.5);
-        if (!visible || impressionTracked.current) return;
-        impressionTracked.current = true;
-        trackAdEvent("impression", { slot: ADSENSE_SLOT, component: "VerticalResponsiveAd" });
-      },
-      { threshold: [0.5] },
-    );
-    observer.observe(containerRef.current);
-    return () => observer.disconnect();
-  }, []);
-
-  if (process.env.NODE_ENV !== "production") {
+  if (!client || process.env.NODE_ENV !== "production") {
     return null;
   }
 
@@ -59,7 +45,7 @@ export function VerticalResponsiveAd() {
         <ins
           className="adsbygoogle"
           style={{ display: "block" }}
-          data-ad-client={ADSENSE_CLIENT}
+          data-ad-client={client}
           data-ad-slot={ADSENSE_SLOT}
           data-ad-format="auto"
           data-full-width-responsive="true"
