@@ -7,7 +7,7 @@ type ToolLink = { href: string; label: string };
 type ToolGroup = {
   title: string;
   active: ToolLink[];
-  comingSoon?: ToolLink[];
+  inProgress?: ToolLink[];
 };
 
 const TOOL_GROUPS: ToolGroup[] = [
@@ -21,6 +21,8 @@ const TOOL_GROUPS: ToolGroup[] = [
       { href: "/jpg-to-pdf", label: "JPG to PDF" },
       { href: "/pdf-to-png", label: "PDF to PNG" },
       { href: "/png-to-pdf", label: "PNG to PDF" },
+      { href: "/pdf-to-images", label: "PDF to Images" },
+      { href: "/images-to-pdf", label: "Images to PDF" },
     ],
   },
   {
@@ -29,7 +31,7 @@ const TOOL_GROUPS: ToolGroup[] = [
       { href: "/edit-pdf", label: "Edit PDF" },
       { href: "/rotate-pdf", label: "Rotate PDF" },
           ],
-    comingSoon: [
+    inProgress: [
       { href: "/add-page-numbers-to-pdf", label: "Add Page Numbers" },
       { href: "/remove-pdf-pages", label: "Remove PDF Pages" },
       
@@ -45,7 +47,7 @@ const TOOL_GROUPS: ToolGroup[] = [
       { href: "/reorder-pdf-pages", label: "Reorder PDF Pages" },
       { href: "/extract-pdf-pages", label: "Extract PDF Pages" },
     ],
-    comingSoon: [
+    inProgress: [
       { href: "/protect-pdf", label: "Protect PDF" },
       { href: "/unlock-pdf", label: "Unlock PDF" },
     ],
@@ -53,6 +55,18 @@ const TOOL_GROUPS: ToolGroup[] = [
   {
     title: "Optimize PDF",
     active: [{ href: "/compress-pdf", label: "Compress PDF" }],
+  },
+  {
+    title: "PDF Page Tools",
+    active: [
+      { href: "/reorder-pdf-pages", label: "Reorder PDF Pages" },
+      { href: "/split-pdf", label: "Split PDF" },
+    ],
+    inProgress: [
+      { href: "/extract-pdf-pages", label: "Extract PDF Pages" },
+      { href: "/remove-pdf-pages", label: "Remove PDF Pages" },
+      { href: "/add-page-numbers-to-pdf", label: "Add Page Numbers" },
+    ],
   },
 ];
 
@@ -84,8 +98,8 @@ export default function ToolsPage() {
       <p className="mt-4 text-lg text-sage-700">
         CalmPDF gives you practical browser-based tools for day-to-day document work: convert PDF to
         Word, export Word documents to PDF, merge files for sharing, split pages for extraction, and
-        compress large documents for email. Every tool runs locally on your device for a private,
-        fast workflow.
+        compress large documents for email. You can also browse in-progress tools from this crawlable
+        hub and jump to related tool pages in one click.
       </p>
 
       <section className="mt-10 space-y-6" aria-label="PDF tool categories">
@@ -106,13 +120,15 @@ export default function ToolsPage() {
               </ul>
             </div>
 
-            {group.comingSoon && group.comingSoon.length > 0 && (
+            {group.inProgress && group.inProgress.length > 0 && (
               <div>
-                <h3 className="text-sm font-semibold uppercase tracking-wide text-sage-500">Coming soon</h3>
+                <h3 className="text-sm font-semibold uppercase tracking-wide text-sage-600">In progress</h3>
                 <ul className="mt-3 space-y-2">
-                  {group.comingSoon.map((link) => (
-                    <li key={link.href} className="text-sage-500">
-                      <span aria-label={`${link.label} coming soon`}>{link.label}</span>
+                  {group.inProgress.map((link) => (
+                    <li key={link.href}>
+                      <Link href={link.href} className="text-sage-700 no-underline hover:underline">
+                        {link.label}
+                      </Link>
                     </li>
                   ))}
                 </ul>
