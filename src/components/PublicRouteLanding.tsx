@@ -7,6 +7,12 @@ type PublicRouteLandingProps = {
 };
 
 export function PublicRouteLanding({ title, description, related = [] }: PublicRouteLandingProps) {
+  const hubLinks = [
+    { href: "/tools", label: "All PDF Tools" },
+    { href: "/how-to", label: "How-to Guides" },
+  ];
+  const relatedLinks = [...related, ...hubLinks];
+
   return (
     <article className="mx-auto max-w-3xl px-4 md:px-6 py-16">
       <nav aria-label="Breadcrumb" className="text-sm text-sage-700">
@@ -26,11 +32,11 @@ export function PublicRouteLanding({ title, description, related = [] }: PublicR
         </p>
       </div>
 
-      {related.length > 0 && (
+      {relatedLinks.length > 0 && (
         <section className="mt-8">
           <h2 className="text-xl font-semibold">Related pages</h2>
           <ul className="mt-3 grid gap-3 md:grid-cols-2">
-            {related.map((item) => (
+            {relatedLinks.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className="card block no-underline hover:border-sage-300 transition-colors">
                   {item.label}

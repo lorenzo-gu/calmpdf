@@ -2,8 +2,7 @@ import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { TOOLS } from "@/content/tools";
 import type { Post } from "@/content/posts";
-import { VerticalResponsiveAd } from "@/components/VerticalResponsiveAd";
-import { useAdExperiment } from "@/components/AdExperimentProvider";
+import { FooterAd, HeaderAd, InArticleAd } from "@/components/AdUnits";
 
 function JsonLdScript({ data }: { data: object }) {
   return (
@@ -99,15 +98,25 @@ export function ArticleShell({
         <span className="text-sage-900">{post.title}</span>
       </nav>
 
+      <section className="mx-auto max-w-3xl px-4 md:px-6">
+        <HeaderAd />
+      </section>
+
       {/* Article body */}
       <article className="mx-auto max-w-3xl px-4 md:px-6 pt-6 pb-12 leading-relaxed">
         {children}
+
+        {/* Keep in-article placement moderate to avoid aggressive ad density. */}
+        <InArticleAd />
       </article>
+
+      <section className="mx-auto max-w-3xl px-4 md:px-6">
+        <InArticleAd />
+      </section>
 
       {/* Footer ad slot for how-to pages after primary content. */}
       <section className="mx-auto max-w-3xl px-4 md:px-6">
-        {variant !== "low" ? <VerticalResponsiveAd /> : null}
-        <VerticalResponsiveAd />
+        <FooterAd />
       </section>
 
       {/* CTA card */}

@@ -181,6 +181,22 @@ export const BLOG_POSTS: Post[] = [
         relatedLinks: [{ href: "/compress-pdf", label: "Compress PDF tool" }, { href: "/compress-pdf-for-email", label: "Compress PDF for Email" }],
   },
   {
+        slug: "merge-pdfs-on-mac-windows-iphone",
+        title: "How to Merge PDFs on Mac, Windows, and iPhone",
+        description:
+                "A practical cross-platform guide for merging PDFs on Mac, Windows, and iPhone with troubleshooting tips and privacy guidance.",
+        datePublished: "2026-05-06",
+        dateModified: "2026-05-06",
+        ctaHref: "/merge-pdf",
+        ctaLabel: "Merge PDF free",
+        published: true,
+        faqs: [
+          { q: "Can I merge PDFs on iPhone without an app?", a: "Yes. You can use a browser-based merger in Safari and save the output back to the Files app without installing a dedicated app." },
+          { q: "Is there a built-in PDF merge feature in Windows?", a: "Not as a dedicated native merge tool. Most users use browser tools or third-party desktop apps." },
+        ],
+        relatedLinks: [{ href: "/merge-pdf", label: "Merge PDF tool" }, { href: "/how-to/combine-pdf-files", label: "How to Combine PDF Files" }],
+  },
+  {
         slug: "combine-pdf-files",
         title: "How to Combine PDF Files",
         description:

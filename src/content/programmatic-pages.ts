@@ -7,7 +7,15 @@ export type ProgrammaticPage = {
     | "compress-pdf-to-500kb"
     | "compress-pdf-to-1mb"
     | "compress-pdf-to-2mb"
-    | "compress-pdf-for-email";
+    | "compress-pdf-for-email"
+    | "pdf-to-word-for-contracts"
+    | "merge-pdf-for-mortgage-application"
+    | "compress-pdf-for-visa-application"
+    | "merge-pdf-files-online-free"
+    | "split-pdf-into-separate-pages"
+    | "rotate-pdf-landscape-to-portrait"
+    | "pdf-tools-for-students"
+    | "pdf-tools-for-recruiters-job-applications";
   title: string;
   h1: string;
   metaDescription: string;
@@ -17,7 +25,7 @@ export type ProgrammaticPage = {
   practicalSteps: string[];
   limitationNote: string;
   ctaLabel: string;
-  ctaHref: "/compress-pdf";
+  ctaHref: "/compress-pdf" | "/pdf-to-word" | "/merge-pdf" | "/split-pdf" | "/rotate-pdf";
   faqs: { q: string; a: string }[];
   relatedLinks: { href: string; label: string }[];
   sitemap: {
@@ -159,6 +167,183 @@ export const PROGRAMMATIC_PAGES: ProgrammaticPage[] = [
     ],
     sitemap: { changeFrequency: "monthly", priority: 0.75 },
   },
+  {
+    slug: "pdf-to-word-for-contracts",
+    title: "PDF to Word for Contracts | CalmPDF",
+    h1: "Convert PDF to Word for Contracts",
+    metaDescription: "Turn contract PDFs into editable Word files in your browser so you can revise clauses, pricing tables, and terms faster.",
+    introCopy: "Need to edit a contract that only exists as PDF? Convert it to Word first, then make redlines or comments before sharing back with legal or procurement.",
+    targetIntent: "Teams and freelancers who need contract edits without retyping entire documents.",
+    useCases: ["MSA and SOW revisions", "Vendor agreement redlines", "Procurement and legal review cycles"],
+    practicalSteps: ["Convert PDF to Word and review formatting", "Apply tracked changes in Word before final approval", "Export final version back to PDF for signatures"],
+    limitationNote: "Complex layouts (tables, stamps, scanned signatures) may need light cleanup after conversion.",
+    ctaLabel: "Convert contract PDF to Word",
+    ctaHref: "/pdf-to-word",
+    faqs: [
+      { q: "Will the converted file be editable?", a: "Yes, headings, paragraphs, and most tables become editable Word content." },
+      { q: "Is this suitable for signed contracts?", a: "Use it for drafting and redlines; keep the signed original PDF for records." },
+    ],
+    relatedLinks: [
+      { href: "/how-to/convert-pdf-to-word", label: "How to convert PDF to Word" },
+      { href: "/word-to-pdf", label: "Convert Word back to PDF" },
+    ],
+    sitemap: { changeFrequency: "monthly", priority: 0.8 },
+  },
+  {
+    slug: "merge-pdf-for-mortgage-application",
+    title: "Merge PDF for Mortgage Application | CalmPDF",
+    h1: "Merge PDF for Mortgage Applications",
+    metaDescription: "Combine pay stubs, bank statements, ID scans, and forms into one clean PDF before uploading to a mortgage portal.",
+    introCopy: "Lenders often ask for one consolidated file. Merge your mortgage documents in order so underwriting teams can review faster.",
+    targetIntent: "Home buyers and loan officers preparing complete mortgage document packets.",
+    useCases: ["Purchase mortgage submissions", "Refinance document packages", "Broker and lender portal uploads"],
+    practicalSteps: ["Arrange documents in lender-requested order", "Merge into one PDF", "Verify readability and page order before upload"],
+    limitationNote: "Large scanned files may create oversized packets; compress after merging if your portal has size limits.",
+    ctaLabel: "Merge mortgage PDFs",
+    ctaHref: "/merge-pdf",
+    faqs: [
+      { q: "What order should I use?", a: "Follow the exact checklist from your lender so underwriting can process it quickly." },
+      { q: "Can I combine statements from multiple banks?", a: "Yes. Include clear page labels and keep statement months in sequence." },
+    ],
+    relatedLinks: [
+      { href: "/how-to/combine-pdf-files", label: "How to combine PDF files" },
+      { href: "/compress-pdf-to-2mb", label: "Compress PDF to 2MB" },
+    ],
+    sitemap: { changeFrequency: "monthly", priority: 0.8 },
+  },
+  {
+    slug: "compress-pdf-for-visa-application",
+    title: "Compress PDF for Visa Application | CalmPDF",
+    h1: "Compress PDF for Visa Applications",
+    metaDescription: "Reduce visa-support PDFs to meet strict embassy and portal upload limits without sharing files to a server.",
+    introCopy: "Visa systems often reject files that are too large. Compress passports, bank letters, and supporting documents before submission.",
+    targetIntent: "Applicants trying to pass strict visa portal size limits on first upload.",
+    useCases: ["Tourist and student visa portals", "Work permit document uploads", "Embassy appointment documentation"],
+    practicalSteps: ["Compress each supporting PDF", "Check if each file is within the required size cap", "Rename clearly before uploading to the visa portal"],
+    limitationNote: "Exact size targets are not guaranteed for image-heavy passport scans; rescanning at lower DPI may be required.",
+    ctaLabel: "Compress visa PDFs",
+    ctaHref: "/compress-pdf",
+    faqs: [
+      { q: "Will compression affect document readability?", a: "Usually text remains readable; always review names, numbers, and stamps before submission." },
+      { q: "Is this private enough for personal documents?", a: "CalmPDF processes files in your browser, so documents stay on your device." },
+    ],
+    relatedLinks: [
+      { href: "/compress-pdf-to-500kb", label: "Compress PDF to 500KB" },
+      { href: "/how-to/compress-pdf-without-losing-quality", label: "Compress without losing quality" },
+    ],
+    sitemap: { changeFrequency: "monthly", priority: 0.8 },
+  },
+  {
+    slug: "merge-pdf-files-online-free",
+    title: "Merge PDF Files Online Free | CalmPDF",
+    h1: "Merge PDF Files Online Free",
+    metaDescription: "Combine multiple PDFs into one file for free in your browser. Keep pages in order and prepare one clean document for sharing or uploads.",
+    introCopy: "Need one PDF instead of many attachments? Merge PDF files online for free with CalmPDF and keep everything on your device.",
+    targetIntent: "People who want a no-signup way to combine PDFs for submissions, sharing, or recordkeeping.",
+    useCases: ["Combining invoices for accounting", "Bundling signed pages into one agreement", "Sending one attachment instead of many files"],
+    practicalSteps: ["Add all PDFs and drag them into the final order", "Merge and review page flow, numbering, and orientation", "Compress afterward if your destination has file-size limits"],
+    limitationNote: "Merging does not reduce file size by itself; run compression after merging if needed.",
+    ctaLabel: "Merge PDF files for free",
+    ctaHref: "/merge-pdf",
+    faqs: [
+      { q: "Is it really free to merge PDFs?", a: "Yes. CalmPDF lets you merge PDFs in-browser without creating an account." },
+      { q: "Will merging change formatting?", a: "No. Merging combines pages as-is, so layout and quality stay intact." },
+    ],
+    relatedLinks: [
+      { href: "/how-to/combine-pdf-files", label: "How to combine PDF files" },
+      { href: "/split-pdf", label: "Split PDF pages" },
+    ],
+    sitemap: { changeFrequency: "monthly", priority: 0.8 },
+  },
+  {
+    slug: "split-pdf-into-separate-pages",
+    title: "Split PDF into Separate Pages | CalmPDF",
+    h1: "Split PDF into Separate Pages",
+    metaDescription: "Extract every page of a PDF into separate files in your browser. Useful for forms, applications, and sharing only the pages you need.",
+    introCopy: "If you only need selected pages, split your PDF into separate pages and share exactly what each recipient needs.",
+    targetIntent: "Users who need to break a long PDF into smaller, page-level files for workflows and uploads.",
+    useCases: ["Submitting only signature pages", "Separating student assignments by chapter", "Sharing one statement page with support teams"],
+    practicalSteps: ["Upload your document and choose split mode", "Export individual pages or page ranges", "Rename output files clearly before sending"],
+    limitationNote: "Splitting keeps original quality but can create many files, so naming and organization matter.",
+    ctaLabel: "Split PDF now",
+    ctaHref: "/split-pdf",
+    faqs: [
+      { q: "Does splitting reduce quality?", a: "No. Split pages keep the same content quality as the original PDF." },
+      { q: "Can I split by ranges instead of every page?", a: "Yes. You can extract one page, multiple pages, or custom ranges." },
+    ],
+    relatedLinks: [
+      { href: "/how-to/extract-pages-from-pdf", label: "How to extract pages from a PDF" },
+      { href: "/merge-pdf", label: "Merge PDFs back together" },
+    ],
+    sitemap: { changeFrequency: "monthly", priority: 0.8 },
+  },
+  {
+    slug: "rotate-pdf-landscape-to-portrait",
+    title: "Rotate PDF Landscape to Portrait | CalmPDF",
+    h1: "Rotate PDF Landscape to Portrait",
+    metaDescription: "Fix sideways or landscape PDF pages by rotating them to portrait orientation directly in your browser.",
+    introCopy: "Got a PDF with sideways scans? Rotate landscape pages to portrait before printing, sharing, or uploading.",
+    targetIntent: "Users correcting page orientation so PDFs are readable on phones, ATS systems, and printers.",
+    useCases: ["Phone-scanned forms uploaded sideways", "Landscape bank statements for uploads", "Portrait-only portals that reject rotated pages"],
+    practicalSteps: ["Open the PDF and identify incorrect page orientation", "Rotate only the affected pages", "Save and verify orientation on desktop and mobile"],
+    limitationNote: "Rotation changes orientation metadata and page display but does not edit underlying text content.",
+    ctaLabel: "Rotate PDF pages",
+    ctaHref: "/rotate-pdf",
+    faqs: [
+      { q: "Can I rotate just one page?", a: "Yes. You can rotate specific pages without changing the whole document." },
+      { q: "Will rotated pages print correctly?", a: "Yes. After saving, most PDF viewers and printers use the new orientation." },
+    ],
+    relatedLinks: [
+      { href: "/how-to/rotate-pdf-pages", label: "How to rotate PDF pages" },
+      { href: "/split-pdf", label: "Split pages before rotating" },
+    ],
+    sitemap: { changeFrequency: "monthly", priority: 0.8 },
+  },
+  {
+    slug: "pdf-tools-for-students",
+    title: "PDF Tools for Students | CalmPDF",
+    h1: "PDF Tools for Students",
+    metaDescription: "Use free browser-based PDF tools for class notes, assignments, and scholarship submissions: split, merge, compress, and convert quickly.",
+    introCopy: "Students handle PDFs constantly: lecture slides, assignment hand-ins, and applications. CalmPDF gives you fast tools without installs.",
+    targetIntent: "Students looking for practical PDF workflows for coursework and admissions.",
+    useCases: ["Compressing assignment uploads", "Merging appendix pages into one submission", "Converting PDFs to editable documents for notes"],
+    practicalSteps: ["Choose the tool based on your submission requirement", "Preview output before uploading to your LMS", "Keep originals and submit a clearly named final file"],
+    limitationNote: "Some school portals enforce strict size limits, so compressing may require removing nonessential pages.",
+    ctaLabel: "Open student PDF tools",
+    ctaHref: "/compress-pdf",
+    faqs: [
+      { q: "Which PDF tool do students use most?", a: "Compression and merge are the most common for LMS and scholarship uploads." },
+      { q: "Do I need to install software?", a: "No. CalmPDF runs in your browser, so you can work from school or personal devices." },
+    ],
+    relatedLinks: [
+      { href: "/compress-pdf-for-email", label: "Compress PDFs for professor email" },
+      { href: "/how-to/reduce-pdf-file-size", label: "Reduce PDF file size guide" },
+    ],
+    sitemap: { changeFrequency: "monthly", priority: 0.8 },
+  },
+  {
+    slug: "pdf-tools-for-recruiters-job-applications",
+    title: "PDF Tools for Recruiters & Job Applications | CalmPDF",
+    h1: "PDF Tools for Recruiters and Job Applications",
+    metaDescription: "Prepare hiring and job-application PDFs faster: compress resumes, merge supporting docs, split portfolios, and fix page orientation.",
+    introCopy: "Recruiters and candidates both depend on clean PDFs. Use CalmPDF to format documents for ATS portals, inbox limits, and hiring workflows.",
+    targetIntent: "Recruiters and applicants who need submission-ready PDFs for ATS systems and hiring communications.",
+    useCases: ["Compressing resume and cover letter uploads", "Merging references and certificates", "Rotating scanned documents for ATS readability"],
+    practicalSteps: ["Compress files to pass portal or inbox limits", "Merge supporting documents in logical hiring order", "Double-check readability on mobile and desktop before submission"],
+    limitationNote: "ATS systems vary; always verify required file size, naming, and document type before final upload.",
+    ctaLabel: "Prepare job-application PDFs",
+    ctaHref: "/compress-pdf",
+    faqs: [
+      { q: "What file size should resumes target?", a: "Under 1MB is usually safe for ATS portals, with smaller files loading faster for reviewers." },
+      { q: "Should candidates merge all documents into one PDF?", a: "Only if the listing asks for a single file; otherwise upload each requested file separately." },
+    ],
+    relatedLinks: [
+      { href: "/compress-pdf-to-1mb", label: "Compress PDF to 1MB" },
+      { href: "/merge-pdf-files-online-free", label: "Merge PDF files online free" },
+    ],
+    sitemap: { changeFrequency: "monthly", priority: 0.8 },
+  },
+
 ];
 
 export const PROGRAMMATIC_PAGE_BY_SLUG = Object.fromEntries(

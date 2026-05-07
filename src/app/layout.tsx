@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SITE } from "@/lib/site";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/JsonLd";
+import { FooterAd, HeaderAd } from "@/components/PageAds";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { AdExperimentProvider } from "@/components/AdExperimentProvider";
@@ -12,6 +13,8 @@ const searchEngineVerification = {
   google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   bing: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION,
 };
+
+const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -34,6 +37,13 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   verification: searchEngineVerification,
+  ...(ADSENSE_CLIENT
+    ? {
+        other: {
+          "google-adsense-account": ADSENSE_CLIENT,
+        },
+      }
+    : {}),
 };
 
 export const viewport: Viewport = {
@@ -64,14 +74,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8704043209936495"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
         />
       </head>
       <body className="min-h-screen flex flex-col">
         <OrganizationJsonLd />
         <WebSiteJsonLd />
         <Header />
-        <AdExperimentProvider><main className="flex-1">{children}</main></AdExperimentProvider>
+        <HeaderAd />
+        <main className="flex-1">{children}</main>
+        <FooterAd />
         <Footer />
         <Analytics />
       </body>
