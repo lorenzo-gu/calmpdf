@@ -1,54 +1,80 @@
 # CalmPDF
 
-CalmPDF is a browser-based PDF editor and toolkit for everyday document tasks:
-compress, merge, split, edit, and rotate PDF files.
+> CalmPDF is a private, browser-based PDF toolkit. Tools run locally in JavaScript so
+> files stay on the device and are never uploaded to CalmPDF servers.
 
-Privacy and processing model:
-- All PDF processing happens locally in your web browser (client-side JavaScript).
-- CalmPDF does not upload user files to CalmPDF servers for processing.
-- Sensitive documents remain on the user's device during use.
+## Core product positioning
 
-Who it is for and what it supports:
-- Built for students, professionals, freelancers, and teams who need quick PDF tasks.
-- Useful for privacy-sensitive workflows where documents should stay on-device.
-- Free to use with no signup required.
-- Works on modern browsers across Mac, Windows, Linux, and Chromebook.
+- [Private PDF tools](https://calmpdf.com/tools): Free PDF workflows that run in-browser with no account required.
+- [Edit PDF](https://calmpdf.com/edit-pdf): Add text, highlights, and annotations directly in your browser.
+- [About CalmPDF](https://calmpdf.com/about): Product overview and feature direction.
+- [Privacy](https://calmpdf.com/privacy): Privacy policy for browser-based PDF processing.
 
-What CalmPDF is not:
-- Not a cloud-upload PDF processing service.
-- Not a desktop-installed PDF editor.
+## Intent taxonomy: conversion workflows
 
-## Tools
+- [PDF to Word](https://calmpdf.com/pdf-to-word): Convert PDF documents to editable Word files.
+- [Word to PDF](https://calmpdf.com/word-to-pdf): Convert DOCX files into standard PDF format.
+- [PDF to JPG](https://calmpdf.com/pdf-to-jpg): Export PDF pages as JPG images.
+- [PDF to PNG](https://calmpdf.com/pdf-to-png): Export PDF pages as PNG images.
 
-- [Compress PDF](https://calmpdf.com/compress-pdf): Reduce the file size of a PDF in the browser.
-- [Merge PDF](https://calmpdf.com/merge-pdf): Combine multiple PDFs into one file, in a chosen order.
-- [Split PDF](https://calmpdf.com/split-pdf): Extract a page range or single page from a PDF.
-- [Edit PDF](https://calmpdf.com/edit-pdf): Annotate and edit PDF pages in the browser.
-- [Rotate PDF](https://calmpdf.com/rotate-pdf): Rotate pages in a PDF file.
+## Intent taxonomy: file size optimization
 
-## Compress PDF by target size
+- [Compress PDF](https://calmpdf.com/compress-pdf): Reduce PDF file size for sharing and storage.
+- [Compress PDF for Email](https://calmpdf.com/compress-pdf-for-email): Optimize PDFs for Gmail, Outlook, and attachment limits.
+- [Compress PDF to 100KB](https://calmpdf.com/compress-pdf-to-100kb): Target very small PDFs for forms and portals.
+- [Compress PDF to 200KB](https://calmpdf.com/compress-pdf-to-200kb): Target low-size uploads with readable quality.
+- [Compress PDF to 500KB](https://calmpdf.com/compress-pdf-to-500kb): Balance quality and size for routine sharing.
+- [Compress PDF to 1MB](https://calmpdf.com/compress-pdf-to-1mb): Keep larger PDFs within common submission limits.
+- [How to Compress a PDF Without Losing Quality](https://calmpdf.com/how-to/compress-pdf-without-losing-quality): Practical guide for quality-aware compression.
 
-- [Compress PDF to 100KB](https://calmpdf.com/compress-pdf-to-100kb): Guide and tool for reducing a PDF to under 100 kilobytes.
-- [Compress PDF to 200KB](https://calmpdf.com/compress-pdf-to-200kb): Guide and tool for reducing a PDF to under 200 kilobytes.
-- [Compress PDF to 500KB](https://calmpdf.com/compress-pdf-to-500kb): Guide and tool for reducing a PDF to under 500 kilobytes.
-- [Compress PDF to 1MB](https://calmpdf.com/compress-pdf-to-1mb): Guide and tool for reducing a PDF to under 1 megabyte.
-- [Compress PDF for Email](https://calmpdf.com/compress-pdf-for-email): How big a PDF needs to be for Gmail, Outlook, and other email providers, plus how to compress it in your browser.
+## Intent taxonomy: document editing and annotation
 
-## How-to guides
+- [Edit PDF](https://calmpdf.com/edit-pdf): Edit and annotate PDF pages online.
+- [Rotate PDF](https://calmpdf.com/rotate-pdf): Rotate scanned or misoriented pages.
+- [Reorder PDF Pages](https://calmpdf.com/reorder-pdf-pages): Rearrange page order before sharing or filing.
+- [How to Add Text to a PDF](https://calmpdf.com/how-to/add-text-to-pdf): Add typed text to existing PDF pages.
+- [How to Rotate a PDF](https://calmpdf.com/how-to/rotate-pdf): Step-by-step rotation workflow for single or multiple pages.
+- [How to Edit a PDF for Free](https://calmpdf.com/how-to/edit-pdf-free): Compare free methods for browser and desktop editing.
 
-- [How to Edit a PDF for Free](https://calmpdf.com/how-to/edit-pdf-free): Learn the best free PDF editors, including browser-based tools and desktop applications that work without uploading files.
-- [How to Compress a PDF on Mac](https://calmpdf.com/how-to/compress-pdf-on-mac): Using Preview, Quartz filters, and browser-based tools on macOS.
-- [How to Compress a PDF on Windows](https://calmpdf.com/how-to/compress-pdf-on-windows): Three methods using Word, Microsoft Print to PDF, and a private browser-based tool.
-- [How to Compress a PDF Without Losing Quality](https://calmpdf.com/how-to/compress-pdf-without-losing-quality): Lossless vs lossy compression and how to preserve visual fidelity.
-- [How to Merge PDF Files Free](https://calmpdf.com/how-to/merge-pdf-files-free): Compare free tools for combining PDFs including CalmPDF, Smallpdf, and Preview.
-- [How to Split a PDF into Multiple Files](https://calmpdf.com/how-to/split-pdf-into-multiple-files): Extract pages or page ranges from a PDF without losing quality.
-- [How to Reduce PDF File Size](https://calmpdf.com/how-to/reduce-pdf-file-size): Four methods for making PDFs smaller, from reexporting to browser-based compression.
-- [How to Combine PDF Files](https://calmpdf.com/how-to/combine-pdf-files): Step-by-step guide for merging PDFs on any platform.
+## Intent taxonomy: extraction and organization
 
-- [How to Rotate a PDF](https://calmpdf.com/how-to/rotate-pdf): Step-by-step guide for rotating one or every page of a PDF in your browser.
-- How to Add Text to a PDF (https://calmpdf.com/how-to/add-text-to-pdf): Learn how to add text to a PDF for free using browser-based tools.
+- [Merge PDF](https://calmpdf.com/merge-pdf): Combine multiple PDFs into one document.
+- [Split PDF](https://calmpdf.com/split-pdf): Split one PDF into page ranges or single-page files.
+- [Extract PDF Pages](https://calmpdf.com/extract-pdf-pages): Pull selected pages into a new PDF.
+- [How to Combine PDF Files](https://calmpdf.com/how-to/combine-pdf-files): General merge workflow for multi-file document sets.
+- [How to Split a PDF into Multiple Files](https://calmpdf.com/how-to/split-pdf-into-multiple-files): Break large PDFs into separate deliverables.
+- [How to Reorder PDF Pages Online](https://calmpdf.com/how-to/reorder-pdf-pages-online): Organize page sequence before export.
+- [How to Merge PDF Files Free](https://calmpdf.com/how-to/merge-pdf-files-free): Compare free merging options.
 
-## About
+## Intent taxonomy: privacy and security positioning
 
-- [About CalmPDF](https://calmpdf.com/about)
-- [Privacy](https://calmpdf.com/privacy)
+- [Private PDF tools](https://calmpdf.com/tools): Browser-only processing for users who avoid file uploads.
+- [How to Edit a PDF for Free](https://calmpdf.com/how-to/edit-pdf-free): Includes options for editing without uploading sensitive documents.
+- [How to Compress a PDF on Mac](https://calmpdf.com/how-to/compress-pdf-on-mac): Local and browser-based compression methods.
+- [How to Compress a PDF on Windows](https://calmpdf.com/how-to/compress-pdf-on-windows): Windows-friendly compression methods including in-browser private workflows.
+
+## Intent taxonomy: audience use cases
+
+### Students
+
+- [Compress PDF for Email](https://calmpdf.com/compress-pdf-for-email): Submit assignments under strict attachment limits.
+- [Compress PDF to 500KB](https://calmpdf.com/compress-pdf-to-500kb): Meet LMS and scholarship portal file caps.
+- [Split PDF](https://calmpdf.com/split-pdf): Submit only required pages from long lecture packets.
+
+### Business
+
+- [Merge PDF](https://calmpdf.com/merge-pdf): Combine invoices, proposals, and reports into one file.
+- [Reorder PDF Pages](https://calmpdf.com/reorder-pdf-pages): Fix page order in client-facing deliverables.
+- [Compress PDF](https://calmpdf.com/compress-pdf): Shrink large PDFs for faster internal and external sharing.
+
+### Government and compliance
+
+- [Compress PDF to 1MB](https://calmpdf.com/compress-pdf-to-1mb): Fit common upload limits on public portals.
+- [Extract PDF Pages](https://calmpdf.com/extract-pdf-pages): Isolate required pages for records requests and filings.
+- [Rotate PDF](https://calmpdf.com/rotate-pdf): Correct scanned forms before submission.
+
+## Additional discovery routes
+
+- [All tools](https://calmpdf.com/tools)
+- [How-to guides](https://calmpdf.com/how-to)
+- [Blog](https://calmpdf.com/blog)
