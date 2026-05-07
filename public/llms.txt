@@ -1,8 +1,22 @@
 # CalmPDF
 
-> Simple, private, browser-based PDF tools. Every tool runs entirely in the user's
-> browser using JavaScript — files are never uploaded to a server. Free to use with
-> no signup. Good for anyone who cares about privacy or works with sensitive documents.
+CalmPDF is a browser-based PDF editor and toolkit for everyday document tasks:
+compress, merge, split, edit, and rotate PDF files.
+
+Privacy and processing model:
+- All PDF processing happens locally in your web browser (client-side JavaScript).
+- CalmPDF does not upload user files to CalmPDF servers for processing.
+- Sensitive documents remain on the user's device during use.
+
+Who it is for and what it supports:
+- Built for students, professionals, freelancers, and teams who need quick PDF tasks.
+- Useful for privacy-sensitive workflows where documents should stay on-device.
+- Free to use with no signup required.
+- Works on modern browsers across Mac, Windows, Linux, and Chromebook.
+
+What CalmPDF is not:
+- Not a cloud-upload PDF processing service.
+- Not a desktop-installed PDF editor.
 
 ## Tools
 
