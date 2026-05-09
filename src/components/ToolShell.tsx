@@ -1,10 +1,10 @@
-import Link from "next/link";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { ShieldCheck, Zap, Wifi } from "lucide-react";
+import { ShieldCheck, Zap, Wifi, Wrench } from "lucide-react";
 import type { Tool } from "@/content/tools";
 import { TOOLS } from "@/content/tools";
 import { SoftwareAppJsonLd, HowToJsonLd, FaqJsonLd, BreadcrumbJsonLd } from "./JsonLd";
 import { FooterAd, HeaderAd, InArticleAd } from "@/components/AdUnits";
+import { RelatedToolCard, EditorialCard } from "@/components/cards";
 
 export function ToolShell({
   tool,
@@ -131,27 +131,28 @@ export function ToolShell({
 
       {relatedGuides.length > 0 && (
         <section className="mx-auto max-w-content px-4 md:px-6 py-10">
-          <h2 className="text-2xl font-semibold mb-6">Related guides</h2>
-          <ul className="list-disc pl-6 space-y-2 text-sage-800">
+          <h2 className="text-2xl font-semibold mb-2">Related guides</h2>
+          <p className="text-sage-700 max-w-2xl">Practical walkthroughs to help you finish this workflow faster.</p>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {relatedGuides.map((guide) => (
-              <li key={guide.href}>
-                <Link href={guide.href} className="underline underline-offset-2 hover:text-sage-950">
-                  {guide.label}
-                </Link>
-              </li>
+              <EditorialCard
+                key={guide.href}
+                href={guide.href}
+                title={guide.label}
+                description="Step-by-step instructions for this PDF task, including common pitfalls to avoid."
+                category="How-to"
+              />
             ))}
-          </ul>
+          </div>
         </section>
       )}
 
       <section className="mx-auto max-w-content px-4 md:px-6 py-10">
-        <h2 className="text-2xl font-semibold mb-6">Related PDF tools</h2>
-        <div className="grid gap-4 md:grid-cols-3">
+        <h2 className="text-2xl font-semibold mb-2">Related PDF tools</h2>
+        <p className="text-sage-700 max-w-2xl">Continue with the next PDF action using these related browser-based tools.</p>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
           {related.map((t) => (
-            <Link key={t.slug} href={`/${t.slug}`} className="card no-underline hover:border-sage-300 transition-colors">
-              <h3 className="font-semibold text-sage-900">{t.h1}</h3>
-              <p className="mt-2 text-sm text-sage-700">{t.tagline}</p>
-            </Link>
+            <RelatedToolCard key={t.slug} href={`/${t.slug}`} title={t.h1} description={t.tagline} icon={<Wrench className="h-5 w-5" />} />
           ))}
         </div>
       </section>

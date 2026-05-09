@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { ShieldCheck, Zap, Wifi, FileText } from "lucide-react";
+import { ShieldCheck, Zap, Wifi, Wrench } from "lucide-react";
 import { TOOLS } from "@/content/tools";
 import { PUBLISHED_BLOG_POSTS } from "@/content/posts";
 import { SITE } from "@/lib/site";
+import { RelatedToolCard, EditorialCard } from "@/components/cards";
 
 const TOOL_GROUPS = [
   {
@@ -153,15 +154,11 @@ export default function HomePage() {
             <div key={group.title} className="card">
               <h3 className="font-semibold text-sage-900">{group.title}</h3>
               <p className="mt-2 text-sm text-sage-700">{group.description}</p>
-              <ul className="mt-4 space-y-2">
+              <div className="mt-4 grid gap-3">
                 {group.links.map((link) => (
-                  <li key={link.href}>
-                    <Link href={link.href} className="text-sage-700 hover:text-sage-900 underline underline-offset-4">
-                      {link.label}
-                    </Link>
-                  </li>
+                  <RelatedToolCard key={link.href} href={link.href} title={link.label} description="Open the tool and finish this task privately in your browser." icon={<Wrench className="h-5 w-5" />} />
                 ))}
-              </ul>
+              </div>
             </div>
           ))}
         </div>
@@ -174,10 +171,7 @@ export default function HomePage() {
         </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {PRIVATE_WORKFLOWS.map((workflow) => (
-            <Link key={workflow.href} href={workflow.href} className="card no-underline hover:border-sage-300 transition-colors min-w-0 h-full">
-              <h3 className="font-semibold text-sage-900 break-words">{workflow.label}</h3>
-              <p className="mt-2 text-sm text-sage-700">{workflow.description}</p>
-            </Link>
+            <EditorialCard key={workflow.href} href={workflow.href} title={workflow.label} description={workflow.description} category="Workflow" readTime="4 min" />
           ))}
         </div>
       </section>
@@ -187,11 +181,7 @@ export default function HomePage() {
         <p className="mt-2 text-sage-700 max-w-2xl">Step-by-step guides for common PDF jobs and troubleshooting.</p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {featuredGuides.map((guide) => (
-            <Link key={guide.slug} href={`/how-to/${guide.slug}`} className="card no-underline hover:border-sage-300 transition-colors min-w-0 h-full">
-              <FileText className="h-5 w-5 text-sage-500" />
-              <h3 className="mt-3 font-semibold text-sage-900 break-words">{guide.title}</h3>
-              <p className="mt-1 text-sm text-sage-700">{guide.description}</p>
-            </Link>
+            <EditorialCard key={guide.slug} href={`/how-to/${guide.slug}`} title={guide.title} description={guide.description} category="How-to" readTime="5 min" />
           ))}
         </div>
       </section>

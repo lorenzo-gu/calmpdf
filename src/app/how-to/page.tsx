@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { PUBLISHED_BLOG_POSTS, type Post } from "@/content/posts";
+import { EditorialCard } from "@/components/cards";
 
 export const metadata: Metadata = {
   title: "PDF How-to Guides | CalmPDF",
@@ -68,14 +68,14 @@ export default function HowToIndexPage() {
             {cluster.posts.length > 0 ? (
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
                 {cluster.posts.map((post) => (
-                  <Link
+                  <EditorialCard
                     key={post.slug}
                     href={`/how-to/${post.slug}`}
-                    className="card no-underline hover:border-sage-300 transition-colors"
-                  >
-                    <h3 className="font-semibold text-sage-900">{post.title}</h3>
-                    <p className="mt-2 text-sm text-sage-700">{post.description}</p>
-                  </Link>
+                    title={post.title}
+                    description={post.description}
+                    category={cluster.title}
+                    readTime="5 min"
+                  />
                 ))}
               </div>
             ) : (
@@ -92,15 +92,18 @@ export default function HowToIndexPage() {
         <p className="mt-2 text-sm text-sage-700">
           Looking for a quick path to common outcomes? Start with these workflow landing pages.
         </p>
-        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
           {workflowLinks.map((link) => (
-            <li key={link.href}>
-              <Link href={link.href} className="card block no-underline hover:border-sage-300 transition-colors">
-                {link.label}
-              </Link>
-            </li>
+            <EditorialCard
+              key={link.href}
+              href={link.href}
+              title={link.label}
+              description="A concise workflow for completing this outcome with browser-based PDF tools."
+              category="Workflow"
+              readTime="4 min"
+            />
           ))}
-        </ul>
+        </div>
       </section>
     </main>
   );
