@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { SITE } from "@/lib/site";
 import { PUBLISHED_BLOG_POSTS, type Post } from "@/content/posts";
 import { EditorialCard } from "@/components/cards";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "PDF How-to Guides | CalmPDF",
@@ -120,7 +121,7 @@ export default function HowToIndexPage() {
         <p className="mt-2 text-sage-700">Choose a category to find the right guide quickly.</p>
 
       <div className="mt-10 space-y-8">
-        {TOPIC_CLUSTERS.map((cluster) => (
+        {NON_EMPTY_CATEGORIES.map((cluster) => (
           <section key={cluster.title}>
             <h2 className="text-xl font-semibold text-sage-900">{cluster.title}</h2>
             {cluster.posts.length > 0 ? (
@@ -144,24 +145,6 @@ export default function HowToIndexPage() {
           </section>
         ))}
       </div>
-
-      <section className="mt-12">
-        <h2 className="text-xl font-semibold text-sage-900">Popular PDF workflows</h2>
-        <p className="mt-2 text-sm text-sage-700">
-          Looking for a quick path to common outcomes? Start with these workflow landing pages.
-        </p>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          {workflowLinks.map((link) => (
-            <EditorialCard
-              key={link.href}
-              href={link.href}
-              title={link.label}
-              description="A concise workflow for completing this outcome with browser-based PDF tools."
-              category="Workflow"
-              readTime="4 min"
-            />
-          ))}
-        </div>
       </section>
     </main>
   );
