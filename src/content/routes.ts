@@ -38,5 +38,5 @@ export const PROGRAMMATIC_SITEMAP_ROUTES: ProgrammaticSitemapRoute[] = [
   { slug: "browser-only-pdf-editor", lastModified: "2026-05-06", changeFrequency: "monthly", priority: 0.72 },
   { slug: "private-pdf-tools-online", lastModified: "2026-05-06", changeFrequency: "monthly", priority: 0.72 },
   { slug: "free-pdf-merger-without-signup", lastModified: "2026-05-06", changeFrequency: "monthly", priority: 0.72 },
-  { slug: "pdf-tools-without-upload", lastModified: "2026-05-09", changeFrequency: "monthly", priority: 0.74 },
+  { slug: "private-pdf-editor-online", lastModified: "2026-05-09", changeFrequency: "monthly", priority: 0.74 },
 ];

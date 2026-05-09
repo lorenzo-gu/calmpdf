@@ -6,7 +6,8 @@ export type ComparisonPage = {
     | "smallpdf-alternative"
     | "browser-only-pdf-editor"
     | "private-pdf-tools-online"
-    | "free-pdf-merger-without-signup";
+    | "free-pdf-merger-without-signup"
+    | "private-pdf-editor-online";
   title: string;
   h1: string;
   metaDescription: string;
@@ -117,6 +118,33 @@ export const COMPARISON_PAGES: ComparisonPage[] = [
     toolLinks: [{ href: "/merge-pdf", label: "Merge PDFs now" }, { href: "/reorder-pdf-pages", label: "Reorder merged pages" }, { href: "/compress-pdf", label: "Compress merged PDF" }],
     sitemap: { changeFrequency: "monthly", priority: 0.72 },
   },
+  {
+    slug: "private-pdf-editor-online",
+    title: "Private PDF Editor Online | CalmPDF",
+    h1: "Private PDF Editor Online (Browser-Based)",
+    metaDescription: "Learn how a private PDF editor online works, why browser-based processing matters, and how CalmPDF compares with upload-first tools.",
+    intro: "If you are searching for a private PDF editor online, the key question is simple: does the tool process your file in your browser or upload it to remote servers? CalmPDF is designed around browser-based processing for common workflows.",
+    summary: "Use private, browser-based tools when handling sensitive documents and choose upload-based workflows only when you explicitly need cloud collaboration features.",
+    comparisonRows: [
+      { criterion: "Where processing happens", calmpdf: "Inside your browser tab for core tools", others: "Often uploaded and processed on vendor servers" },
+      { criterion: "Data exposure surface", calmpdf: "No account required for routine tasks", others: "Accounts, cloud storage, and sharing defaults are common" },
+      { criterion: "Best use case", calmpdf: "Personal or small-team secure PDF editing", others: "Cloud-centric review and collaboration stacks" },
+    ],
+    faqs: [
+      { q: "What does browser-based PDF editing mean?", a: "It means editing logic runs in your browser session instead of sending documents to CalmPDF servers for processing." },
+      { q: "Why do files stay in the browser?", a: "CalmPDF tools are built for local browser execution, so your file is handled on-device during the workflow." },
+      { q: "Is a no-upload PDF editor automatically secure?", a: "No single tool is perfect. You should still protect your device, use trusted networks, and review each product's privacy documentation." },
+      { q: "When should I use an upload-based editor instead?", a: "Upload-based tools can fit when your team needs centralized storage, shared review, or account-level workflow controls." },
+    ],
+    toolLinks: [
+      { href: "/edit-pdf", label: "Edit PDF" },
+      { href: "/merge-pdf", label: "Merge PDF" },
+      { href: "/compress-pdf", label: "Compress PDF" },
+      { href: "/sign-pdf", label: "Sign PDF" },
+    ],
+    sitemap: { changeFrequency: "monthly", priority: 0.74 },
+  },
+
 ];
 
 export const COMPARISON_PAGE_BY_SLUG = Object.fromEntries(
