@@ -23,6 +23,7 @@ export const BLOG_POSTS: Post[] = [
         ctaHref: "/pdf-to-word",
         ctaLabel: "Convert PDF to Word",
         published: true,
+        relatedLinks: [{ href: "/browser-based-pdf-converter", label: "Browser-based PDF converter" }],
   },
   {
         slug: "convert-word-to-pdf",
@@ -45,6 +46,7 @@ export const BLOG_POSTS: Post[] = [
         ctaHref: "/pdf-to-word",
         ctaLabel: "Try PDF to Word",
         published: true,
+        relatedLinks: [{ href: "/browser-based-pdf-converter", label: "Browser-based PDF converter" }],
   },
   {
         slug: "pdf-to-word-not-working",
@@ -56,6 +58,7 @@ export const BLOG_POSTS: Post[] = [
         ctaHref: "/pdf-to-word",
         ctaLabel: "Convert PDF to Word",
         published: true,
+        relatedLinks: [{ href: "/private-pdf-editor-online", label: "Private PDF editor online" }, { href: "/pdf-tools-without-upload", label: "PDF tools without upload" }],
   },
   {
         slug: "edit-pdf-free",
@@ -80,7 +83,7 @@ export const BLOG_POSTS: Post[] = [
           { q: "Can I edit PDF text directly in the browser?", a: "In most browser tools, you can add text boxes, highlights, and shapes, but not fully rewrite existing paragraph text. Full paragraph editing usually requires advanced desktop software." },
           { q: "Is browser-based PDF editing private?", a: "It depends on the tool. CalmPDF runs in your browser so your file stays on your device. If a tool uploads files, the document is processed on remote servers." },
         ],
-        relatedLinks: [{ href: "/edit-pdf", label: "Edit PDF tool" }, { href: "/how-to/add-text-to-pdf", label: "How to Add Text to a PDF" }],
+        relatedLinks: [{ href: "/edit-pdf", label: "Edit PDF tool" }, { href: "/private-pdf-editor-online", label: "Private PDF editor online" }, { href: "/how-to/add-text-to-pdf", label: "How to Add Text to a PDF" }],
   },
   {
     slug: "rotate-pdf",
@@ -126,7 +129,7 @@ export const BLOG_POSTS: Post[] = [
         ctaLabel: "Compress PDF free",
         published: true,
         faqs: [{ q: "Does compressing a PDF reduce quality?", a: "It depends on the method. The Quartz filter in Preview is lossy and can soften images. CalmPDF currently uses lossless compression, so readability and image detail are preserved while file structure is optimized. Text in PDFs is vector-based and is never affected by image compression." }],
-        relatedLinks: [{ href: "/compress-pdf", label: "Compress PDF tool" }, { href: "/how-to/compress-pdf-without-losing-quality", label: "How to Compress a PDF Without Losing Quality" }],
+        relatedLinks: [{ href: "/compress-pdf", label: "Compress PDF tool" }, { href: "/compress-pdf-for-email", label: "Compress PDF for email" }, { href: "/how-to/compress-pdf-without-losing-quality", label: "How to Compress a PDF Without Losing Quality" }],
   },
   {
         slug: "compress-pdf-without-losing-quality",
@@ -139,7 +142,7 @@ export const BLOG_POSTS: Post[] = [
         ctaLabel: "Compress PDF free",
         published: true,
         faqs: [{ q: "Can I compress a scanned PDF without losing quality?", a: "Scanned PDFs are entirely images — each page is a photo of a piece of paper. Some quality loss is unavoidable if you want significant file size reduction. Use a lossless tool first and check the output. For archiving, keep the original; send the compressed version." }],
-        relatedLinks: [{ href: "/compress-pdf", label: "Compress PDF tool" }, { href: "/compress-pdf-to-1mb", label: "Compress PDF to 1MB" }],
+        relatedLinks: [{ href: "/compress-pdf", label: "Compress PDF tool" }, { href: "/compress-pdf-for-email", label: "Email-friendly PDF compression" }, { href: "/compress-pdf-to-1mb", label: "Compress PDF to 1MB" }],
   },
   {
         slug: "merge-pdf-files-free",
@@ -152,7 +155,7 @@ export const BLOG_POSTS: Post[] = [
         ctaLabel: "Merge PDF free",
         published: true,
         faqs: [{ q: "Does merging PDFs reduce quality?", a: "No. Merging combines the pages of multiple PDFs into one file without re-encoding anything. Images, fonts, and formatting stay exactly as they were in the originals." }],
-        relatedLinks: [{ href: "/merge-pdf", label: "Merge PDF tool" }, { href: "/how-to/combine-pdf-files", label: "How to Combine PDF Files" }],
+        relatedLinks: [{ href: "/merge-pdf", label: "Merge PDF tool" }, { href: "/merge-pdf-on-iphone-without-app", label: "Merge PDF on iPhone without an app" }, { href: "/how-to/combine-pdf-files", label: "How to Combine PDF Files" }],
   },
   {
         slug: "split-pdf-into-multiple-files",
@@ -178,7 +181,7 @@ export const BLOG_POSTS: Post[] = [
         ctaLabel: "Compress PDF free",
         published: true,
         faqs: [{ q: "What's the maximum PDF size for email?", a: "Gmail and Outlook both support attachments up to 25 MB. Many corporate email systems have lower limits (10 MB is common). If your PDF exceeds the limit, aim to compress it below 10 MB to be safe for most recipients." }],
-        relatedLinks: [{ href: "/compress-pdf", label: "Compress PDF tool" }, { href: "/compress-pdf-for-email", label: "Compress PDF for Email" }],
+        relatedLinks: [{ href: "/compress-pdf", label: "Compress PDF tool" }, { href: "/compress-pdf-for-email", label: "Compress PDF for Email" }, { href: "/pdf-tools-without-upload", label: "PDF tools without upload" }],
   },
   {
         slug: "merge-pdfs-on-mac-windows-iphone",
@@ -194,7 +197,7 @@ export const BLOG_POSTS: Post[] = [
           { q: "Can I merge PDFs on iPhone without an app?", a: "Yes. You can use a browser-based merger in Safari and save the output back to the Files app without installing a dedicated app." },
           { q: "Is there a built-in PDF merge feature in Windows?", a: "Not as a dedicated native merge tool. Most users use browser tools or third-party desktop apps." },
         ],
-        relatedLinks: [{ href: "/merge-pdf", label: "Merge PDF tool" }, { href: "/how-to/combine-pdf-files", label: "How to Combine PDF Files" }],
+        relatedLinks: [{ href: "/merge-pdf", label: "Merge PDF tool" }, { href: "/merge-pdf-on-iphone-without-app", label: "Merge PDF on iPhone without an app" }, { href: "/how-to/combine-pdf-files", label: "How to Combine PDF Files" }],
   },
   {
         slug: "combine-pdf-files",
@@ -207,7 +210,7 @@ export const BLOG_POSTS: Post[] = [
         ctaLabel: "Combine PDFs free",
         published: true,
         faqs: [{ q: "Does combining PDFs reduce quality?", a: "No. Combining PDFs joins the pages without re-encoding or compressing anything. Images, fonts, and text remain exactly as they were in the original files." }],
-        relatedLinks: [{ href: "/merge-pdf", label: "Merge PDF tool" }, { href: "/how-to/merge-pdf-files-free", label: "How to Merge PDF Files Free" }],
+        relatedLinks: [{ href: "/merge-pdf", label: "Merge PDF tool" }, { href: "/merge-pdf-on-iphone-without-app", label: "Merge PDFs on iPhone without installing apps" }, { href: "/how-to/merge-pdf-files-free", label: "How to Merge PDF Files Free" }],
   },
   {
         slug: "add-text-to-pdf",
@@ -247,7 +250,7 @@ export const BLOG_POSTS: Post[] = [
           { q: "Can I rotate one page without rotating all pages?", a: "Yes. Select only the page thumbnails you want to rotate, then save." },
           { q: "Will rotated pages look blurry?", a: "No. Rotation changes page orientation metadata and does not re-encode page content." },
         ],
-        relatedLinks: [{ href: "/rotate-pdf", label: "Rotate PDF tool" }, { href: "/how-to/reorder-pdf-pages-online", label: "How to Reorder PDF Pages Online" }],
+        relatedLinks: [{ href: "/rotate-pdf", label: "Rotate PDF tool" }, { href: "/pdf-tools-without-upload", label: "Browser PDF tools without upload" }, { href: "/how-to/reorder-pdf-pages-online", label: "How to Reorder PDF Pages Online" }],
   },
   {
         slug: "split-merge-reorder-rotate-which-to-use",
@@ -262,7 +265,7 @@ export const BLOG_POSTS: Post[] = [
           { q: "What is the fastest way to fix page order issues?", a: "Use Reorder when pages are correct but out of sequence. Use Rotate when orientation is wrong. Use Split or Merge only when adding or removing page groups." },
           { q: "Do I need multiple tools for one document?", a: "Sometimes yes. A common workflow is Merge first, then Reorder, then Rotate specific pages." },
         ],
-        relatedLinks: [{ href: "/reorder-pdf", label: "Reorder PDF tool" }, { href: "/merge-pdf", label: "Merge PDF tool" }, { href: "/split-pdf", label: "Split PDF tool" }, { href: "/rotate-pdf", label: "Rotate PDF tool" }],
+        relatedLinks: [{ href: "/reorder-pdf", label: "Reorder PDF tool" }, { href: "/merge-pdf", label: "Merge PDF tool" }, { href: "/split-pdf", label: "Split PDF tool" }, { href: "/rotate-pdf", label: "Rotate PDF tool" }, { href: "/pdf-tools-without-upload", label: "Private browser-based PDF tools" }],
   },
 ];
 

@@ -138,7 +138,7 @@ export function ArticleShell({
 
       {post.relatedLinks && post.relatedLinks.length > 0 && (
         <section className="mx-auto max-w-3xl px-4 md:px-6 pb-12">
-          <h2 className="text-xl font-semibold mb-4">Related guides and tools</h2>
+          <h2 className="text-xl font-semibold mb-4">Related guides and workflows</h2>
           <ul className="grid gap-3 sm:grid-cols-2">
             {post.relatedLinks.map((item) => (
               <li key={item.href}>

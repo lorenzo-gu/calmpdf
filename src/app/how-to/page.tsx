@@ -45,6 +45,14 @@ const TOPIC_CLUSTERS: Cluster[] = [
 ];
 
 export default function HowToIndexPage() {
+  const workflowLinks = [
+    { href: "/pdf-tools-without-upload", label: "PDF tools without upload" },
+    { href: "/private-pdf-editor-online", label: "Private PDF editor online" },
+    { href: "/compress-pdf-for-email", label: "Compress PDF for email" },
+    { href: "/merge-pdf-on-iphone-without-app", label: "Merge PDF on iPhone without app" },
+    { href: "/browser-based-pdf-converter", label: "Browser-based PDF converter" },
+  ];
+
   return (
     <main className="mx-auto max-w-4xl px-4 md:px-6 py-12">
       <h1 className="text-3xl font-semibold tracking-tight">PDF how-to guides</h1>
@@ -78,6 +86,22 @@ export default function HowToIndexPage() {
           </section>
         ))}
       </div>
+
+      <section className="mt-12">
+        <h2 className="text-xl font-semibold text-sage-900">Popular PDF workflows</h2>
+        <p className="mt-2 text-sm text-sage-700">
+          Looking for a quick path to common outcomes? Start with these workflow landing pages.
+        </p>
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+          {workflowLinks.map((link) => (
+            <li key={link.href}>
+              <Link href={link.href} className="card block no-underline hover:border-sage-300 transition-colors">
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
     </main>
   );
 }
