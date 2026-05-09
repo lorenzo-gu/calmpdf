@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { PUBLISHED_BLOG_POSTS, type Post } from "@/content/posts";
+import { EditorialCard } from "@/components/cards";
 
 export const metadata: Metadata = {
   title: "PDF How-to Guides | CalmPDF",
@@ -119,26 +119,47 @@ export default function HowToIndexPage() {
         <h2 className="text-2xl md:text-3xl font-semibold text-sage-900">Browse by task</h2>
         <p className="mt-2 text-sage-700">Choose a category to find the right guide quickly.</p>
 
-        <div className="mt-8 space-y-10">
-          {NON_EMPTY_CATEGORIES.map((category) => (
-            <section key={category.title} id={category.title.toLowerCase().replace(/\s+/g, "-")}>
-              <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
-                <h3 className="text-xl font-semibold text-sage-900">{category.title}</h3>
-                <p className="text-sm text-sage-700">{category.description}</p>
-              </div>
-              <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {category.posts.map((post) => (
-                  <Link
+      <div className="mt-10 space-y-8">
+        {TOPIC_CLUSTERS.map((cluster) => (
+          <section key={cluster.title}>
+            <h2 className="text-xl font-semibold text-sage-900">{cluster.title}</h2>
+            {cluster.posts.length > 0 ? (
+              <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                {cluster.posts.map((post) => (
+                  <EditorialCard
                     key={post.slug}
                     href={`/how-to/${post.slug}`}
-                    className="card no-underline hover:border-sage-300 transition-colors"
-                  >
-                    <h4 className="font-semibold text-sage-900">{post.title}</h4>
-                    <p className="mt-2 text-sm text-sage-700">{post.description}</p>
-                  </Link>
+                    title={post.title}
+                    description={post.description}
+                    category={cluster.title}
+                    readTime="5 min"
+                  />
                 ))}
               </div>
-            </section>
+            ) : (
+              <p className="mt-3 text-sm text-sage-700">
+                New guides coming soon for this topic cluster.
+              </p>
+            )}
+          </section>
+        ))}
+      </div>
+
+      <section className="mt-12">
+        <h2 className="text-xl font-semibold text-sage-900">Popular PDF workflows</h2>
+        <p className="mt-2 text-sm text-sage-700">
+          Looking for a quick path to common outcomes? Start with these workflow landing pages.
+        </p>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          {workflowLinks.map((link) => (
+            <EditorialCard
+              key={link.href}
+              href={link.href}
+              title={link.label}
+              description="A concise workflow for completing this outcome with browser-based PDF tools."
+              category="Workflow"
+              readTime="4 min"
+            />
           ))}
         </div>
       </section>
