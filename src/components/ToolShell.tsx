@@ -49,7 +49,16 @@ export function ToolShell({
 
         <HeaderAd />
 
-        <div className="mt-8">{children}</div>
+        <div className="mt-8 rounded-3xl border border-sand-200 bg-white p-4 md:p-6 shadow-sm">
+          <div className="mx-auto max-w-4xl">{children}</div>
+        </div>
+
+        <div className="mt-6 rounded-2xl border border-sage-200 bg-sage-50 px-4 py-4 md:px-5">
+          <p className="text-sm md:text-base text-sage-800">
+            <span className="font-semibold text-sage-900">Private by design.</span> Files stay on your device and are processed in-browser.
+            No uploads, no account, no server-side storage.
+          </p>
+        </div>
 
         <InArticleAd />
       </section>
@@ -79,7 +88,7 @@ export function ToolShell({
           </ol>
         </div>
         <div className="card">
-          <h2 className="text-xl font-semibold">When to use this tool</h2>
+          <h2 className="text-xl font-semibold">Best for</h2>
           <ul className="mt-4 list-disc pl-6 space-y-2 text-sage-700">
             {tool.useCases.map((item) => (
               <li key={item}>{item}</li>
@@ -87,19 +96,11 @@ export function ToolShell({
           </ul>
         </div>
         <div className="card">
-          <h2 className="text-xl font-semibold">Limitations</h2>
+          <h2 className="text-xl font-semibold">Not ideal for</h2>
           <ul className="mt-4 list-disc pl-6 space-y-2 text-sage-700">
             {tool.limitations.map((item) => (
               <li key={item}>{item}</li>
             ))}
-          </ul>
-        </div>
-        <div className="card">
-          <h2 className="text-xl font-semibold">Privacy</h2>
-          <ul className="mt-4 space-y-3 text-sage-700">
-            <li><strong className="text-sage-900">Private by design.</strong> Your PDF is processed inside your browser. It is never uploaded to a server.</li>
-            <li><strong className="text-sage-900">Fast.</strong> No round trip to the cloud, so it works as fast as your laptop can run JavaScript.</li>
-            <li><strong className="text-sage-900">Free.</strong> All tools are free to use with no signup and no daily limits.</li>
           </ul>
         </div>
         <div className="card">

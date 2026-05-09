@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { ShieldCheck, Zap, Wifi, Wrench } from "lucide-react";
-import { TOOLS } from "@/content/tools";
+import { ArrowRight, CheckCircle2, FileText, ShieldCheck } from "lucide-react";
 import { PUBLISHED_BLOG_POSTS } from "@/content/posts";
 import { SITE } from "@/lib/site";
 import { RelatedToolCard, EditorialCard } from "@/components/cards";
@@ -8,7 +7,7 @@ import { RelatedToolCard, EditorialCard } from "@/components/cards";
 const TOOL_GROUPS = [
   {
     title: "Optimize",
-    description: "Reduce file size and prepare documents for email, forms, and portals.",
+    description: "Reduce PDF size for sharing, submissions, and inbox limits.",
     links: [
       { href: "/compress-pdf", label: "Compress PDF" },
       { href: "/compress-pdf-for-email", label: "Compress PDF for Email" },
@@ -17,25 +16,25 @@ const TOOL_GROUPS = [
   },
   {
     title: "Organize",
-    description: "Combine, split, and reorder pages before you share a final draft.",
+    description: "Combine, split, and reorder pages before sending final versions.",
     links: [
       { href: "/merge-pdf", label: "Merge PDF" },
       { href: "/split-pdf", label: "Split PDF" },
-      { href: "/reorder-pdf", label: "Reorder PDF Pages" },
+      { href: "/reorder-pdf-pages", label: "Reorder PDF Pages" },
     ],
   },
   {
     title: "Edit",
-    description: "Add text, signatures, or markup without installing desktop software.",
+    description: "Make practical document changes without heavyweight desktop apps.",
     links: [
       { href: "/edit-pdf", label: "Edit PDF" },
-      { href: "/sign-pdf", label: "Sign PDF" },
+      { href: "/pdf-metadata-editor", label: "Edit PDF Metadata" },
       { href: "/unlock-pdf", label: "Unlock PDF" },
     ],
   },
   {
     title: "Convert",
-    description: "Move between PDF and Office formats while keeping files private.",
+    description: "Switch between PDF and Office/image formats with private processing.",
     links: [
       { href: "/pdf-to-word", label: "PDF to Word" },
       { href: "/word-to-pdf", label: "Word to PDF" },
@@ -44,27 +43,12 @@ const TOOL_GROUPS = [
   },
   {
     title: "Page tools",
-    description: "Fix orientation and document flow for scanned and mixed-page files.",
+    description: "Fix orientation and extract pages from long or scanned documents.",
     links: [
       { href: "/rotate-pdf", label: "Rotate PDF" },
       { href: "/extract-pdf-pages", label: "Extract PDF Pages" },
-      { href: "/delete-pdf-pages", label: "Delete PDF Pages" },
+      { href: "/remove-pdf-pages", label: "Remove PDF Pages" },
     ],
-  },
-];
-
-const HOMEPAGE_FAQS = [
-  {
-    q: "Are these free PDF tools really free?",
-    a: "Yes. CalmPDF core tools are free to use with no signup, and you can run them directly in your browser.",
-  },
-  {
-    q: "Is CalmPDF a private PDF editor?",
-    a: "Yes. CalmPDF tools process files locally in your browser, so your document does not get uploaded to CalmPDF servers.",
-  },
-  {
-    q: "Can I use PDF tools without upload?",
-    a: <>Yes. If a tool says it runs in your browser, file handling stays on your device instead of being sent to a remote queue. Read our <Link href="/pdf-tools-without-upload" className="underline underline-offset-2 hover:no-underline">PDF tools without upload guide</Link> for the full workflow and caveats.</>,
   },
 ];
 
@@ -72,91 +56,110 @@ const PRIVATE_WORKFLOWS = [
   {
     href: "/pdf-tools-without-upload",
     label: "PDF tools without upload",
-    description: "Explore browser-first PDF tasks that avoid unnecessary file uploads for everyday documents.",
+    description: "Understand exactly how local browser processing works in real-world document tasks.",
   },
   {
     href: "/private-pdf-editor-online",
     label: "Private PDF editor online",
-    description: "Learn when browser-based editing is a practical fit for personal and business PDFs.",
-  },
-  {
-    href: "/compress-pdf-for-email",
-    label: "Compress PDF for email",
-    description: "Reduce file size quickly so attachments are easier to send through strict inbox limits.",
+    description: "See when browser-only editing is the best fit for sensitive files and fast edits.",
   },
   {
     href: "/merge-pdf-on-iphone-without-app",
     label: "Merge PDF on iPhone without app",
-    description: "Follow a Safari-friendly workflow to combine files from your iPhone without extra installs.",
-  },
-  {
-    href: "/browser-based-pdf-converter",
-    label: "Browser-based PDF converter",
-    description: "Compare local and upload-based conversion approaches before choosing a PDF converter.",
+    description: "Follow a clean Safari-first workflow to combine PDFs with zero installs.",
   },
 ];
 
 export default function HomePage() {
-  const featuredGuides = PUBLISHED_BLOG_POSTS.filter((post) => [
-    "compress-pdf-on-windows",
-    "compress-pdf-on-mac",
-    "merge-pdf-files-free",
-    "split-pdf-into-multiple-files",
-    "reorder-pdf-pages-online",
-    "convert-pdf-to-word",
-  ].includes(post.slug));
+  const featuredGuides = PUBLISHED_BLOG_POSTS.filter((post) =>
+    [
+      "compress-pdf-on-windows",
+      "compress-pdf-on-mac",
+      "merge-pdf-files-free",
+      "split-pdf-into-multiple-files",
+      "reorder-pdf-pages-online",
+      "convert-pdf-to-word",
+    ].includes(post.slug),
+  );
 
   return (
     <>
-      <section className="mx-auto max-w-content px-4 md:px-6 pt-14 md:pt-20 pb-14 md:pb-16 text-center">
-        <h1 className="text-3xl sm:text-4xl md:text-6xl font-semibold tracking-tight leading-tight">
-          Fast, private PDF tools in your browser.
-        </h1>
-        <p className="mt-4 md:mt-6 text-base sm:text-lg md:text-xl text-sage-700 max-w-3xl mx-auto">
-          Compress PDF, merge PDF, split PDF, edit PDF, rotate PDF, convert PDF to Word, and reorder PDF pages without uploads.
-          {" "}With {SITE.name}, your files stay on your device for browser-only processing.
-        </p>
+      <section className="mx-auto max-w-content px-4 md:px-6 pt-12 md:pt-20 pb-10 md:pb-14">
+        <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+          <div>
+            <p className="inline-flex items-center rounded-full border border-sage-200 bg-white px-3 py-1 text-xs font-medium uppercase tracking-wide text-sage-700">
+              Privacy-first PDF workspace
+            </p>
+            <h1 className="mt-4 text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight leading-tight">
+              Fast, private PDF tools.
+              <br />
+              No uploads. No drama.
+            </h1>
+            <p className="mt-5 text-base sm:text-lg text-sage-700 max-w-2xl">
+              {SITE.name} helps you compress, merge, split, edit, convert, and organize PDFs directly in your browser so your files stay with you.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link href="#tools" className="btn-primary inline-flex items-center gap-2">
+                Start with tools <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link href="/pdf-tools-without-upload" className="btn-secondary">
+                See privacy details
+              </Link>
+            </div>
+          </div>
 
-        <div className="mt-8 grid w-full max-w-xl mx-auto grid-cols-2 md:flex md:max-w-none md:flex-wrap gap-3 justify-center">
-          <Link href="/tools" className="btn-primary col-span-2 md:col-span-1">
-            All PDF tools
-          </Link>
-          {TOOLS.map((t) => (
-            <Link key={t.slug} href={`/${t.slug}`} className="btn-primary whitespace-nowrap snap-start shrink-0">
-              {t.h1}
-            </Link>
-          ))}
-        </div>
-
-        <div className="mt-8 flex flex-wrap gap-4 justify-center text-sm text-sage-700">
-          <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4" /> 100% private</span>
-          <span className="inline-flex items-center gap-1.5"><Wifi className="h-4 w-4" /> Browser-only processing</span>
-          <span className="inline-flex items-center gap-1.5"><Zap className="h-4 w-4" /> Free forever</span>
+          <div className="card bg-gradient-to-br from-white to-sage-50 border-sage-200 p-5 sm:p-6">
+            <div className="rounded-xl border border-sage-200 bg-white p-4 sm:p-5 shadow-sm">
+              <div className="flex items-center justify-between">
+                <p className="text-sm font-semibold text-sage-900">Document workspace preview</p>
+                <span className="text-xs text-sage-600">Browser-only</span>
+              </div>
+              <div className="mt-4 space-y-3">
+                {[
+                  "Contract-v3.pdf",
+                  "Tax-forms-2026.pdf",
+                  "Mortgage-packet.pdf",
+                ].map((file) => (
+                  <div key={file} className="flex items-center justify-between rounded-lg border border-sage-100 bg-sage-50/60 px-3 py-2 text-sm">
+                    <span className="text-sage-800">{file}</span>
+                    <span className="text-emerald-700">Local</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="mt-4 grid gap-2 text-sm text-sage-700 sm:grid-cols-2">
+              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-emerald-700" /> No account</span>
+              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-emerald-700" /> No upload queue</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-content px-4 md:px-6 pb-6" aria-label="Privacy intro copy">
-        <p className="text-sage-700 max-w-4xl">
-          CalmPDF is built for people searching for fast PDF tools that do not require account creation or server uploads.
-          You can quickly optimize, organize, edit, convert, and fix PDF pages directly in your browser while keeping sensitive documents under your control.
-          For more detail on local processing and practical limits, see <Link href="/pdf-tools-without-upload" className="underline underline-offset-2 hover:no-underline">how to use PDF tools without uploading files</Link>.
-        </p>
+      <section className="border-y border-sage-200 bg-sage-50/70">
+        <div className="mx-auto max-w-content px-4 md:px-6 py-4 md:py-5 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+          <p className="text-base md:text-lg font-medium text-sage-900 inline-flex items-center gap-2">
+            <ShieldCheck className="h-5 w-5 text-emerald-700" /> Your file never leaves your device
+          </p>
+          <p className="text-sm text-sage-700">Browser-only · No account · No upload · Free</p>
+        </div>
       </section>
 
       <section className="mx-auto max-w-content px-4 md:px-6 py-12" id="tools">
-        <h2 className="text-2xl md:text-3xl font-semibold">Browse tools by task</h2>
-        <p className="mt-2 text-sage-700 max-w-2xl">
-          Start with the workflow you need and jump straight to the right tool.
-        </p>
+        <h2 className="text-2xl md:text-3xl font-semibold">Find the right tool by task</h2>
+        <p className="mt-2 text-sage-700 max-w-2xl">Choose a workflow category and jump straight into your PDF job.</p>
 
-        <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {TOOL_GROUPS.map((group) => (
-            <div key={group.title} className="card">
-              <h3 className="font-semibold text-sage-900">{group.title}</h3>
+            <div key={group.title} className="card border-sage-200 bg-white p-6">
+              <h3 className="text-lg font-semibold text-sage-900">{group.title}</h3>
               <p className="mt-2 text-sm text-sage-700">{group.description}</p>
               <div className="mt-4 grid gap-3">
                 {group.links.map((link) => (
-                  <RelatedToolCard key={link.href} href={link.href} title={link.label} description="Open the tool and finish this task privately in your browser." icon={<Wrench className="h-5 w-5" />} />
+                  <li key={link.href}>
+                    <Link href={link.href} className="inline-flex items-center gap-1 text-sage-800 hover:text-sage-950 underline underline-offset-4">
+                      {link.label} <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  </li>
                 ))}
               </div>
             </div>
@@ -165,35 +168,28 @@ export default function HomePage() {
       </section>
 
       <section className="mx-auto max-w-content px-4 md:px-6 py-12">
-        <h2 className="text-2xl md:text-3xl font-semibold">Popular private PDF workflows</h2>
-        <p className="mt-2 text-sage-700 max-w-2xl">
-          Discover practical guides for private, browser-based PDF workflows.
-        </p>
+        <h2 className="text-2xl md:text-3xl font-semibold">Popular workflows</h2>
+        <p className="mt-2 text-sage-700 max-w-2xl">Editorial guides for common private PDF workflows, written for real tasks.</p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {PRIVATE_WORKFLOWS.map((workflow) => (
-            <EditorialCard key={workflow.href} href={workflow.href} title={workflow.label} description={workflow.description} category="Workflow" readTime="4 min" />
+            <Link key={workflow.href} href={workflow.href} className="card no-underline hover:border-sage-300 transition-colors min-w-0 h-full p-6">
+              <h3 className="font-semibold text-sage-900 break-words">{workflow.label}</h3>
+              <p className="mt-2 text-sm text-sage-700">{workflow.description}</p>
+            </Link>
           ))}
         </div>
       </section>
 
       <section className="mx-auto max-w-content px-4 md:px-6 py-12">
-        <h2 className="text-2xl md:text-3xl font-semibold">Popular how-to guides</h2>
-        <p className="mt-2 text-sage-700 max-w-2xl">Step-by-step guides for common PDF jobs and troubleshooting.</p>
+        <h2 className="text-2xl md:text-3xl font-semibold">How-to library</h2>
+        <p className="mt-2 text-sage-700 max-w-2xl">Step-by-step articles for frequent PDF tasks and troubleshooting.</p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {featuredGuides.map((guide) => (
-            <EditorialCard key={guide.slug} href={`/how-to/${guide.slug}`} title={guide.title} description={guide.description} category="How-to" readTime="5 min" />
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-content px-4 md:px-6 py-12">
-        <h2 className="text-2xl md:text-3xl font-semibold">Frequently asked questions</h2>
-        <div className="mt-6 space-y-4">
-          {HOMEPAGE_FAQS.map((faq) => (
-            <details key={faq.q} className="card">
-              <summary className="font-semibold cursor-pointer">{faq.q}</summary>
-              <p className="mt-3 text-sm text-sage-700">{faq.a}</p>
-            </details>
+            <Link key={guide.slug} href={`/how-to/${guide.slug}`} className="card no-underline hover:border-sage-300 transition-colors min-w-0 h-full p-6">
+              <FileText className="h-5 w-5 text-sage-500" />
+              <h3 className="mt-3 font-semibold text-sage-900 break-words">{guide.title}</h3>
+              <p className="mt-1 text-sm text-sage-700">{guide.description}</p>
+            </Link>
           ))}
         </div>
       </section>
