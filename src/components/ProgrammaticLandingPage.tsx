@@ -14,6 +14,24 @@ export function ProgrammaticLandingPage({ page }: { page: ProgrammaticPage }) {
 
   return (
     <main className="mx-auto max-w-3xl px-4 md:px-6 py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: page.faqs.map((faq) => ({
+              "@type": "Question",
+              name: faq.q,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.a,
+              },
+            })),
+          }),
+        }}
+      />
+
       <nav aria-label="Breadcrumb" className="text-sm text-sage-700 mb-6">
         <Link href="/" className="no-underline hover:underline">Home</Link>
         <span className="mx-2">/</span>
