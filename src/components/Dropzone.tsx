@@ -36,7 +36,7 @@ export function Dropzone({
     <label
       className={cn(
         "dropzone cursor-pointer",
-        hover && "bg-sage-100 border-sage-500",
+        hover && "bg-calm-soft border-calm-accent",
       )}
       onDragOver={(e) => {
         e.preventDefault();
@@ -56,9 +56,9 @@ export function Dropzone({
         accept={accept}
         onChange={(e) => handleFiles(e.target.files)}
       />
-      <UploadCloud className="h-10 w-10 text-sage-500" aria-hidden />
-      <p className="mt-3 font-medium text-sage-900">{label}</p>
-      <p className="mt-1 text-sm text-sage-700">{hint}</p>
+      <UploadCloud className="h-10 w-10 text-calm-text-secondary" aria-hidden />
+      <p className="mt-3 font-medium text-calm-text-primary">{label}</p>
+      <p className="mt-1 text-sm text-calm-text-secondary">{hint}</p>
     </label>
   );
 }
