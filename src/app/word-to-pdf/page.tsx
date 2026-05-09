@@ -37,7 +37,11 @@ export default function Page() {
           <Link href="/edit-pdf" className="underline underline-offset-2 hover:no-underline">
             Edit PDF
           </Link>
-          .
+          . You can also review our{" "}
+          <Link href="/browser-based-pdf-converter" className="underline underline-offset-2 hover:no-underline">
+            browser-based converter workflow breakdown
+          </Link>
+          {" "}to choose the right conversion path before exporting.
         </p>
       </section>
     </ToolShell>
