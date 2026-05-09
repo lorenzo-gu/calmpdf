@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, FileText, ShieldCheck } from "lucide-react";
 import { PUBLISHED_BLOG_POSTS } from "@/content/posts";
 import { SITE } from "@/lib/site";
+import { RelatedToolCard, EditorialCard } from "@/components/cards";
 
 const TOOL_GROUPS = [
   {
@@ -152,7 +153,7 @@ export default function HomePage() {
             <div key={group.title} className="card border-sage-200 bg-white p-6">
               <h3 className="text-lg font-semibold text-sage-900">{group.title}</h3>
               <p className="mt-2 text-sm text-sage-700">{group.description}</p>
-              <ul className="mt-4 space-y-2">
+              <div className="mt-4 grid gap-3">
                 {group.links.map((link) => (
                   <li key={link.href}>
                     <Link href={link.href} className="inline-flex items-center gap-1 text-sage-800 hover:text-sage-950 underline underline-offset-4">
@@ -160,7 +161,7 @@ export default function HomePage() {
                     </Link>
                   </li>
                 ))}
-              </ul>
+              </div>
             </div>
           ))}
         </div>
