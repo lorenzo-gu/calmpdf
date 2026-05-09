@@ -33,6 +33,10 @@ export default function Page() {
           <Link href="/compress-pdf" className="underline underline-offset-2 hover:no-underline">
             Compress PDF
           </Link>
+          . For a broader overview of local conversion workflows, visit our{" "}
+          <Link href="/browser-based-pdf-converter" className="underline underline-offset-2 hover:no-underline">
+            browser-based PDF converter guide
+          </Link>
           .
         </p>
         <p>

@@ -34,6 +34,11 @@ export default function Page() {
         </p>
         <p>
           CalmPDF is browser-based, and processing stays on your device. That helps protect confidential project files and personal records while avoiding account setup. Since there is no upload dependency, edits can be faster on stable local hardware even if your internet connection is inconsistent.
+          If you are comparing options, see this{" "}
+          <Link href="/private-pdf-editor-online" className="underline underline-offset-2 hover:no-underline">
+            guide to private online PDF editing workflows
+          </Link>
+          {" "}for practical privacy tradeoffs.
         </p>
         <p>
           Supported across current desktop and mobile browsers. If an element does not appear after editing, zoom in to confirm placement and export again. For best results, keep the original file nearby so you can compare before and after versions and verify the final layout is exactly what you want.

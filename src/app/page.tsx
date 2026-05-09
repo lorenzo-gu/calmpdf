@@ -63,7 +63,7 @@ const HOMEPAGE_FAQS = [
   },
   {
     q: "Can I use PDF tools without upload?",
-    a: "Yes. If a tool says it runs in your browser, file handling stays on your device instead of being sent to a remote queue.",
+    a: <>Yes. If a tool says it runs in your browser, file handling stays on your device instead of being sent to a remote queue. Read our <Link href="/pdf-tools-without-upload" className="underline underline-offset-2 hover:no-underline">PDF tools without upload guide</Link> for the full workflow and caveats.</>,
   },
 ];
 
@@ -110,6 +110,7 @@ export default function HomePage() {
         <p className="text-sage-700 max-w-4xl">
           CalmPDF is built for people searching for fast PDF tools that do not require account creation or server uploads.
           You can quickly optimize, organize, edit, convert, and fix PDF pages directly in your browser while keeping sensitive documents under your control.
+          For more detail on local processing and practical limits, see <Link href="/pdf-tools-without-upload" className="underline underline-offset-2 hover:no-underline">how to use PDF tools without uploading files</Link>.
         </p>
       </section>
 

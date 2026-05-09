@@ -34,6 +34,11 @@ export default function Page() {
         </p>
         <p>
           Processing happens in your browser, so private materials stay local to your device. That is useful for HR files, medical forms, or legal exhibits where confidentiality matters. No account is required, and there is no waiting for remote upload and download cycles when your connection is slow.
+          If you mainly merge from Safari on mobile, follow this{" "}
+          <Link href="/merge-pdf-on-iphone-without-app" className="underline underline-offset-2 hover:no-underline">
+            iPhone merge PDF workflow
+          </Link>
+          {" "}for tap-by-tap guidance.
         </p>
         <p>
           Supported on current desktop and mobile browsers. If a merge fails, check that each source file opens normally and is not password-protected. For large sets, merge in smaller groups first, then combine those outputs into one final package for faster, more reliable results.
