@@ -6,6 +6,7 @@ export type ComparisonPage = {
     | "smallpdf-alternative"
     | "browser-only-pdf-editor"
     | "private-pdf-tools-online"
+    | "browser-based-pdf-converter"
     | "free-pdf-merger-without-signup"
     | "private-pdf-editor-online";
   title: string;
