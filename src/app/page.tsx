@@ -67,6 +67,34 @@ const HOMEPAGE_FAQS = [
   },
 ];
 
+const PRIVATE_WORKFLOWS = [
+  {
+    href: "/pdf-tools-without-upload",
+    label: "PDF tools without upload",
+    description: "Explore browser-first PDF tasks that avoid unnecessary file uploads for everyday documents.",
+  },
+  {
+    href: "/private-pdf-editor-online",
+    label: "Private PDF editor online",
+    description: "Learn when browser-based editing is a practical fit for personal and business PDFs.",
+  },
+  {
+    href: "/compress-pdf-for-email",
+    label: "Compress PDF for email",
+    description: "Reduce file size quickly so attachments are easier to send through strict inbox limits.",
+  },
+  {
+    href: "/merge-pdf-on-iphone-without-app",
+    label: "Merge PDF on iPhone without app",
+    description: "Follow a Safari-friendly workflow to combine files from your iPhone without extra installs.",
+  },
+  {
+    href: "/browser-based-pdf-converter",
+    label: "Browser-based PDF converter",
+    description: "Compare local and upload-based conversion approaches before choosing a PDF converter.",
+  },
+];
+
 export default function HomePage() {
   const featuredGuides = PUBLISHED_BLOG_POSTS.filter((post) => [
     "compress-pdf-on-windows",
@@ -134,6 +162,21 @@ export default function HomePage() {
                 ))}
               </ul>
             </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-content px-4 md:px-6 py-12">
+        <h2 className="text-2xl md:text-3xl font-semibold">Popular private PDF workflows</h2>
+        <p className="mt-2 text-sage-700 max-w-2xl">
+          Discover practical guides for private, browser-based PDF workflows.
+        </p>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {PRIVATE_WORKFLOWS.map((workflow) => (
+            <Link key={workflow.href} href={workflow.href} className="card no-underline hover:border-sage-300 transition-colors min-w-0 h-full">
+              <h3 className="font-semibold text-sage-900 break-words">{workflow.label}</h3>
+              <p className="mt-2 text-sm text-sage-700">{workflow.description}</p>
+            </Link>
           ))}
         </div>
       </section>
