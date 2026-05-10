@@ -4,9 +4,19 @@ type PublicRouteLandingProps = {
   title: string;
   description: string;
   related?: { href: string; label: string }[];
+  availability?: "live" | "comingSoon";
+  comingSoonTitle?: string;
+  comingSoonDescription?: string;
 };
 
-export function PublicRouteLanding({ title, description, related = [] }: PublicRouteLandingProps) {
+export function PublicRouteLanding({
+  title,
+  description,
+  related = [],
+  availability = "live",
+  comingSoonTitle = `${title} is coming soon`,
+  comingSoonDescription,
+}: PublicRouteLandingProps) {
   const hubLinks = [
     { href: "/tools", label: "All PDF Tools" },
     { href: "/how-to", label: "How-to Guides" },
