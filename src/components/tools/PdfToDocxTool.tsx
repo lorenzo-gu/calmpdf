@@ -84,7 +84,7 @@ export function PdfToDocxTool() {
               }}
               disabled={busy}
             >
-              Choose another
+              Choose another file
             </button>
           </div>
         </div>

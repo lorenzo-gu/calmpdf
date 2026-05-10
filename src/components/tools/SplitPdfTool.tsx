@@ -56,7 +56,7 @@ export function SplitPdfTool() {
               </p>
             </div>
             <button type="button" className="btn-ghost" onClick={() => setFile(null)} disabled={busy}>
-              Choose another
+              Choose another file
             </button>
           </div>
         </div>

@@ -85,7 +85,7 @@ export function DocxToPdfTool() {
               }}
               disabled={busy}
             >
-              Choose another
+              Choose another file
             </button>
           </div>
         </div>

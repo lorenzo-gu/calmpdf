@@ -140,7 +140,7 @@ export function PdfToJpgTool() {
               <p className="font-medium text-sage-900">{file.name}</p>
               <p className="text-xs text-sage-700">{formatBytes(file.size)} · {pages.length || "…"} pages</p>
             </div>
-            <button type="button" className="btn-ghost" onClick={() => { resetState(); setFile(null); }} disabled={busy}>Choose another</button>
+            <button type="button" className="btn-ghost" onClick={() => { resetState(); setFile(null); }} disabled={busy}>Choose another file</button>
           </div>
 
           <label className="block text-sm font-medium text-sage-900" htmlFor="jpg-quality">JPG quality: {clampQuality(quality)}%</label>

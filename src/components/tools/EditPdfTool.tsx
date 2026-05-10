@@ -496,7 +496,7 @@ export function EditPdfTool() {
               }}
               disabled={busy}
             >
-              Choose another
+              Choose another file
             </button>
           </div>
 
