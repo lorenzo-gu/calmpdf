@@ -63,8 +63,6 @@ export function ToolShell({
         <InArticleAd />
       </section>
 
-      <FooterAd />
-
       <section className="mx-auto max-w-content px-4 md:px-6 py-10 grid gap-8 md:grid-cols-2">
         <div className="card">
           <h2 className="text-xl font-semibold">Upload & controls</h2>
@@ -130,6 +128,10 @@ export function ToolShell({
         </section>
       ) : null}
 
+      <section className="mx-auto max-w-content px-4 md:px-6">
+        <InArticleAd />
+      </section>
+
       {relatedGuides.length > 0 && (
         <section className="mx-auto max-w-content px-4 md:px-6 py-10">
           <h2 className="text-2xl font-semibold mb-2">Related guides</h2>
@@ -156,6 +158,10 @@ export function ToolShell({
             <RelatedToolCard key={t.slug} href={`/${t.slug}`} title={t.h1} description={t.tagline} icon={<Wrench className="h-5 w-5" />} />
           ))}
         </div>
+      </section>
+
+      <section className="mx-auto max-w-content px-4 md:px-6">
+        <FooterAd />
       </section>
     </>
   );
