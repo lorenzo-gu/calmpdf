@@ -4,7 +4,7 @@ import { ShieldCheck, Zap, Wifi } from "lucide-react";
 import type { Tool } from "@/content/tools";
 import { TOOLS } from "@/content/tools";
 import { SoftwareAppJsonLd, HowToJsonLd, FaqJsonLd, BreadcrumbJsonLd } from "./JsonLd";
-import { FooterAd, HeaderAd, InArticleAd } from "@/components/AdUnits";
+import { FooterAd, InArticleAd } from "@/components/AdUnits";
 
 export function ToolShell({
   tool,
@@ -47,14 +47,8 @@ export function ToolShell({
           </span>
         </div>
 
-        <HeaderAd />
-
         <div className="mt-8">{children}</div>
-
-        <InArticleAd />
       </section>
-
-      <FooterAd />
 
       <section className="mx-auto max-w-content px-4 md:px-6 py-10 grid gap-8 md:grid-cols-2">
         <div className="card">
@@ -129,6 +123,10 @@ export function ToolShell({
         </section>
       ) : null}
 
+      <section className="mx-auto max-w-content px-4 md:px-6">
+        <InArticleAd />
+      </section>
+
       {relatedGuides.length > 0 && (
         <section className="mx-auto max-w-content px-4 md:px-6 py-10">
           <h2 className="text-2xl font-semibold mb-6">Related guides</h2>
@@ -154,6 +152,10 @@ export function ToolShell({
             </Link>
           ))}
         </div>
+      </section>
+
+      <section className="mx-auto max-w-content px-4 md:px-6">
+        <FooterAd />
       </section>
     </>
   );
