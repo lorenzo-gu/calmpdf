@@ -8,11 +8,10 @@ export function HeaderAd() {
 
   return (
     <div className="min-h-[110px]">
-      <AdSlot slot={slot} format="auto" className="mt-6 mb-2" label={AD_LABEL} />
+      <AdSlot slot={slot} format="auto" className="mt-3 mb-4" label={AD_LABEL} />
     </div>
   );
 }
-
 
 export function InArticleAd() {
   const slot = process.env.NEXT_PUBLIC_ADSENSE_IN_ARTICLE_SLOT;
