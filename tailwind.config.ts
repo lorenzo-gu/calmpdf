@@ -5,20 +5,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // CalmPDF palette — muted sage + warm off-white.
-        sand: {
-          50: "#FBFAF6",
-          100: "#F3F1E9",
-          200: "#E7E3D4",
-        },
-        sage: {
-          50: "#F1F5F1",
-          100: "#DCE7DC",
-          300: "#A5BFA5",
-          500: "#6B8E6B",
-          600: "#557255",
-          700: "#3F563F",
-          900: "#1F2B1F",
+        calm: {
+          bg: "#FBFAF7",
+          surface: "#FFFFFF",
+          soft: "#F3F0EA",
+          text: {
+            primary: "#171717",
+            secondary: "#5F6368",
+          },
+          border: "#E7E1D8",
+          accent: "#2563EB",
+          "accent-hover": "#1D4ED8",
+          privacy: "#16A34A",
+          warning: "#D97706",
         },
       },
       fontFamily: {
@@ -32,6 +31,19 @@ const config: Config = {
           "Arial",
           "sans-serif",
         ],
+      },
+      borderRadius: {
+        control: "var(--radius-control)",
+        card: "var(--radius-card)",
+        shell: "var(--radius-shell)",
+      },
+      boxShadow: {
+        "calm-soft": "0 10px 24px -16px rgba(23, 23, 23, 0.28)",
+        "calm-lift": "0 14px 34px -20px rgba(37, 99, 235, 0.35)",
+      },
+      spacing: {
+        18: "4.5rem",
+        22: "5.5rem",
       },
       maxWidth: {
         content: "72rem",
