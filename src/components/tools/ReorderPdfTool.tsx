@@ -76,7 +76,7 @@ export function ReorderPdfTool() {
               <p className="truncate font-medium text-sage-900">{file.name}</p>
               <p className="text-xs text-sage-700">{formatBytes(file.size)} · {pages.length} pages</p>
             </div>
-            <button type="button" className="btn-ghost" onClick={() => { setFile(null); setPages([]); setStatus(null); setError(null); }} disabled={busy}>Choose another</button>
+            <button type="button" className="btn-ghost" onClick={() => { setFile(null); setPages([]); setStatus(null); setError(null); }} disabled={busy}>Choose another file</button>
           </div>
         </div>
       )}

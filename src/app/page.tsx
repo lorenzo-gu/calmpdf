@@ -109,7 +109,7 @@ export default function HomePage() {
     <>
       <section className="mx-auto max-w-content px-4 md:px-6 pt-14 md:pt-20 pb-14 md:pb-16 text-center">
         <h1 className="text-3xl sm:text-4xl md:text-6xl font-semibold tracking-tight leading-tight">
-          Fast, private PDF tools in your browser.
+          Private PDF tools that stay in your browser.
         </h1>
         <p className="mt-4 md:mt-6 text-base sm:text-lg md:text-xl text-sage-700 max-w-3xl mx-auto">
           Compress PDF, merge PDF, split PDF, edit PDF, rotate PDF, convert PDF to Word, and reorder PDF pages without uploads.
@@ -118,7 +118,7 @@ export default function HomePage() {
 
         <div className="mt-8 grid w-full max-w-xl mx-auto grid-cols-2 md:flex md:max-w-none md:flex-wrap gap-3 justify-center">
           <Link href="/tools" className="btn-primary col-span-2 md:col-span-1">
-            All PDF tools
+            Choose your PDF task
           </Link>
           {TOOLS.map((t) => (
             <Link key={t.slug} href={`/${t.slug}`} className="btn-primary whitespace-nowrap snap-start shrink-0">
@@ -128,16 +128,16 @@ export default function HomePage() {
         </div>
 
         <div className="mt-8 flex flex-wrap gap-4 justify-center text-sm text-sage-700">
-          <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4" /> 100% private</span>
-          <span className="inline-flex items-center gap-1.5"><Wifi className="h-4 w-4" /> Browser-only processing</span>
-          <span className="inline-flex items-center gap-1.5"><Zap className="h-4 w-4" /> Free forever</span>
+          <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4" /> Your document stays yours</span>
+          <span className="inline-flex items-center gap-1.5"><Wifi className="h-4 w-4" /> No uploads. No accounts. No drama.</span>
+          <span className="inline-flex items-center gap-1.5"><Zap className="h-4 w-4" /> Quick PDF fixes, without the cloud detour.</span>
         </div>
       </section>
 
       <section className="mx-auto max-w-content px-4 md:px-6 pb-6" aria-label="Privacy intro copy">
         <p className="text-sage-700 max-w-4xl">
-          CalmPDF is built for people searching for fast PDF tools that do not require account creation or server uploads.
-          You can quickly optimize, organize, edit, convert, and fix PDF pages directly in your browser while keeping sensitive documents under your control.
+          No uploads. No accounts. No drama. CalmPDF gives you quick PDF fixes that stay local in your browser.
+          Your document stays yours while you optimize, organize, edit, and convert in a few clicks.
           For more detail on local processing and practical limits, see <Link href="/pdf-tools-without-upload" className="underline underline-offset-2 hover:no-underline">how to use PDF tools without uploading files</Link>.
         </p>
       </section>

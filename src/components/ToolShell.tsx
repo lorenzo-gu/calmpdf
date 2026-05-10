@@ -37,13 +37,13 @@ export function ToolShell({
 
         <div className="mt-6 flex flex-wrap gap-2 text-xs text-sage-700">
           <span className="inline-flex items-center gap-1 rounded-full bg-sage-50 border border-sage-100 px-3 py-1">
-            <ShieldCheck className="h-3.5 w-3.5" /> 100% in your browser
+            <ShieldCheck className="h-3.5 w-3.5" /> Private in your browser
           </span>
           <span className="inline-flex items-center gap-1 rounded-full bg-sage-50 border border-sage-100 px-3 py-1">
-            <Wifi className="h-3.5 w-3.5" /> No upload required
+            <Wifi className="h-3.5 w-3.5" /> No uploads. No accounts. No drama.
           </span>
           <span className="inline-flex items-center gap-1 rounded-full bg-sage-50 border border-sage-100 px-3 py-1">
-            <Zap className="h-3.5 w-3.5" /> Free, no signup
+            <Zap className="h-3.5 w-3.5" /> Drop, fix, download. Done.
           </span>
         </div>
 
@@ -79,7 +79,7 @@ export function ToolShell({
           </ol>
         </div>
         <div className="card">
-          <h2 className="text-xl font-semibold">When to use this tool</h2>
+          <h2 className="text-xl font-semibold">Best for</h2>
           <ul className="mt-4 list-disc pl-6 space-y-2 text-sage-700">
             {tool.useCases.map((item) => (
               <li key={item}>{item}</li>
@@ -87,7 +87,7 @@ export function ToolShell({
           </ul>
         </div>
         <div className="card">
-          <h2 className="text-xl font-semibold">Limitations</h2>
+          <h2 className="text-xl font-semibold">Less effective for now</h2>
           <ul className="mt-4 list-disc pl-6 space-y-2 text-sage-700">
             {tool.limitations.map((item) => (
               <li key={item}>{item}</li>

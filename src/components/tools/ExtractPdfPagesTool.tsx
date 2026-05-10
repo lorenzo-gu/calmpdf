@@ -79,7 +79,7 @@ export function ExtractPdfPagesTool() {
             <p className="text-xs text-sage-700">{formatBytes(file.size)} · {pages.length} pages</p>
           </div>
           <button type="button" className="btn-ghost" disabled={busy} onClick={() => { setFile(null); setPages([]); setStatus(null); setError(null); }}>
-            Choose another
+            Choose another file
           </button>
         </div>
       )}

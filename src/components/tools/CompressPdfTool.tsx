@@ -42,7 +42,7 @@ export function CompressPdfTool() {
               <p className="text-xs text-sage-700">{formatBytes(file.size)}</p>
             </div>
             <button type="button" className="btn-ghost" onClick={() => { setFile(null); setResult(null); }} disabled={busy}>
-              Choose another
+              Choose another file
             </button>
           </div>
         </div>
