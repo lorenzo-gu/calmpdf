@@ -4,9 +4,19 @@ type PublicRouteLandingProps = {
   title: string;
   description: string;
   related?: { href: string; label: string }[];
+  availability?: "live" | "comingSoon";
+  comingSoonTitle?: string;
+  comingSoonDescription?: string;
 };
 
-export function PublicRouteLanding({ title, description, related = [] }: PublicRouteLandingProps) {
+export function PublicRouteLanding({
+  title,
+  description,
+  related = [],
+  availability = "live",
+  comingSoonTitle = `${title} is coming soon`,
+  comingSoonDescription,
+}: PublicRouteLandingProps) {
   const hubLinks = [
     { href: "/tools", label: "All PDF Tools" },
     { href: "/how-to", label: "How-to Guides" },
@@ -24,13 +34,18 @@ export function PublicRouteLanding({ title, description, related = [] }: PublicR
       <h1 className="mt-4 text-3xl md:text-4xl font-semibold">{title}</h1>
       <p className="mt-4 text-lg text-sage-700">{description}</p>
 
-      <div className="mt-8 card">
-        <h2 className="text-xl font-semibold">What to expect</h2>
-        <p className="mt-3 text-sage-700">
-          This page is live and indexable. Tool-specific processing UX is being rolled out in phases.
-          CalmPDF keeps every workflow private by running directly in your browser.
-        </p>
-      </div>
+      {availability === "comingSoon" ? (
+        <div className="mt-8 card">
+          <p className="inline-flex rounded-full bg-sage-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-sage-800">
+            Coming soon
+          </p>
+          <h2 className="mt-3 text-xl font-semibold">{comingSoonTitle}</h2>
+          <p className="mt-3 text-sage-700">
+            {comingSoonDescription ??
+              "We’re building a private, browser-only workflow for this tool. In the meantime, use the alternatives below."}
+          </p>
+        </div>
+      ) : null}
 
       {relatedLinks.length > 0 && (
         <section className="mt-8">
