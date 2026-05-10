@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Loader2 } from "lucide-react";
 import { Dropzone } from "@/components/Dropzone";
 import { compressPdfLossless, formatBytes, triggerDownload } from "@/lib/pdf";
 
@@ -32,23 +31,16 @@ export function CompressPdfTool() {
 
   return (
     <div className="space-y-6">
-      {!file ? (
-        <Dropzone onFiles={(fs) => setFile(fs[0] ?? null)} label="Drop a PDF to compress" />
-      ) : (
-        <div className="card">
-          <div className="flex items-center justify-between gap-3">
-            <div className="min-w-0">
-              <p className="truncate font-medium text-sage-900">{file.name}</p>
-              <p className="text-xs text-sage-700">{formatBytes(file.size)}</p>
-            </div>
-            <button type="button" className="btn-ghost" onClick={() => { setFile(null); setResult(null); }} disabled={busy}>
-              Choose another
-            </button>
-          </div>
-        </div>
-      )}
-
-      {error && <p className="text-sm text-red-600" role="alert">{error}</p>}
+      <Dropzone
+        onFiles={(fs) => setFile(fs[0] ?? null)}
+        label={busy ? "Compressing your PDF" : "Drop your PDF here"}
+        state={busy ? "processing" : error ? "error" : result ? "success" : file ? "file-selected" : "empty"}
+        file={file}
+        readinessText="Compression is ready. We process everything locally in your browser."
+        errorText={error}
+        successText={result ? "Compression complete. Your file was downloaded locally." : undefined}
+        onClearFile={busy ? undefined : () => { setFile(null); setResult(null); setError(null); }}
+      />
 
       {result && (
         <div className="card bg-sage-50 border-sage-100">
@@ -67,7 +59,6 @@ export function CompressPdfTool() {
 
       <div className="flex gap-3">
         <button type="button" className="btn-primary" disabled={busy || !file} onClick={handleCompress}>
-          {busy && <Loader2 className="h-4 w-4 animate-spin" />}
           {busy ? "Compressing…" : "Compress PDF"}
         </button>
       </div>
