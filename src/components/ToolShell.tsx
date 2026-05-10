@@ -1,10 +1,10 @@
-import Link from "next/link";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { ShieldCheck, Zap, Wifi } from "lucide-react";
+import { ShieldCheck, Zap, Wifi, Wrench } from "lucide-react";
 import type { Tool } from "@/content/tools";
 import { TOOLS } from "@/content/tools";
 import { SoftwareAppJsonLd, HowToJsonLd, FaqJsonLd, BreadcrumbJsonLd } from "./JsonLd";
 import { FooterAd, HeaderAd, InArticleAd } from "@/components/AdUnits";
+import { RelatedToolCard, EditorialCard } from "@/components/cards";
 
 export function ToolShell({
   tool,
@@ -33,23 +33,32 @@ export function ToolShell({
 
       <section className="mx-auto max-w-content px-4 md:px-6 pt-4 pb-10">
         <h1 className="text-3xl md:text-4xl font-semibold">{tool.h1}</h1>
-        <p className="mt-3 text-lg text-sage-700 max-w-2xl">{tool.tagline}</p>
+        <p className="mt-3 text-lg text-calm-text-secondary max-w-2xl">{tool.tagline}</p>
 
-        <div className="mt-6 flex flex-wrap gap-2 text-xs text-sage-700">
-          <span className="inline-flex items-center gap-1 rounded-full bg-sage-50 border border-sage-100 px-3 py-1">
+        <div className="mt-6 flex flex-wrap gap-2 text-xs text-calm-text-secondary">
+          <span className="trust-chip">
             <ShieldCheck className="h-3.5 w-3.5" /> 100% in your browser
           </span>
-          <span className="inline-flex items-center gap-1 rounded-full bg-sage-50 border border-sage-100 px-3 py-1">
+          <span className="trust-chip">
             <Wifi className="h-3.5 w-3.5" /> No upload required
           </span>
-          <span className="inline-flex items-center gap-1 rounded-full bg-sage-50 border border-sage-100 px-3 py-1">
+          <span className="trust-chip">
             <Zap className="h-3.5 w-3.5" /> Free, no signup
           </span>
         </div>
 
         <HeaderAd />
 
-        <div className="mt-8">{children}</div>
+        <div className="mt-8 rounded-3xl border border-sand-200 bg-white p-4 md:p-6 shadow-sm">
+          <div className="mx-auto max-w-4xl">{children}</div>
+        </div>
+
+        <div className="mt-6 rounded-2xl border border-sage-200 bg-sage-50 px-4 py-4 md:px-5">
+          <p className="text-sm md:text-base text-sage-800">
+            <span className="font-semibold text-sage-900">Private by design.</span> Files stay on your device and are processed in-browser.
+            No uploads, no account, no server-side storage.
+          </p>
+        </div>
 
         <InArticleAd />
       </section>
@@ -59,7 +68,7 @@ export function ToolShell({
       <section className="mx-auto max-w-content px-4 md:px-6 py-10 grid gap-8 md:grid-cols-2">
         <div className="card">
           <h2 className="text-xl font-semibold">Upload & controls</h2>
-          <ul className="mt-4 list-disc pl-6 space-y-2 text-sage-700">
+          <ul className="mt-4 list-disc pl-6 space-y-2 text-calm-text-secondary">
             {tool.uploadInstructions.map((item) => (
               <li key={item}>{item}</li>
             ))}
@@ -70,16 +79,16 @@ export function ToolShell({
           <ol className="mt-4 space-y-4">
             {tool.steps.map((s, i) => (
               <li key={i} className="flex gap-3">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-sage-700 text-white text-xs font-semibold">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-calm-accent text-white text-xs font-semibold">
                   {i + 1}
                 </span>
-                <span className="text-sage-700">{s}</span>
+                <span className="text-calm-text-secondary">{s}</span>
               </li>
             ))}
           </ol>
         </div>
         <div className="card">
-          <h2 className="text-xl font-semibold">When to use this tool</h2>
+          <h2 className="text-xl font-semibold">Best for</h2>
           <ul className="mt-4 list-disc pl-6 space-y-2 text-sage-700">
             {tool.useCases.map((item) => (
               <li key={item}>{item}</li>
@@ -87,7 +96,7 @@ export function ToolShell({
           </ul>
         </div>
         <div className="card">
-          <h2 className="text-xl font-semibold">Limitations</h2>
+          <h2 className="text-xl font-semibold">Not ideal for</h2>
           <ul className="mt-4 list-disc pl-6 space-y-2 text-sage-700">
             {tool.limitations.map((item) => (
               <li key={item}>{item}</li>
@@ -95,16 +104,8 @@ export function ToolShell({
           </ul>
         </div>
         <div className="card">
-          <h2 className="text-xl font-semibold">Privacy</h2>
-          <ul className="mt-4 space-y-3 text-sage-700">
-            <li><strong className="text-sage-900">Private by design.</strong> Your PDF is processed inside your browser. It is never uploaded to a server.</li>
-            <li><strong className="text-sage-900">Fast.</strong> No round trip to the cloud, so it works as fast as your laptop can run JavaScript.</li>
-            <li><strong className="text-sage-900">Free.</strong> All tools are free to use with no signup and no daily limits.</li>
-          </ul>
-        </div>
-        <div className="card">
           <h2 className="text-xl font-semibold">Troubleshooting</h2>
-          <ul className="mt-4 list-disc pl-6 space-y-2 text-sage-700">
+          <ul className="mt-4 list-disc pl-6 space-y-2 text-calm-text-secondary">
             {tool.troubleshooting.map((item) => (
               <li key={item}>{item}</li>
             ))}
@@ -115,14 +116,14 @@ export function ToolShell({
       {tool.faqs.length > 0 ? (
         <section className="mx-auto max-w-content px-4 md:px-6 py-10">
           <h2 className="text-2xl font-semibold mb-6">Frequently asked questions</h2>
-          <div className="divide-y divide-sand-200 rounded-2xl border border-sand-200 bg-white">
+          <div className="accordion">
             {tool.faqs.map((f, i) => (
-              <details key={i} className="group p-5 open:bg-sand-50/50">
-                <summary className="cursor-pointer list-none flex justify-between items-center font-medium text-sage-900">
+              <details key={i} className="group accordion-item">
+                <summary className="cursor-pointer list-none flex justify-between items-center font-medium text-calm-text-primary">
                   {f.q}
-                  <span className="ml-4 text-sage-500 group-open:rotate-45 transition-transform">+</span>
+                  <span className="ml-4 text-calm-text-secondary group-open:rotate-45 transition-transform">+</span>
                 </summary>
-                <p className="mt-3 text-sage-700">{f.a}</p>
+                <p className="mt-3 text-calm-text-secondary">{f.a}</p>
               </details>
             ))}
           </div>
@@ -131,27 +132,28 @@ export function ToolShell({
 
       {relatedGuides.length > 0 && (
         <section className="mx-auto max-w-content px-4 md:px-6 py-10">
-          <h2 className="text-2xl font-semibold mb-6">Related guides</h2>
-          <ul className="list-disc pl-6 space-y-2 text-sage-800">
+          <h2 className="text-2xl font-semibold mb-2">Related guides</h2>
+          <p className="text-sage-700 max-w-2xl">Practical walkthroughs to help you finish this workflow faster.</p>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {relatedGuides.map((guide) => (
-              <li key={guide.href}>
-                <Link href={guide.href} className="underline underline-offset-2 hover:text-sage-950">
-                  {guide.label}
-                </Link>
-              </li>
+              <EditorialCard
+                key={guide.href}
+                href={guide.href}
+                title={guide.label}
+                description="Step-by-step instructions for this PDF task, including common pitfalls to avoid."
+                category="How-to"
+              />
             ))}
-          </ul>
+          </div>
         </section>
       )}
 
       <section className="mx-auto max-w-content px-4 md:px-6 py-10">
-        <h2 className="text-2xl font-semibold mb-6">Related PDF tools</h2>
-        <div className="grid gap-4 md:grid-cols-3">
+        <h2 className="text-2xl font-semibold mb-2">Related PDF tools</h2>
+        <p className="text-sage-700 max-w-2xl">Continue with the next PDF action using these related browser-based tools.</p>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
           {related.map((t) => (
-            <Link key={t.slug} href={`/${t.slug}`} className="card no-underline hover:border-sage-300 transition-colors">
-              <h3 className="font-semibold text-sage-900">{t.h1}</h3>
-              <p className="mt-2 text-sm text-sage-700">{t.tagline}</p>
-            </Link>
+            <RelatedToolCard key={t.slug} href={`/${t.slug}`} title={t.h1} description={t.tagline} icon={<Wrench className="h-5 w-5" />} />
           ))}
         </div>
       </section>

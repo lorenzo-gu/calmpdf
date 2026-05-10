@@ -3,39 +3,96 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --radius-control: 12px;
+    --radius-card: 20px;
+    --radius-shell: 30px;
+  }
+
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
+
   body {
-    @apply bg-sand-50 text-sage-900;
+    @apply bg-calm-bg text-calm-text-primary;
   }
+
   h1, h2, h3, h4 {
-    @apply text-sage-900 tracking-tight;
+    @apply text-calm-text-primary tracking-tight;
   }
+
+  h1 {
+    @apply text-4xl md:text-5xl font-semibold leading-tight;
+  }
+
+  h2 {
+    @apply text-2xl md:text-3xl font-semibold leading-snug;
+  }
+
+  h3 {
+    @apply text-xl font-semibold;
+  }
+
+  p, li {
+    @apply text-base leading-7;
+  }
+
+  small {
+    @apply text-sm text-calm-text-secondary;
+  }
+
   a {
-    @apply text-sage-700 underline-offset-4 hover:underline;
+    @apply text-calm-accent underline-offset-4 hover:underline;
   }
 }
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5
-           text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center gap-2 rounded-control px-4 py-2.5 text-sm font-semibold
+      transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-calm-accent focus-visible:ring-offset-2
+      disabled:opacity-50 disabled:cursor-not-allowed;
   }
+
   .btn-primary {
-    @apply btn bg-sage-700 text-white hover:bg-sage-600;
+    @apply btn bg-calm-accent text-white hover:bg-calm-accent-hover shadow-calm-soft;
   }
+
   .btn-ghost {
-    @apply btn text-sage-700 hover:bg-sage-50;
+    @apply btn border border-calm-border text-calm-text-primary hover:bg-calm-soft;
   }
+
   .card {
-    @apply rounded-2xl border border-sand-200 bg-white p-6 shadow-sm;
+    @apply rounded-card border border-calm-border bg-calm-surface p-6 shadow-calm-soft;
   }
+
+  .tool-card {
+    @apply card no-underline transition-all hover:-translate-y-0.5 hover:shadow-calm-lift hover:border-calm-accent/30;
+  }
+
+  .guide-card {
+    @apply rounded-card border border-calm-border bg-calm-soft p-5 shadow-calm-soft;
+  }
+
+  .trust-chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-calm-border bg-calm-soft px-3 py-1.5 text-xs font-medium text-calm-text-secondary;
+  }
+
+  .accordion {
+    @apply divide-y divide-calm-border rounded-card border border-calm-border bg-calm-surface shadow-calm-soft;
+  }
+
+  .accordion-item {
+    @apply p-5 open:bg-calm-soft/50;
+  }
+
   .dropzone {
-    @apply flex flex-col items-center justify-center rounded-2xl border-2 border-dashed
-           border-sage-300 bg-sage-50/50 px-6 py-14 text-center transition-colors
-           hover:bg-sage-50;
+    @apply flex flex-col items-center justify-center rounded-shell border-2 border-dashed border-calm-border bg-calm-soft/70 px-6 py-14 text-center
+      transition-all hover:border-calm-accent/40 hover:bg-calm-soft;
+  }
+
+  .empty-state {
+    @apply card rounded-shell p-10 text-center;
   }
 }
